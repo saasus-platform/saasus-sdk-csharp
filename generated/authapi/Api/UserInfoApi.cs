@@ -49,6 +49,29 @@ namespace authapi.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserInfo</returns>
         ApiResponse<UserInfo> GetUserInfoWithHttpInfo(string token, int operationIndex = 0);
+        /// <summary>
+        /// Get User Info by Email
+        /// </summary>
+        /// <remarks>
+        /// Get user information by email address. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="email">Email</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>UserInfo</returns>
+        UserInfo GetUserInfoByEmail(string email, int operationIndex = 0);
+
+        /// <summary>
+        /// Get User Info by Email
+        /// </summary>
+        /// <remarks>
+        /// Get user information by email address. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="email">Email</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of UserInfo</returns>
+        ApiResponse<UserInfo> GetUserInfoByEmailWithHttpInfo(string email, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -83,6 +106,31 @@ namespace authapi.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserInfo)</returns>
         System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserInfoWithHttpInfoAsync(string token, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Get User Info by Email
+        /// </summary>
+        /// <remarks>
+        /// Get user information by email address. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="email">Email</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of UserInfo</returns>
+        System.Threading.Tasks.Task<UserInfo> GetUserInfoByEmailAsync(string email, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get User Info by Email
+        /// </summary>
+        /// <remarks>
+        /// Get user information by email address. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="email">Email</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (UserInfo)</returns>
+        System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserInfoByEmailWithHttpInfoAsync(string email, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -350,6 +398,162 @@ namespace authapi.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUserInfo", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get User Info by Email Get user information by email address. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="email">Email</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>UserInfo</returns>
+        public UserInfo GetUserInfoByEmail(string email, int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<UserInfo> localVarResponse = GetUserInfoByEmailWithHttpInfo(email);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get User Info by Email Get user information by email address. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="email">Email</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of UserInfo</returns>
+        public authapi.Client.ApiResponse<UserInfo> GetUserInfoByEmailWithHttpInfo(string email, int operationIndex = 0)
+        {
+            // verify the required parameter 'email' is set
+            if (email == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'email' when calling UserInfoApi->GetUserInfoByEmail");
+            }
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "email", email));
+
+            localVarRequestOptions.Operation = "UserInfoApi.GetUserInfoByEmail";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<UserInfo>("/userinfo/search/email", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUserInfoByEmail", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get User Info by Email Get user information by email address. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="email">Email</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of UserInfo</returns>
+        public async System.Threading.Tasks.Task<UserInfo> GetUserInfoByEmailAsync(string email, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<UserInfo> localVarResponse = await GetUserInfoByEmailWithHttpInfoAsync(email, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get User Info by Email Get user information by email address. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="email">Email</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (UserInfo)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<UserInfo>> GetUserInfoByEmailWithHttpInfoAsync(string email, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'email' is set
+            if (email == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'email' when calling UserInfoApi->GetUserInfoByEmail");
+            }
+
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "email", email));
+
+            localVarRequestOptions.Operation = "UserInfoApi.GetUserInfoByEmail";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<UserInfo>("/userinfo/search/email", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUserInfoByEmail", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
