@@ -52,6 +52,39 @@
 
 ---
 
+### **JSONライブラリについての注意点**
+
+SDKではデフォルトで**Newtonsoft.Json**ライブラリを使用しています。そのため、アプリケーションのJSONライブラリが`System.Text.Json`など他のライブラリに設定されている場合、以下の点に注意が必要です。
+
+#### **Newtonsoft.Jsonを使用する場合**
+モデルをそのままレスポンスとして返却できます。
+
+```csharp
+var userInfo = await userInfoApi.GetUserInfoAsync(token);
+
+// モデルをそのままレスポンスに返却
+return Ok(userInfo);
+```
+
+#### **異なるJSONライブラリを使用する場合**
+シリアライズ処理を明示的に行う必要があります。
+
+```csharp
+var userInfo = await userInfoApi.GetUserInfoAsync(token);
+
+// JSON形式でレスポンスを返す（SDKのToJsonメソッドを利用）
+var jsonResponse = userInfo.ToJson();
+return Results.Text(jsonResponse, "application/json");
+
+// Newtonsoft.Jsonを使用して明示的にシリアライズ
+var jsonResponse = JsonConvert.SerializeObject(users.VarUsers);
+return Results.Text(jsonResponse, "application/json");
+```
+
+JSONライブラリの設定に応じて、必要なシリアライズ処理を追加してください。
+
+---
+
 ## .NET Framework 4.8（packages.config）アプリケーションで SDK を使用する手順
 
 ### **1. SDK プロジェクトのビルド**
@@ -121,3 +154,19 @@ cp bin/Release/saasus-sdk-csharp.1.0.0.nupkg C:\LocalNuGetFeed
    3. 一覧に表示された `saasus-sdk-csharp` を選択し、**[インストール]** をクリックします。
 
 ---
+
+## 環境変数の設定
+
+SDKを正しく動作させるには、以下の環境変数の設定が必要です。
+
+| 環境変数名          | 説明                          |
+|-----------------------|-------------------------------|
+| `SAASUS_SAAS_ID`      | SaaSの識別子（SaaS ID）       |
+| `SAASUS_API_KEY`      | APIアクセス用のAPIキー       |
+| `SAASUS_SECRET_KEY`   | クライアントシークレットキー |
+
+環境変数の設定方法は、実行環境やアプリケーションの要件に応じて適切に行ってください。
+例えば、`appsettings.json`に定義した値を読み込んで環境変数に設定することもできます。
+
+---
+
