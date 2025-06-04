@@ -1,5 +1,38 @@
 #!/bin/bash
 
+# バージョン引数がある場合のみ saasus-sdk-csharp.csproj を更新
+if [ $# -ge 1 ]; then
+  RAW_VERSION=$1
+  CLEAN_VERSION=${RAW_VERSION#v}
+  echo "Target SDK version: ${CLEAN_VERSION}"
+
+  CS_PROJ_FILE="saasus-sdk-csharp.csproj"
+
+  if [ -f "$CS_PROJ_FILE" ]; then
+    echo "Updating version in ${CS_PROJ_FILE} to ${CLEAN_VERSION}"
+
+    if grep -q "<Version>.*</Version>" "$CS_PROJ_FILE"; then
+      # <Version> タグがすでにある場合は置換
+      if [ "$(uname)" = "Darwin" ]; then
+        sed -i '' "s|<Version>.*</Version>|<Version>${CLEAN_VERSION}</Version>|g" "$CS_PROJ_FILE"
+      else
+        sed -i "s|<Version>.*</Version>|<Version>${CLEAN_VERSION}</Version>|g" "$CS_PROJ_FILE"
+      fi
+    else
+      # <Version> タグが存在しない場合は <PropertyGroup> の最後に追加
+      if [ "$(uname)" = "Darwin" ]; then
+        sed -i '' "s|</PropertyGroup>|  <Version>${CLEAN_VERSION}</Version>\n</PropertyGroup>|" "$CS_PROJ_FILE"
+      else
+        sed -i "s|</PropertyGroup>|  <Version>${CLEAN_VERSION}</Version>\n</PropertyGroup>|" "$CS_PROJ_FILE"
+      fi
+    fi
+  else
+    echo "Warning: ${CS_PROJ_FILE} not found"
+  fi
+else
+  echo "No version argument provided, skipping version update"
+fi
+
 # 生成するモジュール名の配列
 MODULES=("auth" "pricing" "billing" "awsmarketplace" "integration" "apilog" "communication" )
 
