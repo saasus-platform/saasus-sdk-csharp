@@ -1,0 +1,52 @@
+name: Publish NuGet (Test)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dotnet-version: ["8.0.x"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # .csproj から現在の <Version> を抽出し、"-test.<run_number>" に置き換える ──
+      - name: Inject test version (use current csproj version)
+        run: |
+          # 1. csprojファイル名を変数に
+          CSPROJ="saasus-sdk-csharp.csproj"
+
+          # 2. <Version>タグ内の文字列を抽出
+          CURRENT_VERSION=$(grep -oP '(?<=<Version>)[^<]+' "$CSPROJ")
+
+          # 3. 抽出したバージョンに "-test.${{ github.run_number }}" を付与して置換
+          NEW_VERSION="${CURRENT_VERSION}-test.${{ github.run_number }}"
+          echo "Current version: $CURRENT_VERSION"
+          echo "New test version: $NEW_VERSION"
+
+          sed -i "s|<Version>.*</Version>|<Version>${NEW_VERSION}</Version>|" "$CSPROJ"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Pack NuGet package
+        run: dotnet pack --configuration Release --no-build --output ./nuget_packages
+
+      - name: Push to NuGet.org
+        run: dotnet nuget push "./nuget_packages/*.nupkg" \
+             -s https://api.nuget.org/v3/index.json \
+             -k ${{ secrets.NUGET_API_KEY }} \
+             --skip-duplicate
