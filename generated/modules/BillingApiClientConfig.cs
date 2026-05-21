@@ -28,5 +28,17 @@ namespace modules
                 DefaultHeaders["X-SaaSus-Referer"] = xSaaSusReferer;
             }
         }
+
+        /// <summary>
+        /// Sets the X-SaaSus-Trace-Id header for the API requests.
+        /// </summary>
+        /// <param name="xSaaSusTraceId">X-SaaSus-Trace-Id value</param>
+        public void SetXSaaSusTraceId(string xSaaSusTraceId)
+        {
+            if (!string.IsNullOrEmpty(xSaaSusTraceId))
+            {
+                DefaultHeaders["X-SaaSus-Trace-Id"] = xSaaSusTraceId;
+            }
+        }
     }
 }
