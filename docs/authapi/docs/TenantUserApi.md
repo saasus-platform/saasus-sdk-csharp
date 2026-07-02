@@ -10,8 +10,11 @@ All URIs are relative to *https://api.saasus.io/v1/auth*
 | [**DeleteTenantUserRole**](TenantUserApi.md#deletetenantuserrole) | **DELETE** /tenants/{tenant_id}/users/{user_id}/envs/{env_id}/roles/{role_name} | Remove Role From Tenant User |
 | [**GetAllTenantUser**](TenantUserApi.md#getalltenantuser) | **GET** /tenants/all/users/{user_id} | Get User Info |
 | [**GetAllTenantUsers**](TenantUserApi.md#getalltenantusers) | **GET** /tenants/all/users | Get Users |
+| [**GetAllTenantUsersCount**](TenantUserApi.md#getalltenantuserscount) | **GET** /tenants/all/users/count | Get Tenant Users Count |
 | [**GetTenantUser**](TenantUserApi.md#gettenantuser) | **GET** /tenants/{tenant_id}/users/{user_id} | Get Tenant User |
 | [**GetTenantUsers**](TenantUserApi.md#gettenantusers) | **GET** /tenants/{tenant_id}/users | Get Tenant Users |
+| [**SaveTenantUsersCounts**](TenantUserApi.md#savetenantuserscounts) | **POST** /tenants/all/users/count | Save Tenant Users Count |
+| [**SearchTenantUsers**](TenantUserApi.md#searchtenantusers) | **GET** /tenants/all/users/search | Search Tenant Users |
 | [**UpdateTenantUser**](TenantUserApi.md#updatetenantuser) | **PATCH** /tenants/{tenant_id}/users/{user_id} | Update Tenant User Attribute |
 
 <a id="createtenantuser"></a>
@@ -562,6 +565,92 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="getalltenantuserscount"></a>
+# **GetAllTenantUsersCount**
+> TenantUsersCounts GetAllTenantUsersCount ()
+
+Get Tenant Users Count
+
+Get the count of tenant users for each tenant. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class GetAllTenantUsersCountExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new TenantUserApi(config);
+
+            try
+            {
+                // Get Tenant Users Count
+                TenantUsersCounts result = apiInstance.GetAllTenantUsersCount();
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling TenantUserApi.GetAllTenantUsersCount: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetAllTenantUsersCountWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get Tenant Users Count
+    ApiResponse<TenantUsersCounts> response = apiInstance.GetAllTenantUsersCountWithHttpInfo();
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling TenantUserApi.GetAllTenantUsersCountWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+[**TenantUsersCounts**](TenantUsersCounts.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="gettenantuser"></a>
 # **GetTenantUser**
 > User GetTenantUser (string tenantId, string userId)
@@ -743,6 +832,200 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="savetenantuserscounts"></a>
+# **SaveTenantUsersCounts**
+> void SaveTenantUsersCounts (SaveTenantUsersCountsParam saveTenantUsersCountsParam)
+
+Save Tenant Users Count
+
+Save the count of tenant users for each tenant. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class SaveTenantUsersCountsExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new TenantUserApi(config);
+            var saveTenantUsersCountsParam = new SaveTenantUsersCountsParam(); // SaveTenantUsersCountsParam | 
+
+            try
+            {
+                // Save Tenant Users Count
+                apiInstance.SaveTenantUsersCounts(saveTenantUsersCountsParam);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling TenantUserApi.SaveTenantUsersCounts: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SaveTenantUsersCountsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Save Tenant Users Count
+    apiInstance.SaveTenantUsersCountsWithHttpInfo(saveTenantUsersCountsParam);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling TenantUserApi.SaveTenantUsersCountsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **saveTenantUsersCountsParam** | [**SaveTenantUsersCountsParam**](SaveTenantUsersCountsParam.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="searchtenantusers"></a>
+# **SearchTenantUsers**
+> SearchTenantUsersResult SearchTenantUsers (string tenantId = null, string id = null, string email = null, string signInId = null, int? envId = null, string roleName = null, long? limit = null, string cursor = null)
+
+Search Tenant Users
+
+Search tenant users by user id, tenant id, email, sign-in ID, env, or role. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class SearchTenantUsersExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new TenantUserApi(config);
+            var tenantId = "tenantId_example";  // string | Tenant ID (optional) 
+            var id = "id_example";  // string | User ID (optional) 
+            var email = "email_example";  // string | Email prefix (optional) 
+            var signInId = "signInId_example";  // string | Sign-in ID prefix (optional) 
+            var envId = 56;  // int? | Environment ID (optional) 
+            var roleName = "roleName_example";  // string | Role Name (optional) 
+            var limit = 789L;  // long? | Maximum number of items to retrieve (optional) 
+            var cursor = "cursor_example";  // string | Cursor for cursor pagination (optional) 
+
+            try
+            {
+                // Search Tenant Users
+                SearchTenantUsersResult result = apiInstance.SearchTenantUsers(tenantId, id, email, signInId, envId, roleName, limit, cursor);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling TenantUserApi.SearchTenantUsers: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchTenantUsersWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Search Tenant Users
+    ApiResponse<SearchTenantUsersResult> response = apiInstance.SearchTenantUsersWithHttpInfo(tenantId, id, email, signInId, envId, roleName, limit, cursor);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling TenantUserApi.SearchTenantUsersWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **tenantId** | **string** | Tenant ID | [optional]  |
+| **id** | **string** | User ID | [optional]  |
+| **email** | **string** | Email prefix | [optional]  |
+| **signInId** | **string** | Sign-in ID prefix | [optional]  |
+| **envId** | **int?** | Environment ID | [optional]  |
+| **roleName** | **string** | Role Name | [optional]  |
+| **limit** | **long?** | Maximum number of items to retrieve | [optional]  |
+| **cursor** | **string** | Cursor for cursor pagination | [optional]  |
+
+### Return type
+
+[**SearchTenantUsersResult**](SearchTenantUsersResult.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
