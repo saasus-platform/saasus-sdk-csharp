@@ -1,0 +1,10 @@
+.git
+.github
+**/bin
+**/obj
+**/.DS_Store
+nuget_packages
+.env
+.env.*
+**/.env
+**/.env.*

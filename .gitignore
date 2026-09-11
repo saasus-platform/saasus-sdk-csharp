@@ -10,3 +10,14 @@ obj/
 !/.github/workflows/
 !/.github/workflows/publish-nuget.yml
 !/.github/workflows/test-publish-nuget.yml
+
+.env
+.env.*
+!.env.example
+!.env_sample
+
+tests/E2E/Snapshots/*/story_comparisons/
+tests/E2E/Snapshots/*/story_reports/
+
+# Run reports written by E2E_REPORT_JSON (see tests/E2E/*/README.md)
+artifacts/

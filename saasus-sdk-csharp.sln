@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "saasus-sdk-csharp", "saasus-sdk-csharp.csproj", "{12E1CBA9-63FA-4E50-A38C-177A437D45B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaaSusSdk.Tests", "tests\SaaSusSdk.Tests.csproj", "{6D28980C-DC0B-44CB-AC0C-63045E38F6D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{12E1CBA9-63FA-4E50-A38C-177A437D45B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12E1CBA9-63FA-4E50-A38C-177A437D45B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12E1CBA9-63FA-4E50-A38C-177A437D45B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D28980C-DC0B-44CB-AC0C-63045E38F6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D28980C-DC0B-44CB-AC0C-63045E38F6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D28980C-DC0B-44CB-AC0C-63045E38F6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D28980C-DC0B-44CB-AC0C-63045E38F6D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

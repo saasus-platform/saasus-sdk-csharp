@@ -1,0 +1,25 @@
+{
+  "mode": "full",
+  "module_name": "billing",
+  "output_directory": "tests/E2E/Snapshots",
+  "file_name_format": "story_snapshot_{tag}_{story_name}.json",
+  "capture_level": "FULL",
+  "comparison_mode": "release",
+  "sdk_version": "unknown",
+  "test_environment": "dev",
+  "validation_enabled": true,
+  "validation_history_limit": 2,
+  "verbose": false,
+  "fail_on_breaking": true,
+  "capture_failed_stories": false,
+  "overwrite": false,
+  "default_dynamic_fields": true,
+  "dynamic_fields": ["request_id"],
+  "dynamic_mode": "replace",
+  "validation_rules": {
+    "completion": { "enabled": true, "severity": "error" },
+    "sequence": { "enabled": true, "severity": "error" },
+    "state_transition": { "enabled": true, "severity": "warning" },
+    "timing": { "enabled": false, "severity": "info" }
+  }
+}
