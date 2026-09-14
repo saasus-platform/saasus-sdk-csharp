@@ -16,6 +16,8 @@ obj/
 !.env.example
 !.env_sample
 
+tests/E2E/Snapshots/*/story_snapshots/
+tests/E2E/Snapshots/*/story_validations/
 tests/E2E/Snapshots/*/story_comparisons/
 tests/E2E/Snapshots/*/story_reports/
 
