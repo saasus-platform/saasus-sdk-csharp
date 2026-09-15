@@ -189,3 +189,25 @@ SDKを正しく動作させるには、以下の環境変数の設定が必要�
 
 ---
 
+
+---
+
+## macOSでDocker Composeを使用する
+
+Docker Desktopを起動し、このリポジトリのルートで以下を実行してください。公式の.NET 8 SDKイメージはApple Silicon（arm64）とIntel Mac（amd64）の両方に対応しています。
+
+```bash
+# イメージを作成する
+docker compose build
+
+# SDKを復元・ビルドする（既定コマンド）
+docker compose run --rm csharp
+
+# .NET SDKの情報を確認する
+docker compose run --rm csharp dotnet --info
+
+# コンテナ内のシェルを開く
+docker compose run --rm csharp bash
+```
+
+ソースコードはコンテナの`/workspace`へマウントされるため、macOS側で行った変更がすぐ反映されます。NuGetパッケージは名前付きボリュームにキャッシュされます。このプロジェクト自体は実行可能アプリではなくSDKライブラリなので、既定コマンドは`dotnet run`ではなく`dotnet build`です。

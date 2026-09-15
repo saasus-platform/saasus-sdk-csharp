@@ -1,0 +1,20 @@
+services:
+  csharp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - nuget-cache:/root/.nuget/packages
+    command:
+      - dotnet
+      - build
+      - saasus-sdk-csharp.csproj
+      - --configuration
+      - Debug
+    stdin_open: true
+    tty: true
+
+volumes:
+  nuget-cache:
