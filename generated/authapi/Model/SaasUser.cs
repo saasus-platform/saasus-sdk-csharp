@@ -40,9 +40,11 @@ namespace authapi.Model
         /// Initializes a new instance of the <see cref="SaasUser" /> class.
         /// </summary>
         /// <param name="id">id (required).</param>
-        /// <param name="email">E-mail (required).</param>
+        /// <param name="email">E-mail. For sign-in ID authentication users, this field is an empty string.  (required).</param>
+        /// <param name="signInId">Sign-in ID. For email authentication users, this field is an empty string.  (required).</param>
         /// <param name="attributes">Attribute information  (required).</param>
-        public SaasUser(string id = default(string), string email = default(string), Dictionary<string, Object> attributes = default(Dictionary<string, Object>))
+        /// <param name="lastLoginAt">Last login date and time (unix timestamp). Null if the user has never logged in. .</param>
+        public SaasUser(string id = default(string), string email = default(string), string signInId = default(string), Dictionary<string, Object> attributes = default(Dictionary<string, Object>), int? lastLoginAt = default(int?))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -56,12 +58,19 @@ namespace authapi.Model
                 throw new ArgumentNullException("email is a required property for SaasUser and cannot be null");
             }
             this.Email = email;
+            // to ensure "signInId" is required (not null)
+            if (signInId == null)
+            {
+                throw new ArgumentNullException("signInId is a required property for SaasUser and cannot be null");
+            }
+            this.SignInId = signInId;
             // to ensure "attributes" is required (not null)
             if (attributes == null)
             {
                 throw new ArgumentNullException("attributes is a required property for SaasUser and cannot be null");
             }
             this.Attributes = attributes;
+            this.LastLoginAt = lastLoginAt;
         }
 
         /// <summary>
@@ -72,12 +81,20 @@ namespace authapi.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// E-mail
+        /// E-mail. For sign-in ID authentication users, this field is an empty string. 
         /// </summary>
-        /// <value>E-mail</value>
+        /// <value>E-mail. For sign-in ID authentication users, this field is an empty string. </value>
         /// <example>hoge@example.com</example>
         [DataMember(Name = "email", IsRequired = true, EmitDefaultValue = true)]
         public string Email { get; set; }
+
+        /// <summary>
+        /// Sign-in ID. For email authentication users, this field is an empty string. 
+        /// </summary>
+        /// <value>Sign-in ID. For email authentication users, this field is an empty string. </value>
+        /// <example>user123</example>
+        [DataMember(Name = "sign_in_id", IsRequired = true, EmitDefaultValue = true)]
+        public string SignInId { get; set; }
 
         /// <summary>
         /// Attribute information 
@@ -86,6 +103,14 @@ namespace authapi.Model
         /// <example>{&quot;address&quot;:&quot;東京都&quot;,&quot;birthday&quot;:19940925,&quot;sex&quot;:&quot;男&quot;}</example>
         [DataMember(Name = "attributes", IsRequired = true, EmitDefaultValue = true)]
         public Dictionary<string, Object> Attributes { get; set; }
+
+        /// <summary>
+        /// Last login date and time (unix timestamp). Null if the user has never logged in. 
+        /// </summary>
+        /// <value>Last login date and time (unix timestamp). Null if the user has never logged in. </value>
+        /// <example>1640995200</example>
+        [DataMember(Name = "last_login_at", EmitDefaultValue = true)]
+        public int? LastLoginAt { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -97,7 +122,9 @@ namespace authapi.Model
             sb.Append("class SaasUser {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  SignInId: ").Append(SignInId).Append("\n");
             sb.Append("  Attributes: ").Append(Attributes).Append("\n");
+            sb.Append("  LastLoginAt: ").Append(LastLoginAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -144,10 +171,20 @@ namespace authapi.Model
                     this.Email.Equals(input.Email))
                 ) && 
                 (
+                    this.SignInId == input.SignInId ||
+                    (this.SignInId != null &&
+                    this.SignInId.Equals(input.SignInId))
+                ) && 
+                (
                     this.Attributes == input.Attributes ||
                     this.Attributes != null &&
                     input.Attributes != null &&
                     this.Attributes.SequenceEqual(input.Attributes)
+                ) && 
+                (
+                    this.LastLoginAt == input.LastLoginAt ||
+                    (this.LastLoginAt != null &&
+                    this.LastLoginAt.Equals(input.LastLoginAt))
                 );
         }
 
@@ -168,9 +205,17 @@ namespace authapi.Model
                 {
                     hashCode = (hashCode * 59) + this.Email.GetHashCode();
                 }
+                if (this.SignInId != null)
+                {
+                    hashCode = (hashCode * 59) + this.SignInId.GetHashCode();
+                }
                 if (this.Attributes != null)
                 {
                     hashCode = (hashCode * 59) + this.Attributes.GetHashCode();
+                }
+                if (this.LastLoginAt != null)
+                {
+                    hashCode = (hashCode * 59) + this.LastLoginAt.GetHashCode();
                 }
                 return hashCode;
             }

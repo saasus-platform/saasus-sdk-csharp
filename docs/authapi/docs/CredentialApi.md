@@ -6,6 +6,7 @@ All URIs are relative to *https://api.saasus.io/v1/auth*
 |--------|--------------|-------------|
 | [**CreateAuthCredentials**](CredentialApi.md#createauthcredentials) | **POST** /credentials | Save Authentication/Authorization Information |
 | [**GetAuthCredentials**](CredentialApi.md#getauthcredentials) | **GET** /credentials | Get Authentication/Authorization Information |
+| [**RevokeToken**](CredentialApi.md#revoketoken) | **POST** /token/revoke | Revoke Token |
 
 <a id="createauthcredentials"></a>
 # **CreateAuthCredentials**
@@ -192,6 +193,94 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **404** | Not Found |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="revoketoken"></a>
+# **RevokeToken**
+> void RevokeToken (RevokeTokenParam revokeTokenParam)
+
+Revoke Token
+
+Revoke the specified refresh token. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class RevokeTokenExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new CredentialApi(config);
+            var revokeTokenParam = new RevokeTokenParam(); // RevokeTokenParam | 
+
+            try
+            {
+                // Revoke Token
+                apiInstance.RevokeToken(revokeTokenParam);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling CredentialApi.RevokeToken: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the RevokeTokenWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Revoke Token
+    apiInstance.RevokeTokenWithHttpInfo(revokeTokenParam);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling CredentialApi.RevokeTokenWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **revokeTokenParam** | [**RevokeTokenParam**](RevokeTokenParam.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

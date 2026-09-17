@@ -43,9 +43,10 @@ namespace authapi.Model
         /// <param name="termsOfServiceUrl">terms of service URL (required).</param>
         /// <param name="privacyPolicyUrl">privacy policy URL (required).</param>
         /// <param name="googleTagManagerContainerId">Google Tag Manager container ID (required).</param>
+        /// <param name="isSignInIdEnabled">display setting for sign-in ID on the sign-in screen.</param>
         /// <param name="icon">service icon (required).</param>
         /// <param name="favicon">favicon (required).</param>
-        public UpdateCustomizePageSettingsParam(string title = default(string), string termsOfServiceUrl = default(string), string privacyPolicyUrl = default(string), string googleTagManagerContainerId = default(string), string icon = default(string), string favicon = default(string))
+        public UpdateCustomizePageSettingsParam(string title = default(string), string termsOfServiceUrl = default(string), string privacyPolicyUrl = default(string), string googleTagManagerContainerId = default(string), bool isSignInIdEnabled = default(bool), string icon = default(string), string favicon = default(string))
         {
             // to ensure "title" is required (not null)
             if (title == null)
@@ -83,6 +84,7 @@ namespace authapi.Model
                 throw new ArgumentNullException("favicon is a required property for UpdateCustomizePageSettingsParam and cannot be null");
             }
             this.Favicon = favicon;
+            this.IsSignInIdEnabled = isSignInIdEnabled;
         }
 
         /// <summary>
@@ -118,6 +120,14 @@ namespace authapi.Model
         public string GoogleTagManagerContainerId { get; set; }
 
         /// <summary>
+        /// display setting for sign-in ID on the sign-in screen
+        /// </summary>
+        /// <value>display setting for sign-in ID on the sign-in screen</value>
+        /// <example>false</example>
+        [DataMember(Name = "is_sign_in_id_enabled", EmitDefaultValue = true)]
+        public bool IsSignInIdEnabled { get; set; }
+
+        /// <summary>
         /// service icon
         /// </summary>
         /// <value>service icon</value>
@@ -145,6 +155,7 @@ namespace authapi.Model
             sb.Append("  TermsOfServiceUrl: ").Append(TermsOfServiceUrl).Append("\n");
             sb.Append("  PrivacyPolicyUrl: ").Append(PrivacyPolicyUrl).Append("\n");
             sb.Append("  GoogleTagManagerContainerId: ").Append(GoogleTagManagerContainerId).Append("\n");
+            sb.Append("  IsSignInIdEnabled: ").Append(IsSignInIdEnabled).Append("\n");
             sb.Append("  Icon: ").Append(Icon).Append("\n");
             sb.Append("  Favicon: ").Append(Favicon).Append("\n");
             sb.Append("}\n");
@@ -203,6 +214,10 @@ namespace authapi.Model
                     this.GoogleTagManagerContainerId.Equals(input.GoogleTagManagerContainerId))
                 ) && 
                 (
+                    this.IsSignInIdEnabled == input.IsSignInIdEnabled ||
+                    this.IsSignInIdEnabled.Equals(input.IsSignInIdEnabled)
+                ) && 
+                (
                     this.Icon == input.Icon ||
                     (this.Icon != null &&
                     this.Icon.Equals(input.Icon))
@@ -239,6 +254,7 @@ namespace authapi.Model
                 {
                     hashCode = (hashCode * 59) + this.GoogleTagManagerContainerId.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.IsSignInIdEnabled.GetHashCode();
                 if (this.Icon != null)
                 {
                     hashCode = (hashCode * 59) + this.Icon.GetHashCode();
