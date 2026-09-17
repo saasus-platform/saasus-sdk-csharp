@@ -40,10 +40,11 @@ namespace authapi.Model
         /// Initializes a new instance of the <see cref="UserInfo" /> class.
         /// </summary>
         /// <param name="id">id (required).</param>
-        /// <param name="email">E-mail (required).</param>
+        /// <param name="email">E-mail. For sign-in ID authentication users, this field is an empty string.  (required).</param>
+        /// <param name="signInId">Sign-in ID. For email authentication users, this field is an empty string.  (required).</param>
         /// <param name="userAttribute">user additional attributes (required).</param>
         /// <param name="tenants">Tenant Info (required).</param>
-        public UserInfo(string id = default(string), string email = default(string), Dictionary<string, Object> userAttribute = default(Dictionary<string, Object>), List<UserAvailableTenant> tenants = default(List<UserAvailableTenant>))
+        public UserInfo(string id = default(string), string email = default(string), string signInId = default(string), Dictionary<string, Object> userAttribute = default(Dictionary<string, Object>), List<UserAvailableTenant> tenants = default(List<UserAvailableTenant>))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -57,6 +58,12 @@ namespace authapi.Model
                 throw new ArgumentNullException("email is a required property for UserInfo and cannot be null");
             }
             this.Email = email;
+            // to ensure "signInId" is required (not null)
+            if (signInId == null)
+            {
+                throw new ArgumentNullException("signInId is a required property for UserInfo and cannot be null");
+            }
+            this.SignInId = signInId;
             // to ensure "userAttribute" is required (not null)
             if (userAttribute == null)
             {
@@ -79,12 +86,20 @@ namespace authapi.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// E-mail
+        /// E-mail. For sign-in ID authentication users, this field is an empty string. 
         /// </summary>
-        /// <value>E-mail</value>
+        /// <value>E-mail. For sign-in ID authentication users, this field is an empty string. </value>
         /// <example>hoge@example.com</example>
         [DataMember(Name = "email", IsRequired = true, EmitDefaultValue = true)]
         public string Email { get; set; }
+
+        /// <summary>
+        /// Sign-in ID. For email authentication users, this field is an empty string. 
+        /// </summary>
+        /// <value>Sign-in ID. For email authentication users, this field is an empty string. </value>
+        /// <example>user123</example>
+        [DataMember(Name = "sign_in_id", IsRequired = true, EmitDefaultValue = true)]
+        public string SignInId { get; set; }
 
         /// <summary>
         /// user additional attributes
@@ -111,6 +126,7 @@ namespace authapi.Model
             sb.Append("class UserInfo {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  SignInId: ").Append(SignInId).Append("\n");
             sb.Append("  UserAttribute: ").Append(UserAttribute).Append("\n");
             sb.Append("  Tenants: ").Append(Tenants).Append("\n");
             sb.Append("}\n");
@@ -159,6 +175,11 @@ namespace authapi.Model
                     this.Email.Equals(input.Email))
                 ) && 
                 (
+                    this.SignInId == input.SignInId ||
+                    (this.SignInId != null &&
+                    this.SignInId.Equals(input.SignInId))
+                ) && 
+                (
                     this.UserAttribute == input.UserAttribute ||
                     this.UserAttribute != null &&
                     input.UserAttribute != null &&
@@ -188,6 +209,10 @@ namespace authapi.Model
                 if (this.Email != null)
                 {
                     hashCode = (hashCode * 59) + this.Email.GetHashCode();
+                }
+                if (this.SignInId != null)
+                {
+                    hashCode = (hashCode * 59) + this.SignInId.GetHashCode();
                 }
                 if (this.UserAttribute != null)
                 {

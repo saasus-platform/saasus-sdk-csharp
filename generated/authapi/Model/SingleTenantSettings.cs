@@ -39,7 +39,7 @@ namespace authapi.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SingleTenantSettings" /> class.
         /// </summary>
-        /// <param name="enabled">enable Single Tenant settings or not (required).</param>
+        /// <param name="enabled">enable SaaS Infrastructure Management settings or not (required).</param>
         /// <param name="roleArn">ARN of the role for SaaS Platform to AssumeRole (required).</param>
         /// <param name="cloudformationTemplateUrl">S3 URL where the CloudFormationTemplate to be executed in the SaaS environment is stored (required).</param>
         /// <param name="ddlTemplateUrl">S3 URL where the CloudFormationTemplate to be executed in the SaaS environment is stored (required).</param>
@@ -74,9 +74,9 @@ namespace authapi.Model
         }
 
         /// <summary>
-        /// enable Single Tenant settings or not
+        /// enable SaaS Infrastructure Management settings or not
         /// </summary>
-        /// <value>enable Single Tenant settings or not</value>
+        /// <value>enable SaaS Infrastructure Management settings or not</value>
         [DataMember(Name = "enabled", IsRequired = true, EmitDefaultValue = true)]
         public bool Enabled { get; set; }
 

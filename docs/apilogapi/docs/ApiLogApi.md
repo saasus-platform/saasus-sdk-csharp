@@ -100,7 +100,7 @@ catch (ApiException e)
 
 <a id="getlogs"></a>
 # **GetLogs**
-> ApiLogs GetLogs (DateTime? createdDate = null, DateTime? createdAt = null, long? limit = null, string cursor = null)
+> ApiLogs GetLogs (DateTime? createdDate = null, DateTime? createdAt = null, long? limit = null, long? startAt = null, long? endAt = null, string cursor = null)
 
 Get API execution log list
 
@@ -123,14 +123,16 @@ namespace Example
             ApiLogApiClientConfig config = new Configuration().GetApiLogApiClientConfig();
             var apiInstance = new ApiLogApi(config);
             var createdDate = DateTime.Parse("2013-10-20");  // DateTime? | The date, in format of YYYY-MM-DD, to retrieve the log. (optional) 
-            var createdAt = DateTime.Parse("2013-10-20T19:20:30+01:00");  // DateTime? | The datetime, in ISO 8601 format, to retrieve the log. (optional) 
+            var createdAt = DateTime.Parse("2013-10-20T19:20:30+01:00");  // DateTime? | The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. (optional) 
             var limit = 789L;  // long? | Maximum number of logs to retrieve. (optional) 
+            var startAt = 789L;  // long? | The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional) 
+            var endAt = 789L;  // long? | The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional) 
             var cursor = "cursor_example";  // string | Cursor for cursor pagination. (optional) 
 
             try
             {
                 // Get API execution log list
-                ApiLogs result = apiInstance.GetLogs(createdDate, createdAt, limit, cursor);
+                ApiLogs result = apiInstance.GetLogs(createdDate, createdAt, limit, startAt, endAt, cursor);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -151,7 +153,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get API execution log list
-    ApiResponse<ApiLogs> response = apiInstance.GetLogsWithHttpInfo(createdDate, createdAt, limit, cursor);
+    ApiResponse<ApiLogs> response = apiInstance.GetLogsWithHttpInfo(createdDate, createdAt, limit, startAt, endAt, cursor);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -169,8 +171,10 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **createdDate** | **DateTime?** | The date, in format of YYYY-MM-DD, to retrieve the log. | [optional]  |
-| **createdAt** | **DateTime?** | The datetime, in ISO 8601 format, to retrieve the log. | [optional]  |
+| **createdAt** | **DateTime?** | The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. | [optional]  |
 | **limit** | **long?** | Maximum number of logs to retrieve. | [optional]  |
+| **startAt** | **long?** | The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. | [optional]  |
+| **endAt** | **long?** | The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. | [optional]  |
 | **cursor** | **string** | Cursor for cursor pagination. | [optional]  |
 
 ### Return type
