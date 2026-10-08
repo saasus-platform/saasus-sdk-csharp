@@ -6,6 +6,7 @@ All URIs are relative to *https://api.saasus.io/v1/auth*
 |--------|--------------|-------------|
 | [**GetUserInfo**](UserInfoApi.md#getuserinfo) | **GET** /userinfo | Get User Info |
 | [**GetUserInfoByEmail**](UserInfoApi.md#getuserinfobyemail) | **GET** /userinfo/search/email | Get User Info by Email |
+| [**GetUserInfoBySignInId**](UserInfoApi.md#getuserinfobysigninid) | **GET** /userinfo/search/sign-in-id | Get User Info by Sign-in ID |
 
 <a id="getuserinfo"></a>
 # **GetUserInfo**
@@ -13,7 +14,7 @@ All URIs are relative to *https://api.saasus.io/v1/auth*
 
 Get User Info
 
-User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. 
+User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc. 
 
 ### Example
 ```csharp
@@ -167,6 +168,98 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **email** | **string** | Email |  |
+
+### Return type
+
+[**UserInfo**](UserInfo.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **404** | Not Found |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="getuserinfobysigninid"></a>
+# **GetUserInfoBySignInId**
+> UserInfo GetUserInfoBySignInId (string signInId)
+
+Get User Info by Sign-in ID
+
+Get user information by sign-in ID. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class GetUserInfoBySignInIdExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new UserInfoApi(config);
+            var signInId = "signInId_example";  // string | Sign-in ID. 
+
+            try
+            {
+                // Get User Info by Sign-in ID
+                UserInfo result = apiInstance.GetUserInfoBySignInId(signInId);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling UserInfoApi.GetUserInfoBySignInId: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetUserInfoBySignInIdWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get User Info by Sign-in ID
+    ApiResponse<UserInfo> response = apiInstance.GetUserInfoBySignInIdWithHttpInfo(signInId);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling UserInfoApi.GetUserInfoBySignInIdWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **signInId** | **string** | Sign-in ID.  |  |
 
 ### Return type
 
