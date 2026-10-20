@@ -1,0 +1,147 @@
+# (A) the candidate SDK builds
+# (B) its requests are accepted by a mock of the latest spec and the responses
+#     deserialize
+# (C) the latest release still round-trips against the latest spec
+#
+# Language-agnostic steps come from saasus-platform/github-actions; the C#
+# build/test steps stay here.
+#
+# pull_request, never pull_request_target: fork PRs do not receive the secrets.
+
+name: SDK Contract Test
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: sdk-contract-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # The job name "contract-test" is the required status check name. Do not rename.
+  contract-test:
+    name: contract-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout PR (candidate SDK)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Set up Node (for Prism)
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+
+      # Short-lived, contents:read on the private api repo only.
+      - name: Mint api read token
+        id: api-token
+        uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1
+        with:
+          app-id: ${{ secrets.SPEC_READER_APP_ID }}
+          private-key: ${{ secrets.SPEC_READER_PRIVATE_KEY }}
+          owner: Anti-Pattern-Inc
+          repositories: saasus-api
+
+      # The api repository and its latest stable tag are resolved in the action.
+      - name: Fetch OpenAPI spec
+        id: spec
+        uses: saasus-platform/github-actions/.github/actions/fetch-openapi-spec@main
+        with:
+          token: ${{ steps.api-token.outputs.token }}
+
+      # Not regenerated: the committed code is the artifact that gets merged.
+      # The api repo's "Update SDK" workflow runs generate.sh when it opens the
+      # PR but never compiles the result, so this is where that happens.
+      - name: (A) Build candidate SDK
+        run: dotnet build saasus-sdk-csharp.csproj --configuration Release
+
+      # The generated ApiClient overwrites the Authorization header with a
+      # SaaSus SigV1 signature, which no spec declares a scheme for, so the mock
+      # would answer 401 to every operation. The real API accepts the signature,
+      # so the mismatch is in the spec, not the SDK. Request and response
+      # validation — all this suite checks — stay enforced; the authentication
+      # layer is out of scope.
+      - name: Drop the mock's security requirement (C#-specific)
+        env:
+          SPEC_DIR: ${{ steps.spec.outputs.spec-dir }}
+        run: |
+          set -euo pipefail
+          for spec in "${SPEC_DIR}"/*.yml; do
+            awk '
+              /^security:/ { skip = 1; next }
+              skip && /^[[:space:]]/ { next }
+              { skip = 0; print }
+            ' "${spec}" > "${spec}.stripped"
+            mv "${spec}.stripped" "${spec}"
+          done
+
+      # Static mode, so responses come from the spec's examples: that is what
+      # makes its oneOf responses resolvable. Dynamic mode would ignore them.
+      - name: Start Prism mocks
+        uses: saasus-platform/github-actions/.github/actions/setup-prism@main
+        with:
+          spec-dir: ${{ steps.spec.outputs.spec-dir }}
+          modules: ${{ steps.spec.outputs.modules }}
+
+      # CONTRACT_MODULES comes from the same output as the Prism setup's, so the
+      # module list has no copy here. Mock URLs arrive in the PRISM_URL_<MODULE>
+      # variables the setup exported.
+      - name: (B) Candidate SDK contract
+        env:
+          CONTRACT_SPEC_DIR: ${{ steps.spec.outputs.spec-dir }}
+          CONTRACT_MODULES: ${{ steps.spec.outputs.modules }}
+          # The candidate SDK must cover every spec operation.
+          CONTRACT_REQUIRE_COMPLETE: "true"
+        run: >
+          dotnet test tests/Contract/SaaSusSdk.Contract.Tests.csproj --configuration Release
+          --results-directory contract-reports
+          --logger "trx;LogFileName=contract-candidate.trx"
+
+      - name: Resolve latest release tag
+        id: release-tag
+        uses: saasus-platform/github-actions/.github/actions/resolve-latest-stable-tag@main
+
+      - name: Checkout latest release
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ steps.release-tag.outputs.tag }}
+          path: latest-release
+
+      # The release tag's OWN suite is run, not a copy of the current one, so
+      # each release is checked with the test it shipped with. Prism and
+      # CONTRACT_SPEC_DIR both still point at the latest spec.
+      #
+      # A tag published before the suite existed has no such project and fails
+      # here by design: there is no skip mechanism.
+      - name: (C) Latest release forward-compat (bundled suite)
+        env:
+          CONTRACT_SPEC_DIR: ${{ steps.spec.outputs.spec-dir }}
+          CONTRACT_MODULES: ${{ steps.spec.outputs.modules }}
+        working-directory: latest-release
+        run: >
+          dotnet test tests/Contract/SaaSusSdk.Contract.Tests.csproj --configuration Release
+          --results-directory contract-reports
+          --logger "trx;LogFileName=contract-release.trx"
+
+      # Evidence of what ran: each case is a display name in the trx. Uploaded
+      # on failure too, where the release report can be absent because (B)
+      # failed first — hence if-no-files-found: ignore.
+      - name: Upload contract test reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: contract-test-reports
+          path: |
+            contract-reports/**
+            latest-release/contract-reports/**
+          if-no-files-found: ignore
