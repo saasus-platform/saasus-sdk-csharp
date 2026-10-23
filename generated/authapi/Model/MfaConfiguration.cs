@@ -56,7 +56,7 @@ namespace authapi.Model
         /// on: apply when all users log in optional: apply to individual users with MFA factor enabled ※ The parameter is currently optional and fixed. 
         /// </summary>
         /// <value>on: apply when all users log in optional: apply to individual users with MFA factor enabled ※ The parameter is currently optional and fixed. </value>
-        /// <example>true</example>
+        /// <example>on</example>
         [DataMember(Name = "mfa_configuration", IsRequired = true, EmitDefaultValue = true)]
         public MfaConfigurationEnum VarMfaConfiguration { get; set; }
         /// <summary>

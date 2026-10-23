@@ -179,6 +179,27 @@ namespace authapi.Api
         /// <returns>ApiResponse of Users</returns>
         ApiResponse<Users> GetAllTenantUsersWithHttpInfo(int operationIndex = 0);
         /// <summary>
+        /// Get Tenant Users Count
+        /// </summary>
+        /// <remarks>
+        /// Get the count of tenant users for each tenant. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>TenantUsersCounts</returns>
+        TenantUsersCounts GetAllTenantUsersCount(int operationIndex = 0);
+
+        /// <summary>
+        /// Get Tenant Users Count
+        /// </summary>
+        /// <remarks>
+        /// Get the count of tenant users for each tenant. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of TenantUsersCounts</returns>
+        ApiResponse<TenantUsersCounts> GetAllTenantUsersCountWithHttpInfo(int operationIndex = 0);
+        /// <summary>
         /// Get Tenant User
         /// </summary>
         /// <remarks>
@@ -226,6 +247,66 @@ namespace authapi.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Users</returns>
         ApiResponse<Users> GetTenantUsersWithHttpInfo(string tenantId, int operationIndex = 0);
+        /// <summary>
+        /// Save Tenant Users Count
+        /// </summary>
+        /// <remarks>
+        /// Save the count of tenant users for each tenant. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveTenantUsersCountsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        void SaveTenantUsersCounts(SaveTenantUsersCountsParam saveTenantUsersCountsParam, int operationIndex = 0);
+
+        /// <summary>
+        /// Save Tenant Users Count
+        /// </summary>
+        /// <remarks>
+        /// Save the count of tenant users for each tenant. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveTenantUsersCountsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> SaveTenantUsersCountsWithHttpInfo(SaveTenantUsersCountsParam saveTenantUsersCountsParam, int operationIndex = 0);
+        /// <summary>
+        /// Search Tenant Users
+        /// </summary>
+        /// <remarks>
+        /// Search tenant users by user id, tenant id, email, sign-in ID, env, or role. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tenantId">Tenant ID (optional)</param>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="envId">Environment ID (optional)</param>
+        /// <param name="roleName">Role Name (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SearchTenantUsersResult</returns>
+        SearchTenantUsersResult SearchTenantUsers(string tenantId = default(string), string id = default(string), string email = default(string), string signInId = default(string), int? envId = default(int?), string roleName = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0);
+
+        /// <summary>
+        /// Search Tenant Users
+        /// </summary>
+        /// <remarks>
+        /// Search tenant users by user id, tenant id, email, sign-in ID, env, or role. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tenantId">Tenant ID (optional)</param>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="envId">Environment ID (optional)</param>
+        /// <param name="roleName">Role Name (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SearchTenantUsersResult</returns>
+        ApiResponse<SearchTenantUsersResult> SearchTenantUsersWithHttpInfo(string tenantId = default(string), string id = default(string), string email = default(string), string signInId = default(string), int? envId = default(int?), string roleName = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0);
         /// <summary>
         /// Update Tenant User Attribute
         /// </summary>
@@ -427,6 +508,29 @@ namespace authapi.Api
         /// <returns>Task of ApiResponse (Users)</returns>
         System.Threading.Tasks.Task<ApiResponse<Users>> GetAllTenantUsersWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
+        /// Get Tenant Users Count
+        /// </summary>
+        /// <remarks>
+        /// Get the count of tenant users for each tenant. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of TenantUsersCounts</returns>
+        System.Threading.Tasks.Task<TenantUsersCounts> GetAllTenantUsersCountAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get Tenant Users Count
+        /// </summary>
+        /// <remarks>
+        /// Get the count of tenant users for each tenant. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (TenantUsersCounts)</returns>
+        System.Threading.Tasks.Task<ApiResponse<TenantUsersCounts>> GetAllTenantUsersCountWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
         /// Get Tenant User
         /// </summary>
         /// <remarks>
@@ -478,6 +582,70 @@ namespace authapi.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Users)</returns>
         System.Threading.Tasks.Task<ApiResponse<Users>> GetTenantUsersWithHttpInfoAsync(string tenantId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Save Tenant Users Count
+        /// </summary>
+        /// <remarks>
+        /// Save the count of tenant users for each tenant. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveTenantUsersCountsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task SaveTenantUsersCountsAsync(SaveTenantUsersCountsParam saveTenantUsersCountsParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Save Tenant Users Count
+        /// </summary>
+        /// <remarks>
+        /// Save the count of tenant users for each tenant. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveTenantUsersCountsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> SaveTenantUsersCountsWithHttpInfoAsync(SaveTenantUsersCountsParam saveTenantUsersCountsParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Search Tenant Users
+        /// </summary>
+        /// <remarks>
+        /// Search tenant users by user id, tenant id, email, sign-in ID, env, or role. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tenantId">Tenant ID (optional)</param>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="envId">Environment ID (optional)</param>
+        /// <param name="roleName">Role Name (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SearchTenantUsersResult</returns>
+        System.Threading.Tasks.Task<SearchTenantUsersResult> SearchTenantUsersAsync(string tenantId = default(string), string id = default(string), string email = default(string), string signInId = default(string), int? envId = default(int?), string roleName = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Search Tenant Users
+        /// </summary>
+        /// <remarks>
+        /// Search tenant users by user id, tenant id, email, sign-in ID, env, or role. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tenantId">Tenant ID (optional)</param>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="envId">Environment ID (optional)</param>
+        /// <param name="roleName">Role Name (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SearchTenantUsersResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SearchTenantUsersResult>> SearchTenantUsersWithHttpInfoAsync(string tenantId = default(string), string id = default(string), string email = default(string), string signInId = default(string), int? envId = default(int?), string roleName = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Update Tenant User Attribute
         /// </summary>
@@ -1640,6 +1808,144 @@ namespace authapi.Api
         }
 
         /// <summary>
+        /// Get Tenant Users Count Get the count of tenant users for each tenant. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>TenantUsersCounts</returns>
+        public TenantUsersCounts GetAllTenantUsersCount(int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<TenantUsersCounts> localVarResponse = GetAllTenantUsersCountWithHttpInfo();
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get Tenant Users Count Get the count of tenant users for each tenant. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of TenantUsersCounts</returns>
+        public authapi.Client.ApiResponse<TenantUsersCounts> GetAllTenantUsersCountWithHttpInfo(int operationIndex = 0)
+        {
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+
+            localVarRequestOptions.Operation = "TenantUserApi.GetAllTenantUsersCount";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<TenantUsersCounts>("/tenants/all/users/count", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAllTenantUsersCount", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get Tenant Users Count Get the count of tenant users for each tenant. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of TenantUsersCounts</returns>
+        public async System.Threading.Tasks.Task<TenantUsersCounts> GetAllTenantUsersCountAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<TenantUsersCounts> localVarResponse = await GetAllTenantUsersCountWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get Tenant Users Count Get the count of tenant users for each tenant. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (TenantUsersCounts)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<TenantUsersCounts>> GetAllTenantUsersCountWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+
+            localVarRequestOptions.Operation = "TenantUserApi.GetAllTenantUsersCount";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<TenantUsersCounts>("/tenants/all/users/count", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAllTenantUsersCount", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Get Tenant User Get one tenant user by specific ID. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1960,6 +2266,396 @@ namespace authapi.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetTenantUsers", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Save Tenant Users Count Save the count of tenant users for each tenant. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveTenantUsersCountsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        public void SaveTenantUsersCounts(SaveTenantUsersCountsParam saveTenantUsersCountsParam, int operationIndex = 0)
+        {
+            SaveTenantUsersCountsWithHttpInfo(saveTenantUsersCountsParam);
+        }
+
+        /// <summary>
+        /// Save Tenant Users Count Save the count of tenant users for each tenant. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveTenantUsersCountsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public authapi.Client.ApiResponse<Object> SaveTenantUsersCountsWithHttpInfo(SaveTenantUsersCountsParam saveTenantUsersCountsParam, int operationIndex = 0)
+        {
+            // verify the required parameter 'saveTenantUsersCountsParam' is set
+            if (saveTenantUsersCountsParam == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'saveTenantUsersCountsParam' when calling TenantUserApi->SaveTenantUsersCounts");
+            }
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = saveTenantUsersCountsParam;
+
+            localVarRequestOptions.Operation = "TenantUserApi.SaveTenantUsersCounts";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/tenants/all/users/count", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SaveTenantUsersCounts", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Save Tenant Users Count Save the count of tenant users for each tenant. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveTenantUsersCountsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task SaveTenantUsersCountsAsync(SaveTenantUsersCountsParam saveTenantUsersCountsParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            await SaveTenantUsersCountsWithHttpInfoAsync(saveTenantUsersCountsParam, operationIndex, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Save Tenant Users Count Save the count of tenant users for each tenant. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveTenantUsersCountsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<Object>> SaveTenantUsersCountsWithHttpInfoAsync(SaveTenantUsersCountsParam saveTenantUsersCountsParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'saveTenantUsersCountsParam' is set
+            if (saveTenantUsersCountsParam == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'saveTenantUsersCountsParam' when calling TenantUserApi->SaveTenantUsersCounts");
+            }
+
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = saveTenantUsersCountsParam;
+
+            localVarRequestOptions.Operation = "TenantUserApi.SaveTenantUsersCounts";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/tenants/all/users/count", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SaveTenantUsersCounts", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Search Tenant Users Search tenant users by user id, tenant id, email, sign-in ID, env, or role. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tenantId">Tenant ID (optional)</param>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="envId">Environment ID (optional)</param>
+        /// <param name="roleName">Role Name (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SearchTenantUsersResult</returns>
+        public SearchTenantUsersResult SearchTenantUsers(string tenantId = default(string), string id = default(string), string email = default(string), string signInId = default(string), int? envId = default(int?), string roleName = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<SearchTenantUsersResult> localVarResponse = SearchTenantUsersWithHttpInfo(tenantId, id, email, signInId, envId, roleName, limit, cursor);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Search Tenant Users Search tenant users by user id, tenant id, email, sign-in ID, env, or role. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tenantId">Tenant ID (optional)</param>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="envId">Environment ID (optional)</param>
+        /// <param name="roleName">Role Name (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SearchTenantUsersResult</returns>
+        public authapi.Client.ApiResponse<SearchTenantUsersResult> SearchTenantUsersWithHttpInfo(string tenantId = default(string), string id = default(string), string email = default(string), string signInId = default(string), int? envId = default(int?), string roleName = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0)
+        {
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            if (tenantId != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "tenant_id", tenantId));
+            }
+            if (id != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "id", id));
+            }
+            if (email != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "email", email));
+            }
+            if (signInId != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "sign_in_id", signInId));
+            }
+            if (envId != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "env_id", envId));
+            }
+            if (roleName != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "role_name", roleName));
+            }
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
+            }
+            if (cursor != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "cursor", cursor));
+            }
+
+            localVarRequestOptions.Operation = "TenantUserApi.SearchTenantUsers";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<SearchTenantUsersResult>("/tenants/all/users/search", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchTenantUsers", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Search Tenant Users Search tenant users by user id, tenant id, email, sign-in ID, env, or role. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tenantId">Tenant ID (optional)</param>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="envId">Environment ID (optional)</param>
+        /// <param name="roleName">Role Name (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SearchTenantUsersResult</returns>
+        public async System.Threading.Tasks.Task<SearchTenantUsersResult> SearchTenantUsersAsync(string tenantId = default(string), string id = default(string), string email = default(string), string signInId = default(string), int? envId = default(int?), string roleName = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<SearchTenantUsersResult> localVarResponse = await SearchTenantUsersWithHttpInfoAsync(tenantId, id, email, signInId, envId, roleName, limit, cursor, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Search Tenant Users Search tenant users by user id, tenant id, email, sign-in ID, env, or role. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tenantId">Tenant ID (optional)</param>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="envId">Environment ID (optional)</param>
+        /// <param name="roleName">Role Name (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SearchTenantUsersResult)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<SearchTenantUsersResult>> SearchTenantUsersWithHttpInfoAsync(string tenantId = default(string), string id = default(string), string email = default(string), string signInId = default(string), int? envId = default(int?), string roleName = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            if (tenantId != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "tenant_id", tenantId));
+            }
+            if (id != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "id", id));
+            }
+            if (email != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "email", email));
+            }
+            if (signInId != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "sign_in_id", signInId));
+            }
+            if (envId != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "env_id", envId));
+            }
+            if (roleName != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "role_name", roleName));
+            }
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
+            }
+            if (cursor != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "cursor", cursor));
+            }
+
+            localVarRequestOptions.Operation = "TenantUserApi.SearchTenantUsers";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<SearchTenantUsersResult>("/tenants/all/users/search", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchTenantUsers", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

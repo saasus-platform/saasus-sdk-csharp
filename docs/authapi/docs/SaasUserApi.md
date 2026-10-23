@@ -4,6 +4,7 @@ All URIs are relative to *https://api.saasus.io/v1/auth*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
+| [**ConfirmDevice**](SaasUserApi.md#confirmdevice) | **POST** /device/confirm | Confirm Device |
 | [**ConfirmEmailUpdate**](SaasUserApi.md#confirmemailupdate) | **POST** /users/{user_id}/email/confirm | Confirm User Email Update |
 | [**ConfirmExternalUserLink**](SaasUserApi.md#confirmexternaluserlink) | **POST** /external-users/confirm | Confirm External User Account Link |
 | [**ConfirmSignUpWithAwsMarketplace**](SaasUserApi.md#confirmsignupwithawsmarketplace) | **POST** /aws-marketplace/sign-up-confirm | Confirm Sign Up with AWS Marketplace |
@@ -12,19 +13,120 @@ All URIs are relative to *https://api.saasus.io/v1/auth*
 | [**DeleteSaasUser**](SaasUserApi.md#deletesaasuser) | **DELETE** /users/{user_id} | Delete User |
 | [**GetSaasUser**](SaasUserApi.md#getsaasuser) | **GET** /users/{user_id} | Get User |
 | [**GetSaasUsers**](SaasUserApi.md#getsaasusers) | **GET** /users | Get Users |
+| [**GetSaasUsersCount**](SaasUserApi.md#getsaasuserscount) | **GET** /users/count | Get SaaS Users Count |
 | [**GetUserMfaPreference**](SaasUserApi.md#getusermfapreference) | **GET** /users/{user_id}/mfa/preference | Get User&#39;s MFA Settings |
 | [**LinkAwsMarketplace**](SaasUserApi.md#linkawsmarketplace) | **PATCH** /aws-marketplace/link | Link an existing tenant with AWS Marketplace |
 | [**RequestEmailUpdate**](SaasUserApi.md#requestemailupdate) | **POST** /users/{user_id}/email/request | Request User Email Update |
 | [**RequestExternalUserLink**](SaasUserApi.md#requestexternaluserlink) | **POST** /external-users/request | Request External User Account Link |
 | [**ResendSignUpConfirmationEmail**](SaasUserApi.md#resendsignupconfirmationemail) | **POST** /sign-up/resend | Resend Sign Up Confirmation Email |
+| [**ResetSaasUserPassword**](SaasUserApi.md#resetsaasuserpassword) | **POST** /users/{user_id}/password/reset | Reset Password |
+| [**RespondToSignInChallenge**](SaasUserApi.md#respondtosigninchallenge) | **POST** /sign-in/challenge | Respond to Sign In Challenge |
+| [**SaveSaasUsersCount**](SaasUserApi.md#savesaasuserscount) | **POST** /users/count | Save SaaS Users Count |
+| [**SearchSaasUsers**](SaasUserApi.md#searchsaasusers) | **GET** /users/search | Search SaaS Users |
+| [**SignIn**](SaasUserApi.md#signin) | **POST** /sign-in | Sign In |
 | [**SignUp**](SaasUserApi.md#signup) | **POST** /sign-up | Sign Up |
 | [**SignUpWithAwsMarketplace**](SaasUserApi.md#signupwithawsmarketplace) | **POST** /aws-marketplace/sign-up | Sign Up with AWS Marketplace |
 | [**UnlinkProvider**](SaasUserApi.md#unlinkprovider) | **DELETE** /users/{user_id}/providers/{provider_name} | Unlink external identity providers |
+| [**UpdateDeviceStatus**](SaasUserApi.md#updatedevicestatus) | **POST** /device/status | Update Device Status |
 | [**UpdateSaasUserAttributes**](SaasUserApi.md#updatesaasuserattributes) | **PATCH** /users/{user_id}/attributes | Update SaaS User Attributes |
 | [**UpdateSaasUserEmail**](SaasUserApi.md#updatesaasuseremail) | **PATCH** /users/{user_id}/email | Change Email |
 | [**UpdateSaasUserPassword**](SaasUserApi.md#updatesaasuserpassword) | **PATCH** /users/{user_id}/password | Change Password |
+| [**UpdateSaasUserSignInId**](SaasUserApi.md#updatesaasusersigninid) | **PATCH** /users/{user_id}/sign-in-id | Change Sign-in ID |
 | [**UpdateSoftwareToken**](SaasUserApi.md#updatesoftwaretoken) | **PUT** /users/{user_id}/mfa/software-token | Register Authentication Application |
 | [**UpdateUserMfaPreference**](SaasUserApi.md#updateusermfapreference) | **PATCH** /users/{user_id}/mfa/preference | Update User&#39;s MFA Settings |
+
+<a id="confirmdevice"></a>
+# **ConfirmDevice**
+> ConfirmDeviceResult ConfirmDevice (ConfirmDeviceParam confirmDeviceParam = null)
+
+Confirm Device
+
+Confirms a device for remembering. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class ConfirmDeviceExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new SaasUserApi(config);
+            var confirmDeviceParam = new ConfirmDeviceParam(); // ConfirmDeviceParam |  (optional) 
+
+            try
+            {
+                // Confirm Device
+                ConfirmDeviceResult result = apiInstance.ConfirmDevice(confirmDeviceParam);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling SaasUserApi.ConfirmDevice: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ConfirmDeviceWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Confirm Device
+    ApiResponse<ConfirmDeviceResult> response = apiInstance.ConfirmDeviceWithHttpInfo(confirmDeviceParam);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling SaasUserApi.ConfirmDeviceWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **confirmDeviceParam** | [**ConfirmDeviceParam**](ConfirmDeviceParam.md) |  | [optional]  |
+
+### Return type
+
+[**ConfirmDeviceResult**](ConfirmDeviceResult.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a id="confirmemailupdate"></a>
 # **ConfirmEmailUpdate**
@@ -296,7 +398,7 @@ catch (ApiException e)
 
 <a id="createsaasuser"></a>
 # **CreateSaasUser**
-> SaasUser CreateSaasUser (CreateSaasUserParam createSaasUserParam = null)
+> CreatedSaasUser CreateSaasUser (CreateSaasUserParam createSaasUserParam = null)
 
 Create SaaS User
 
@@ -323,7 +425,7 @@ namespace Example
             try
             {
                 // Create SaaS User
-                SaasUser result = apiInstance.CreateSaasUser(createSaasUserParam);
+                CreatedSaasUser result = apiInstance.CreateSaasUser(createSaasUserParam);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -344,7 +446,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Create SaaS User
-    ApiResponse<SaasUser> response = apiInstance.CreateSaasUserWithHttpInfo(createSaasUserParam);
+    ApiResponse<CreatedSaasUser> response = apiInstance.CreateSaasUserWithHttpInfo(createSaasUserParam);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -365,7 +467,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**SaasUser**](SaasUser.md)
+[**CreatedSaasUser**](CreatedSaasUser.md)
 
 ### Authorization
 
@@ -481,11 +583,11 @@ catch (ApiException e)
 
 <a id="deletesaasuser"></a>
 # **DeleteSaasUser**
-> void DeleteSaasUser (string userId)
+> UserInfo DeleteSaasUser (string userId)
 
 Delete User
 
-Delete all users with matching user ID from the tenant and SaaS. 
+Delete all users with matching user ID from the tenant and SaaS. Returns user information before deletion. 
 
 ### Example
 ```csharp
@@ -508,7 +610,8 @@ namespace Example
             try
             {
                 // Delete User
-                apiInstance.DeleteSaasUser(userId);
+                UserInfo result = apiInstance.DeleteSaasUser(userId);
+                Debug.WriteLine(result);
             }
             catch (ApiException  e)
             {
@@ -528,7 +631,10 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Delete User
-    apiInstance.DeleteSaasUserWithHttpInfo(userId);
+    ApiResponse<UserInfo> response = apiInstance.DeleteSaasUserWithHttpInfo(userId);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
@@ -546,7 +652,7 @@ catch (ApiException e)
 
 ### Return type
 
-void (empty response body)
+[**UserInfo**](UserInfo.md)
 
 ### Authorization
 
@@ -726,6 +832,92 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**SaasUsers**](SaasUsers.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="getsaasuserscount"></a>
+# **GetSaasUsersCount**
+> SaasUsersCount GetSaasUsersCount ()
+
+Get SaaS Users Count
+
+Get the count of SaaS users. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class GetSaasUsersCountExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new SaasUserApi(config);
+
+            try
+            {
+                // Get SaaS Users Count
+                SaasUsersCount result = apiInstance.GetSaasUsersCount();
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling SaasUserApi.GetSaasUsersCount: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetSaasUsersCountWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get SaaS Users Count
+    ApiResponse<SaasUsersCount> response = apiInstance.GetSaasUsersCountWithHttpInfo();
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling SaasUserApi.GetSaasUsersCountWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+[**SaasUsersCount**](SaasUsersCount.md)
 
 ### Authorization
 
@@ -929,7 +1121,7 @@ void (empty response body)
 
 Request User Email Update
 
-Request to update the user's email address. Sends a verification code to the requested email address. Requires the user's access token. The verification code is valid for 24 hours. 
+Request to update the user's email address. Sends a verification code to the requested email address. Requires the user's access token. The verification code is valid for 24 hours. This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API. 
 
 ### Example
 ```csharp
@@ -1008,6 +1200,7 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+| **400** | Bad Request |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1183,6 +1376,471 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="resetsaasuserpassword"></a>
+# **ResetSaasUserPassword**
+> SaasUserResetPasswordResult ResetSaasUserPassword (string userId)
+
+Reset Password
+
+Reset user's login password. The current password will be invalidated and a temporary password will be issued. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class ResetSaasUserPasswordExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new SaasUserApi(config);
+            var userId = f94bfffc-8be2-11ec-b41a-0242ac120004;  // string | User ID
+
+            try
+            {
+                // Reset Password
+                SaasUserResetPasswordResult result = apiInstance.ResetSaasUserPassword(userId);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling SaasUserApi.ResetSaasUserPassword: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ResetSaasUserPasswordWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Reset Password
+    ApiResponse<SaasUserResetPasswordResult> response = apiInstance.ResetSaasUserPasswordWithHttpInfo(userId);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling SaasUserApi.ResetSaasUserPasswordWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** | User ID |  |
+
+### Return type
+
+[**SaasUserResetPasswordResult**](SaasUserResetPasswordResult.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **404** | Not Found |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="respondtosigninchallenge"></a>
+# **RespondToSignInChallenge**
+> RespondToSignInChallengeResult RespondToSignInChallenge (RespondToSignInChallengeParam respondToSignInChallengeParam = null)
+
+Respond to Sign In Challenge
+
+Respond to a sign-in challenge. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class RespondToSignInChallengeExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new SaasUserApi(config);
+            var respondToSignInChallengeParam = new RespondToSignInChallengeParam(); // RespondToSignInChallengeParam |  (optional) 
+
+            try
+            {
+                // Respond to Sign In Challenge
+                RespondToSignInChallengeResult result = apiInstance.RespondToSignInChallenge(respondToSignInChallengeParam);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling SaasUserApi.RespondToSignInChallenge: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the RespondToSignInChallengeWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Respond to Sign In Challenge
+    ApiResponse<RespondToSignInChallengeResult> response = apiInstance.RespondToSignInChallengeWithHttpInfo(respondToSignInChallengeParam);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling SaasUserApi.RespondToSignInChallengeWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **respondToSignInChallengeParam** | [**RespondToSignInChallengeParam**](RespondToSignInChallengeParam.md) |  | [optional]  |
+
+### Return type
+
+[**RespondToSignInChallengeResult**](RespondToSignInChallengeResult.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="savesaasuserscount"></a>
+# **SaveSaasUsersCount**
+> void SaveSaasUsersCount (SaveSaasUsersCountParam saveSaasUsersCountParam)
+
+Save SaaS Users Count
+
+Save the count of SaaS users. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class SaveSaasUsersCountExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new SaasUserApi(config);
+            var saveSaasUsersCountParam = new SaveSaasUsersCountParam(); // SaveSaasUsersCountParam | 
+
+            try
+            {
+                // Save SaaS Users Count
+                apiInstance.SaveSaasUsersCount(saveSaasUsersCountParam);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling SaasUserApi.SaveSaasUsersCount: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SaveSaasUsersCountWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Save SaaS Users Count
+    apiInstance.SaveSaasUsersCountWithHttpInfo(saveSaasUsersCountParam);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling SaasUserApi.SaveSaasUsersCountWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **saveSaasUsersCountParam** | [**SaveSaasUsersCountParam**](SaveSaasUsersCountParam.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **500** | Internal Server Error |  -  |
+| **501** | Not Implemented |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="searchsaasusers"></a>
+# **SearchSaasUsers**
+> SearchSaasUsersResult SearchSaasUsers (string id = null, string email = null, string signInId = null, long? limit = null, string cursor = null)
+
+Search SaaS Users
+
+Search SaaS users by user ID, email, or sign-in ID. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class SearchSaasUsersExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new SaasUserApi(config);
+            var id = "id_example";  // string | User ID (optional) 
+            var email = "email_example";  // string | Email prefix (optional) 
+            var signInId = "signInId_example";  // string | Sign-in ID prefix (optional) 
+            var limit = 789L;  // long? | Maximum number of items to retrieve (optional) 
+            var cursor = "cursor_example";  // string | Cursor for cursor pagination (optional) 
+
+            try
+            {
+                // Search SaaS Users
+                SearchSaasUsersResult result = apiInstance.SearchSaasUsers(id, email, signInId, limit, cursor);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling SaasUserApi.SearchSaasUsers: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchSaasUsersWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Search SaaS Users
+    ApiResponse<SearchSaasUsersResult> response = apiInstance.SearchSaasUsersWithHttpInfo(id, email, signInId, limit, cursor);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling SaasUserApi.SearchSaasUsersWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **id** | **string** | User ID | [optional]  |
+| **email** | **string** | Email prefix | [optional]  |
+| **signInId** | **string** | Sign-in ID prefix | [optional]  |
+| **limit** | **long?** | Maximum number of items to retrieve | [optional]  |
+| **cursor** | **string** | Cursor for cursor pagination | [optional]  |
+
+### Return type
+
+[**SearchSaasUsersResult**](SearchSaasUsersResult.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="signin"></a>
+# **SignIn**
+> SignInResult SignIn (SignInParam signInParam = null)
+
+Sign In
+
+A user attempts to sign in. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class SignInExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new SaasUserApi(config);
+            var signInParam = new SignInParam(); // SignInParam |  (optional) 
+
+            try
+            {
+                // Sign In
+                SignInResult result = apiInstance.SignIn(signInParam);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling SaasUserApi.SignIn: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SignInWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Sign In
+    ApiResponse<SignInResult> response = apiInstance.SignInWithHttpInfo(signInParam);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling SaasUserApi.SignInWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **signInParam** | [**SignInParam**](SignInParam.md) |  | [optional]  |
+
+### Return type
+
+[**SignInResult**](SignInResult.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1458,6 +2116,95 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="updatedevicestatus"></a>
+# **UpdateDeviceStatus**
+> void UpdateDeviceStatus (UpdateDeviceStatusParam updateDeviceStatusParam = null)
+
+Update Device Status
+
+Updates the device status. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class UpdateDeviceStatusExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new SaasUserApi(config);
+            var updateDeviceStatusParam = new UpdateDeviceStatusParam(); // UpdateDeviceStatusParam |  (optional) 
+
+            try
+            {
+                // Update Device Status
+                apiInstance.UpdateDeviceStatus(updateDeviceStatusParam);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling SaasUserApi.UpdateDeviceStatus: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateDeviceStatusWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Update Device Status
+    apiInstance.UpdateDeviceStatusWithHttpInfo(updateDeviceStatusParam);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling SaasUserApi.UpdateDeviceStatusWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **updateDeviceStatusParam** | [**UpdateDeviceStatusParam**](UpdateDeviceStatusParam.md) |  | [optional]  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="updatesaasuserattributes"></a>
 # **UpdateSaasUserAttributes**
 > void UpdateSaasUserAttributes (string userId, UpdateSaasUserAttributesParam updateSaasUserAttributesParam = null)
@@ -1553,7 +2300,7 @@ void (empty response body)
 
 Change Email
 
-Change user's email. 
+Change user's email. The user must be an email authentication user. Sign-in ID authentication users cannot change their email. 
 
 ### Example
 ```csharp
@@ -1702,6 +2449,95 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** | User ID |  |
 | **updateSaasUserPasswordParam** | [**UpdateSaasUserPasswordParam**](UpdateSaasUserPasswordParam.md) |  | [optional]  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updatesaasusersigninid"></a>
+# **UpdateSaasUserSignInId**
+> void UpdateSaasUserSignInId (string userId, UpdateSaasUserSignInIdParam updateSaasUserSignInIdParam = null)
+
+Change Sign-in ID
+
+Change user's sign-in ID. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class UpdateSaasUserSignInIdExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new SaasUserApi(config);
+            var userId = f94bfffc-8be2-11ec-b41a-0242ac120004;  // string | User ID
+            var updateSaasUserSignInIdParam = new UpdateSaasUserSignInIdParam(); // UpdateSaasUserSignInIdParam |  (optional) 
+
+            try
+            {
+                // Change Sign-in ID
+                apiInstance.UpdateSaasUserSignInId(userId, updateSaasUserSignInIdParam);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling SaasUserApi.UpdateSaasUserSignInId: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateSaasUserSignInIdWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Change Sign-in ID
+    apiInstance.UpdateSaasUserSignInIdWithHttpInfo(userId, updateSaasUserSignInIdParam);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling SaasUserApi.UpdateSaasUserSignInIdWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** | User ID |  |
+| **updateSaasUserSignInIdParam** | [**UpdateSaasUserSignInIdParam**](UpdateSaasUserSignInIdParam.md) |  | [optional]  |
 
 ### Return type
 

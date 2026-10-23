@@ -40,7 +40,8 @@ namespace authapi.Model
         /// Initializes a new instance of the <see cref="UpdateSaasUserPasswordParam" /> class.
         /// </summary>
         /// <param name="password">Password (required).</param>
-        public UpdateSaasUserPasswordParam(string password = default(string))
+        /// <param name="temporary">Set to true to mark the new password as a temporary password (user must change on next sign-in).</param>
+        public UpdateSaasUserPasswordParam(string password = default(string), bool temporary = default(bool))
         {
             // to ensure "password" is required (not null)
             if (password == null)
@@ -48,6 +49,7 @@ namespace authapi.Model
                 throw new ArgumentNullException("password is a required property for UpdateSaasUserPasswordParam and cannot be null");
             }
             this.Password = password;
+            this.Temporary = temporary;
         }
 
         /// <summary>
@@ -59,6 +61,13 @@ namespace authapi.Model
         public string Password { get; set; }
 
         /// <summary>
+        /// Set to true to mark the new password as a temporary password (user must change on next sign-in)
+        /// </summary>
+        /// <value>Set to true to mark the new password as a temporary password (user must change on next sign-in)</value>
+        [DataMember(Name = "temporary", EmitDefaultValue = true)]
+        public bool Temporary { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -67,6 +76,7 @@ namespace authapi.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class UpdateSaasUserPasswordParam {\n");
             sb.Append("  Password: ").Append(Password).Append("\n");
+            sb.Append("  Temporary: ").Append(Temporary).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -106,6 +116,10 @@ namespace authapi.Model
                     this.Password == input.Password ||
                     (this.Password != null &&
                     this.Password.Equals(input.Password))
+                ) && 
+                (
+                    this.Temporary == input.Temporary ||
+                    this.Temporary.Equals(input.Temporary)
                 );
         }
 
@@ -122,6 +136,7 @@ namespace authapi.Model
                 {
                     hashCode = (hashCode * 59) + this.Password.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.Temporary.GetHashCode();
                 return hashCode;
             }
         }

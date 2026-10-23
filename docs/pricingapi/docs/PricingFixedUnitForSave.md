@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Name | 
 **DisplayName** | **string** | Display Name | 
 **Description** | **string** | Description | 
-**Type** | **UnitType** |  | 
+**Type** | **string** |  | 
 **Currency** | **Currency** |  | 
 **UnitAmount** | **int** | Price | 
 **RecurringInterval** | **RecurringInterval** |  | 

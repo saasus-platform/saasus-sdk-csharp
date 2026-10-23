@@ -6,10 +6,10 @@ All URIs are relative to *https://api.saasus.io/v1/auth*
 |--------|--------------|-------------|
 | [**GetAuthInfo**](AuthInfoApi.md#getauthinfo) | **GET** /auth-info | Get Authentication Info |
 | [**GetIdentityProviders**](AuthInfoApi.md#getidentityproviders) | **GET** /identity-providers | Get Sign-In Information Via External Provider |
-| [**GetSignInSettings**](AuthInfoApi.md#getsigninsettings) | **GET** /sign-in-settings | Get Password Requirements |
+| [**GetSignInSettings**](AuthInfoApi.md#getsigninsettings) | **GET** /sign-in-settings | Get Sign-In Settings |
 | [**UpdateAuthInfo**](AuthInfoApi.md#updateauthinfo) | **PUT** /auth-info | Update Authentication Info |
 | [**UpdateIdentityProvider**](AuthInfoApi.md#updateidentityprovider) | **PUT** /identity-providers | Update Sign-In Information |
-| [**UpdateSignInSettings**](AuthInfoApi.md#updatesigninsettings) | **PUT** /sign-in-settings | Update Password Requirements |
+| [**UpdateSignInSettings**](AuthInfoApi.md#updatesigninsettings) | **PUT** /sign-in-settings | Update Sign-In Settings |
 
 <a id="getauthinfo"></a>
 # **GetAuthInfo**
@@ -187,9 +187,9 @@ This endpoint does not need any parameter.
 # **GetSignInSettings**
 > SignInSettings GetSignInSettings ()
 
-Get Password Requirements
+Get Sign-In Settings
 
-Get user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+Get sign-in settings, including user password requirements and refresh token validity period. 
 
 ### Example
 ```csharp
@@ -210,7 +210,7 @@ namespace Example
 
             try
             {
-                // Get Password Requirements
+                // Get Sign-In Settings
                 SignInSettings result = apiInstance.GetSignInSettings();
                 Debug.WriteLine(result);
             }
@@ -231,7 +231,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Password Requirements
+    // Get Sign-In Settings
     ApiResponse<SignInSettings> response = apiInstance.GetSignInSettingsWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -439,6 +439,7 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+| **400** | Bad Request |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -447,9 +448,9 @@ void (empty response body)
 # **UpdateSignInSettings**
 > void UpdateSignInSettings (UpdateSignInSettingsParam updateSignInSettingsParam = null)
 
-Update Password Requirements
+Update Sign-In Settings
 
-Update user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+Update sign-in settings, including user password requirements and refresh token validity period. 
 
 ### Example
 ```csharp
@@ -471,7 +472,7 @@ namespace Example
 
             try
             {
-                // Update Password Requirements
+                // Update Sign-In Settings
                 apiInstance.UpdateSignInSettings(updateSignInSettingsParam);
             }
             catch (ApiException  e)
@@ -491,7 +492,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Update Password Requirements
+    // Update Sign-In Settings
     apiInstance.UpdateSignInSettingsWithHttpInfo(updateSignInSettingsParam);
 }
 catch (ApiException e)
@@ -526,6 +527,7 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+| **400** | Invalid Parameter |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
