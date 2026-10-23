@@ -30,25 +30,48 @@ namespace authapi.Api
         /// Save Authentication/Authorization Information
         /// </summary>
         /// <remarks>
-        /// Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. 
+        /// Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
+        /// <param name="createAuthCredentialsParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AuthorizationTempCode</returns>
-        AuthorizationTempCode CreateAuthCredentials(Credentials body = default(Credentials), int operationIndex = 0);
+        AuthorizationTempCode CreateAuthCredentials(CreateAuthCredentialsParam createAuthCredentialsParam = default(CreateAuthCredentialsParam), int operationIndex = 0);
 
         /// <summary>
         /// Save Authentication/Authorization Information
         /// </summary>
         /// <remarks>
-        /// Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. 
+        /// Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
+        /// <param name="createAuthCredentialsParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AuthorizationTempCode</returns>
-        ApiResponse<AuthorizationTempCode> CreateAuthCredentialsWithHttpInfo(Credentials body = default(Credentials), int operationIndex = 0);
+        ApiResponse<AuthorizationTempCode> CreateAuthCredentialsWithHttpInfo(CreateAuthCredentialsParam createAuthCredentialsParam = default(CreateAuthCredentialsParam), int operationIndex = 0);
+        /// <summary>
+        /// Exchange a Temporary Code for Authentication/Authorization Information
+        /// </summary>
+        /// <remarks>
+        /// Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier. Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exchangeAuthCredentialsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>Credentials</returns>
+        Credentials ExchangeAuthCredentials(ExchangeAuthCredentialsParam exchangeAuthCredentialsParam, int operationIndex = 0);
+
+        /// <summary>
+        /// Exchange a Temporary Code for Authentication/Authorization Information
+        /// </summary>
+        /// <remarks>
+        /// Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier. Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exchangeAuthCredentialsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Credentials</returns>
+        ApiResponse<Credentials> ExchangeAuthCredentialsWithHttpInfo(ExchangeAuthCredentialsParam exchangeAuthCredentialsParam, int operationIndex = 0);
         /// <summary>
         /// Get Authentication/Authorization Information
         /// </summary>
@@ -76,6 +99,29 @@ namespace authapi.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Credentials</returns>
         ApiResponse<Credentials> GetAuthCredentialsWithHttpInfo(string code = default(string), string authFlow = default(string), string refreshToken = default(string), int operationIndex = 0);
+        /// <summary>
+        /// Revoke Token
+        /// </summary>
+        /// <remarks>
+        /// Revoke the specified refresh token. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeTokenParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        void RevokeToken(RevokeTokenParam revokeTokenParam, int operationIndex = 0);
+
+        /// <summary>
+        /// Revoke Token
+        /// </summary>
+        /// <remarks>
+        /// Revoke the specified refresh token. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeTokenParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> RevokeTokenWithHttpInfo(RevokeTokenParam revokeTokenParam, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -89,27 +135,52 @@ namespace authapi.Api
         /// Save Authentication/Authorization Information
         /// </summary>
         /// <remarks>
-        /// Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. 
+        /// Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
+        /// <param name="createAuthCredentialsParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AuthorizationTempCode</returns>
-        System.Threading.Tasks.Task<AuthorizationTempCode> CreateAuthCredentialsAsync(Credentials body = default(Credentials), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AuthorizationTempCode> CreateAuthCredentialsAsync(CreateAuthCredentialsParam createAuthCredentialsParam = default(CreateAuthCredentialsParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Save Authentication/Authorization Information
         /// </summary>
         /// <remarks>
-        /// Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. 
+        /// Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
+        /// <param name="createAuthCredentialsParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AuthorizationTempCode)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AuthorizationTempCode>> CreateAuthCredentialsWithHttpInfoAsync(Credentials body = default(Credentials), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AuthorizationTempCode>> CreateAuthCredentialsWithHttpInfoAsync(CreateAuthCredentialsParam createAuthCredentialsParam = default(CreateAuthCredentialsParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Exchange a Temporary Code for Authentication/Authorization Information
+        /// </summary>
+        /// <remarks>
+        /// Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier. Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exchangeAuthCredentialsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Credentials</returns>
+        System.Threading.Tasks.Task<Credentials> ExchangeAuthCredentialsAsync(ExchangeAuthCredentialsParam exchangeAuthCredentialsParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Exchange a Temporary Code for Authentication/Authorization Information
+        /// </summary>
+        /// <remarks>
+        /// Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier. Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exchangeAuthCredentialsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Credentials)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Credentials>> ExchangeAuthCredentialsWithHttpInfoAsync(ExchangeAuthCredentialsParam exchangeAuthCredentialsParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get Authentication/Authorization Information
         /// </summary>
@@ -139,6 +210,31 @@ namespace authapi.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Credentials)</returns>
         System.Threading.Tasks.Task<ApiResponse<Credentials>> GetAuthCredentialsWithHttpInfoAsync(string code = default(string), string authFlow = default(string), string refreshToken = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Revoke Token
+        /// </summary>
+        /// <remarks>
+        /// Revoke the specified refresh token. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeTokenParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task RevokeTokenAsync(RevokeTokenParam revokeTokenParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Revoke Token
+        /// </summary>
+        /// <remarks>
+        /// Revoke the specified refresh token. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeTokenParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> RevokeTokenWithHttpInfoAsync(RevokeTokenParam revokeTokenParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -260,26 +356,26 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Save Authentication/Authorization Information Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. 
+        /// Save Authentication/Authorization Information Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
+        /// <param name="createAuthCredentialsParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AuthorizationTempCode</returns>
-        public AuthorizationTempCode CreateAuthCredentials(Credentials body = default(Credentials), int operationIndex = 0)
+        public AuthorizationTempCode CreateAuthCredentials(CreateAuthCredentialsParam createAuthCredentialsParam = default(CreateAuthCredentialsParam), int operationIndex = 0)
         {
-            authapi.Client.ApiResponse<AuthorizationTempCode> localVarResponse = CreateAuthCredentialsWithHttpInfo(body);
+            authapi.Client.ApiResponse<AuthorizationTempCode> localVarResponse = CreateAuthCredentialsWithHttpInfo(createAuthCredentialsParam);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Save Authentication/Authorization Information Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. 
+        /// Save Authentication/Authorization Information Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
+        /// <param name="createAuthCredentialsParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AuthorizationTempCode</returns>
-        public authapi.Client.ApiResponse<AuthorizationTempCode> CreateAuthCredentialsWithHttpInfo(Credentials body = default(Credentials), int operationIndex = 0)
+        public authapi.Client.ApiResponse<AuthorizationTempCode> CreateAuthCredentialsWithHttpInfo(CreateAuthCredentialsParam createAuthCredentialsParam = default(CreateAuthCredentialsParam), int operationIndex = 0)
         {
             authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
 
@@ -304,7 +400,7 @@ namespace authapi.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.Data = body;
+            localVarRequestOptions.Data = createAuthCredentialsParam;
 
             localVarRequestOptions.Operation = "CredentialApi.CreateAuthCredentials";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -331,28 +427,28 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Save Authentication/Authorization Information Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. 
+        /// Save Authentication/Authorization Information Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
+        /// <param name="createAuthCredentialsParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AuthorizationTempCode</returns>
-        public async System.Threading.Tasks.Task<AuthorizationTempCode> CreateAuthCredentialsAsync(Credentials body = default(Credentials), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AuthorizationTempCode> CreateAuthCredentialsAsync(CreateAuthCredentialsParam createAuthCredentialsParam = default(CreateAuthCredentialsParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            authapi.Client.ApiResponse<AuthorizationTempCode> localVarResponse = await CreateAuthCredentialsWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
+            authapi.Client.ApiResponse<AuthorizationTempCode> localVarResponse = await CreateAuthCredentialsWithHttpInfoAsync(createAuthCredentialsParam, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Save Authentication/Authorization Information Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. 
+        /// Save Authentication/Authorization Information Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining. Temporary codes are valid for 10 seconds from issuance. When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body"> (optional)</param>
+        /// <param name="createAuthCredentialsParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AuthorizationTempCode)</returns>
-        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<AuthorizationTempCode>> CreateAuthCredentialsWithHttpInfoAsync(Credentials body = default(Credentials), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<AuthorizationTempCode>> CreateAuthCredentialsWithHttpInfoAsync(CreateAuthCredentialsParam createAuthCredentialsParam = default(CreateAuthCredentialsParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
             authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
@@ -378,7 +474,7 @@ namespace authapi.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.Data = body;
+            localVarRequestOptions.Data = createAuthCredentialsParam;
 
             localVarRequestOptions.Operation = "CredentialApi.CreateAuthCredentials";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -396,6 +492,164 @@ namespace authapi.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("CreateAuthCredentials", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Exchange a Temporary Code for Authentication/Authorization Information Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier. Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exchangeAuthCredentialsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>Credentials</returns>
+        public Credentials ExchangeAuthCredentials(ExchangeAuthCredentialsParam exchangeAuthCredentialsParam, int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<Credentials> localVarResponse = ExchangeAuthCredentialsWithHttpInfo(exchangeAuthCredentialsParam);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Exchange a Temporary Code for Authentication/Authorization Information Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier. Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exchangeAuthCredentialsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Credentials</returns>
+        public authapi.Client.ApiResponse<Credentials> ExchangeAuthCredentialsWithHttpInfo(ExchangeAuthCredentialsParam exchangeAuthCredentialsParam, int operationIndex = 0)
+        {
+            // verify the required parameter 'exchangeAuthCredentialsParam' is set
+            if (exchangeAuthCredentialsParam == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'exchangeAuthCredentialsParam' when calling CredentialApi->ExchangeAuthCredentials");
+            }
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = exchangeAuthCredentialsParam;
+
+            localVarRequestOptions.Operation = "CredentialApi.ExchangeAuthCredentials";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Credentials>("/credentials/exchange", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ExchangeAuthCredentials", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Exchange a Temporary Code for Authentication/Authorization Information Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier. Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exchangeAuthCredentialsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Credentials</returns>
+        public async System.Threading.Tasks.Task<Credentials> ExchangeAuthCredentialsAsync(ExchangeAuthCredentialsParam exchangeAuthCredentialsParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<Credentials> localVarResponse = await ExchangeAuthCredentialsWithHttpInfoAsync(exchangeAuthCredentialsParam, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Exchange a Temporary Code for Authentication/Authorization Information Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier. Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exchangeAuthCredentialsParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Credentials)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<Credentials>> ExchangeAuthCredentialsWithHttpInfoAsync(ExchangeAuthCredentialsParam exchangeAuthCredentialsParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'exchangeAuthCredentialsParam' is set
+            if (exchangeAuthCredentialsParam == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'exchangeAuthCredentialsParam' when calling CredentialApi->ExchangeAuthCredentials");
+            }
+
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = exchangeAuthCredentialsParam;
+
+            localVarRequestOptions.Operation = "CredentialApi.ExchangeAuthCredentials";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Credentials>("/credentials/exchange", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ExchangeAuthCredentials", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -570,6 +824,162 @@ namespace authapi.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetAuthCredentials", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Revoke Token Revoke the specified refresh token. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeTokenParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        public void RevokeToken(RevokeTokenParam revokeTokenParam, int operationIndex = 0)
+        {
+            RevokeTokenWithHttpInfo(revokeTokenParam);
+        }
+
+        /// <summary>
+        /// Revoke Token Revoke the specified refresh token. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeTokenParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public authapi.Client.ApiResponse<Object> RevokeTokenWithHttpInfo(RevokeTokenParam revokeTokenParam, int operationIndex = 0)
+        {
+            // verify the required parameter 'revokeTokenParam' is set
+            if (revokeTokenParam == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'revokeTokenParam' when calling CredentialApi->RevokeToken");
+            }
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = revokeTokenParam;
+
+            localVarRequestOptions.Operation = "CredentialApi.RevokeToken";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/token/revoke", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RevokeToken", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Revoke Token Revoke the specified refresh token. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeTokenParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task RevokeTokenAsync(RevokeTokenParam revokeTokenParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            await RevokeTokenWithHttpInfoAsync(revokeTokenParam, operationIndex, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Revoke Token Revoke the specified refresh token. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeTokenParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<Object>> RevokeTokenWithHttpInfoAsync(RevokeTokenParam revokeTokenParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'revokeTokenParam' is set
+            if (revokeTokenParam == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'revokeTokenParam' when calling CredentialApi->RevokeToken");
+            }
+
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = revokeTokenParam;
+
+            localVarRequestOptions.Operation = "CredentialApi.RevokeToken";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/token/revoke", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RevokeToken", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

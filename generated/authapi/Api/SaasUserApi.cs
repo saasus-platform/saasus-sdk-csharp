@@ -27,6 +27,29 @@ namespace authapi.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Confirm Device
+        /// </summary>
+        /// <remarks>
+        /// Confirms a device for remembering. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="confirmDeviceParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ConfirmDeviceResult</returns>
+        ConfirmDeviceResult ConfirmDevice(ConfirmDeviceParam confirmDeviceParam = default(ConfirmDeviceParam), int operationIndex = 0);
+
+        /// <summary>
+        /// Confirm Device
+        /// </summary>
+        /// <remarks>
+        /// Confirms a device for remembering. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="confirmDeviceParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of ConfirmDeviceResult</returns>
+        ApiResponse<ConfirmDeviceResult> ConfirmDeviceWithHttpInfo(ConfirmDeviceParam confirmDeviceParam = default(ConfirmDeviceParam), int operationIndex = 0);
+        /// <summary>
         /// Confirm User Email Update
         /// </summary>
         /// <remarks>
@@ -106,8 +129,8 @@ namespace authapi.Api
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSaasUserParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>SaasUser</returns>
-        SaasUser CreateSaasUser(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0);
+        /// <returns>CreatedSaasUser</returns>
+        CreatedSaasUser CreateSaasUser(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0);
 
         /// <summary>
         /// Create SaaS User
@@ -118,8 +141,8 @@ namespace authapi.Api
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSaasUserParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of SaasUser</returns>
-        ApiResponse<SaasUser> CreateSaasUserWithHttpInfo(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0);
+        /// <returns>ApiResponse of CreatedSaasUser</returns>
+        ApiResponse<CreatedSaasUser> CreateSaasUserWithHttpInfo(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0);
         /// <summary>
         /// Create secret code for authentication application registration
         /// </summary>
@@ -149,25 +172,25 @@ namespace authapi.Api
         /// Delete User
         /// </summary>
         /// <remarks>
-        /// Delete all users with matching user ID from the tenant and SaaS. 
+        /// Delete all users with matching user ID from the tenant and SaaS. Returns user information before deletion. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        void DeleteSaasUser(string userId, int operationIndex = 0);
+        /// <returns>UserInfo</returns>
+        UserInfo DeleteSaasUser(string userId, int operationIndex = 0);
 
         /// <summary>
         /// Delete User
         /// </summary>
         /// <remarks>
-        /// Delete all users with matching user ID from the tenant and SaaS. 
+        /// Delete all users with matching user ID from the tenant and SaaS. Returns user information before deletion. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteSaasUserWithHttpInfo(string userId, int operationIndex = 0);
+        /// <returns>ApiResponse of UserInfo</returns>
+        ApiResponse<UserInfo> DeleteSaasUserWithHttpInfo(string userId, int operationIndex = 0);
         /// <summary>
         /// Get User
         /// </summary>
@@ -212,6 +235,27 @@ namespace authapi.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SaasUsers</returns>
         ApiResponse<SaasUsers> GetSaasUsersWithHttpInfo(int operationIndex = 0);
+        /// <summary>
+        /// Get SaaS Users Count
+        /// </summary>
+        /// <remarks>
+        /// Get the count of SaaS users. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SaasUsersCount</returns>
+        SaasUsersCount GetSaasUsersCount(int operationIndex = 0);
+
+        /// <summary>
+        /// Get SaaS Users Count
+        /// </summary>
+        /// <remarks>
+        /// Get the count of SaaS users. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SaasUsersCount</returns>
+        ApiResponse<SaasUsersCount> GetSaasUsersCountWithHttpInfo(int operationIndex = 0);
         /// <summary>
         /// Get User&#39;s MFA Settings
         /// </summary>
@@ -262,7 +306,7 @@ namespace authapi.Api
         /// Request User Email Update
         /// </summary>
         /// <remarks>
-        /// Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. 
+        /// Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -275,7 +319,7 @@ namespace authapi.Api
         /// Request User Email Update
         /// </summary>
         /// <remarks>
-        /// Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. 
+        /// Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -329,6 +373,129 @@ namespace authapi.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ResendSignUpConfirmationEmailWithHttpInfo(ResendSignUpConfirmationEmailParam resendSignUpConfirmationEmailParam = default(ResendSignUpConfirmationEmailParam), int operationIndex = 0);
+        /// <summary>
+        /// Reset Password
+        /// </summary>
+        /// <remarks>
+        /// Reset user&#39;s login password. The current password will be invalidated and a temporary password will be issued. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SaasUserResetPasswordResult</returns>
+        SaasUserResetPasswordResult ResetSaasUserPassword(string userId, int operationIndex = 0);
+
+        /// <summary>
+        /// Reset Password
+        /// </summary>
+        /// <remarks>
+        /// Reset user&#39;s login password. The current password will be invalidated and a temporary password will be issued. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SaasUserResetPasswordResult</returns>
+        ApiResponse<SaasUserResetPasswordResult> ResetSaasUserPasswordWithHttpInfo(string userId, int operationIndex = 0);
+        /// <summary>
+        /// Respond to Sign In Challenge
+        /// </summary>
+        /// <remarks>
+        /// Respond to a sign-in challenge. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="respondToSignInChallengeParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>RespondToSignInChallengeResult</returns>
+        RespondToSignInChallengeResult RespondToSignInChallenge(RespondToSignInChallengeParam respondToSignInChallengeParam = default(RespondToSignInChallengeParam), int operationIndex = 0);
+
+        /// <summary>
+        /// Respond to Sign In Challenge
+        /// </summary>
+        /// <remarks>
+        /// Respond to a sign-in challenge. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="respondToSignInChallengeParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of RespondToSignInChallengeResult</returns>
+        ApiResponse<RespondToSignInChallengeResult> RespondToSignInChallengeWithHttpInfo(RespondToSignInChallengeParam respondToSignInChallengeParam = default(RespondToSignInChallengeParam), int operationIndex = 0);
+        /// <summary>
+        /// Save SaaS Users Count
+        /// </summary>
+        /// <remarks>
+        /// Save the count of SaaS users. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveSaasUsersCountParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        void SaveSaasUsersCount(SaveSaasUsersCountParam saveSaasUsersCountParam, int operationIndex = 0);
+
+        /// <summary>
+        /// Save SaaS Users Count
+        /// </summary>
+        /// <remarks>
+        /// Save the count of SaaS users. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveSaasUsersCountParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> SaveSaasUsersCountWithHttpInfo(SaveSaasUsersCountParam saveSaasUsersCountParam, int operationIndex = 0);
+        /// <summary>
+        /// Search SaaS Users
+        /// </summary>
+        /// <remarks>
+        /// Search SaaS users by user ID, email, or sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SearchSaasUsersResult</returns>
+        SearchSaasUsersResult SearchSaasUsers(string id = default(string), string email = default(string), string signInId = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0);
+
+        /// <summary>
+        /// Search SaaS Users
+        /// </summary>
+        /// <remarks>
+        /// Search SaaS users by user ID, email, or sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SearchSaasUsersResult</returns>
+        ApiResponse<SearchSaasUsersResult> SearchSaasUsersWithHttpInfo(string id = default(string), string email = default(string), string signInId = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0);
+        /// <summary>
+        /// Sign In
+        /// </summary>
+        /// <remarks>
+        /// A user attempts to sign in. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SignInResult</returns>
+        SignInResult SignIn(SignInParam signInParam = default(SignInParam), int operationIndex = 0);
+
+        /// <summary>
+        /// Sign In
+        /// </summary>
+        /// <remarks>
+        /// A user attempts to sign in. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SignInResult</returns>
+        ApiResponse<SignInResult> SignInWithHttpInfo(SignInParam signInParam = default(SignInParam), int operationIndex = 0);
         /// <summary>
         /// Sign Up
         /// </summary>
@@ -401,6 +568,29 @@ namespace authapi.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> UnlinkProviderWithHttpInfo(string providerName, string userId, int operationIndex = 0);
         /// <summary>
+        /// Update Device Status
+        /// </summary>
+        /// <remarks>
+        /// Updates the device status. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateDeviceStatusParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        void UpdateDeviceStatus(UpdateDeviceStatusParam updateDeviceStatusParam = default(UpdateDeviceStatusParam), int operationIndex = 0);
+
+        /// <summary>
+        /// Update Device Status
+        /// </summary>
+        /// <remarks>
+        /// Updates the device status. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateDeviceStatusParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> UpdateDeviceStatusWithHttpInfo(UpdateDeviceStatusParam updateDeviceStatusParam = default(UpdateDeviceStatusParam), int operationIndex = 0);
+        /// <summary>
         /// Update SaaS User Attributes
         /// </summary>
         /// <remarks>
@@ -429,7 +619,7 @@ namespace authapi.Api
         /// Change Email
         /// </summary>
         /// <remarks>
-        /// Change user&#39;s email. 
+        /// Change user&#39;s email. The user must be an email authentication user. Sign-in ID authentication users cannot change their email. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -442,7 +632,7 @@ namespace authapi.Api
         /// Change Email
         /// </summary>
         /// <remarks>
-        /// Change user&#39;s email. 
+        /// Change user&#39;s email. The user must be an email authentication user. Sign-in ID authentication users cannot change their email. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -475,6 +665,31 @@ namespace authapi.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> UpdateSaasUserPasswordWithHttpInfo(string userId, UpdateSaasUserPasswordParam updateSaasUserPasswordParam = default(UpdateSaasUserPasswordParam), int operationIndex = 0);
+        /// <summary>
+        /// Change Sign-in ID
+        /// </summary>
+        /// <remarks>
+        /// Change user&#39;s sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="updateSaasUserSignInIdParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        void UpdateSaasUserSignInId(string userId, UpdateSaasUserSignInIdParam updateSaasUserSignInIdParam = default(UpdateSaasUserSignInIdParam), int operationIndex = 0);
+
+        /// <summary>
+        /// Change Sign-in ID
+        /// </summary>
+        /// <remarks>
+        /// Change user&#39;s sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="updateSaasUserSignInIdParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> UpdateSaasUserSignInIdWithHttpInfo(string userId, UpdateSaasUserSignInIdParam updateSaasUserSignInIdParam = default(UpdateSaasUserSignInIdParam), int operationIndex = 0);
         /// <summary>
         /// Register Authentication Application
         /// </summary>
@@ -534,6 +749,31 @@ namespace authapi.Api
     public interface ISaasUserApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
+        /// <summary>
+        /// Confirm Device
+        /// </summary>
+        /// <remarks>
+        /// Confirms a device for remembering. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="confirmDeviceParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ConfirmDeviceResult</returns>
+        System.Threading.Tasks.Task<ConfirmDeviceResult> ConfirmDeviceAsync(ConfirmDeviceParam confirmDeviceParam = default(ConfirmDeviceParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Confirm Device
+        /// </summary>
+        /// <remarks>
+        /// Confirms a device for remembering. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="confirmDeviceParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ConfirmDeviceResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ConfirmDeviceResult>> ConfirmDeviceWithHttpInfoAsync(ConfirmDeviceParam confirmDeviceParam = default(ConfirmDeviceParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Confirm User Email Update
         /// </summary>
@@ -621,8 +861,8 @@ namespace authapi.Api
         /// <param name="createSaasUserParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of SaasUser</returns>
-        System.Threading.Tasks.Task<SaasUser> CreateSaasUserAsync(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of CreatedSaasUser</returns>
+        System.Threading.Tasks.Task<CreatedSaasUser> CreateSaasUserAsync(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Create SaaS User
@@ -634,8 +874,8 @@ namespace authapi.Api
         /// <param name="createSaasUserParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (SaasUser)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SaasUser>> CreateSaasUserWithHttpInfoAsync(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (CreatedSaasUser)</returns>
+        System.Threading.Tasks.Task<ApiResponse<CreatedSaasUser>> CreateSaasUserWithHttpInfoAsync(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Create secret code for authentication application registration
         /// </summary>
@@ -667,27 +907,27 @@ namespace authapi.Api
         /// Delete User
         /// </summary>
         /// <remarks>
-        /// Delete all users with matching user ID from the tenant and SaaS. 
+        /// Delete all users with matching user ID from the tenant and SaaS. Returns user information before deletion. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteSaasUserAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of UserInfo</returns>
+        System.Threading.Tasks.Task<UserInfo> DeleteSaasUserAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete User
         /// </summary>
         /// <remarks>
-        /// Delete all users with matching user ID from the tenant and SaaS. 
+        /// Delete all users with matching user ID from the tenant and SaaS. Returns user information before deletion. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSaasUserWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (UserInfo)</returns>
+        System.Threading.Tasks.Task<ApiResponse<UserInfo>> DeleteSaasUserWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get User
         /// </summary>
@@ -736,6 +976,29 @@ namespace authapi.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SaasUsers)</returns>
         System.Threading.Tasks.Task<ApiResponse<SaasUsers>> GetSaasUsersWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Get SaaS Users Count
+        /// </summary>
+        /// <remarks>
+        /// Get the count of SaaS users. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SaasUsersCount</returns>
+        System.Threading.Tasks.Task<SaasUsersCount> GetSaasUsersCountAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get SaaS Users Count
+        /// </summary>
+        /// <remarks>
+        /// Get the count of SaaS users. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SaasUsersCount)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SaasUsersCount>> GetSaasUsersCountWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get User&#39;s MFA Settings
         /// </summary>
@@ -790,7 +1053,7 @@ namespace authapi.Api
         /// Request User Email Update
         /// </summary>
         /// <remarks>
-        /// Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. 
+        /// Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -804,7 +1067,7 @@ namespace authapi.Api
         /// Request User Email Update
         /// </summary>
         /// <remarks>
-        /// Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. 
+        /// Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -863,6 +1126,139 @@ namespace authapi.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ResendSignUpConfirmationEmailWithHttpInfoAsync(ResendSignUpConfirmationEmailParam resendSignUpConfirmationEmailParam = default(ResendSignUpConfirmationEmailParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Reset Password
+        /// </summary>
+        /// <remarks>
+        /// Reset user&#39;s login password. The current password will be invalidated and a temporary password will be issued. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SaasUserResetPasswordResult</returns>
+        System.Threading.Tasks.Task<SaasUserResetPasswordResult> ResetSaasUserPasswordAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Reset Password
+        /// </summary>
+        /// <remarks>
+        /// Reset user&#39;s login password. The current password will be invalidated and a temporary password will be issued. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SaasUserResetPasswordResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SaasUserResetPasswordResult>> ResetSaasUserPasswordWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Respond to Sign In Challenge
+        /// </summary>
+        /// <remarks>
+        /// Respond to a sign-in challenge. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="respondToSignInChallengeParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of RespondToSignInChallengeResult</returns>
+        System.Threading.Tasks.Task<RespondToSignInChallengeResult> RespondToSignInChallengeAsync(RespondToSignInChallengeParam respondToSignInChallengeParam = default(RespondToSignInChallengeParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Respond to Sign In Challenge
+        /// </summary>
+        /// <remarks>
+        /// Respond to a sign-in challenge. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="respondToSignInChallengeParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (RespondToSignInChallengeResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<RespondToSignInChallengeResult>> RespondToSignInChallengeWithHttpInfoAsync(RespondToSignInChallengeParam respondToSignInChallengeParam = default(RespondToSignInChallengeParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Save SaaS Users Count
+        /// </summary>
+        /// <remarks>
+        /// Save the count of SaaS users. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveSaasUsersCountParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task SaveSaasUsersCountAsync(SaveSaasUsersCountParam saveSaasUsersCountParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Save SaaS Users Count
+        /// </summary>
+        /// <remarks>
+        /// Save the count of SaaS users. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveSaasUsersCountParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> SaveSaasUsersCountWithHttpInfoAsync(SaveSaasUsersCountParam saveSaasUsersCountParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Search SaaS Users
+        /// </summary>
+        /// <remarks>
+        /// Search SaaS users by user ID, email, or sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SearchSaasUsersResult</returns>
+        System.Threading.Tasks.Task<SearchSaasUsersResult> SearchSaasUsersAsync(string id = default(string), string email = default(string), string signInId = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Search SaaS Users
+        /// </summary>
+        /// <remarks>
+        /// Search SaaS users by user ID, email, or sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SearchSaasUsersResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SearchSaasUsersResult>> SearchSaasUsersWithHttpInfoAsync(string id = default(string), string email = default(string), string signInId = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Sign In
+        /// </summary>
+        /// <remarks>
+        /// A user attempts to sign in. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SignInResult</returns>
+        System.Threading.Tasks.Task<SignInResult> SignInAsync(SignInParam signInParam = default(SignInParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Sign In
+        /// </summary>
+        /// <remarks>
+        /// A user attempts to sign in. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SignInResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SignInResult>> SignInWithHttpInfoAsync(SignInParam signInParam = default(SignInParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Sign Up
         /// </summary>
@@ -941,6 +1337,31 @@ namespace authapi.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> UnlinkProviderWithHttpInfoAsync(string providerName, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
+        /// Update Device Status
+        /// </summary>
+        /// <remarks>
+        /// Updates the device status. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateDeviceStatusParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task UpdateDeviceStatusAsync(UpdateDeviceStatusParam updateDeviceStatusParam = default(UpdateDeviceStatusParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Update Device Status
+        /// </summary>
+        /// <remarks>
+        /// Updates the device status. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateDeviceStatusParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> UpdateDeviceStatusWithHttpInfoAsync(UpdateDeviceStatusParam updateDeviceStatusParam = default(UpdateDeviceStatusParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
         /// Update SaaS User Attributes
         /// </summary>
         /// <remarks>
@@ -971,7 +1392,7 @@ namespace authapi.Api
         /// Change Email
         /// </summary>
         /// <remarks>
-        /// Change user&#39;s email. 
+        /// Change user&#39;s email. The user must be an email authentication user. Sign-in ID authentication users cannot change their email. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -985,7 +1406,7 @@ namespace authapi.Api
         /// Change Email
         /// </summary>
         /// <remarks>
-        /// Change user&#39;s email. 
+        /// Change user&#39;s email. The user must be an email authentication user. Sign-in ID authentication users cannot change their email. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -1021,6 +1442,33 @@ namespace authapi.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> UpdateSaasUserPasswordWithHttpInfoAsync(string userId, UpdateSaasUserPasswordParam updateSaasUserPasswordParam = default(UpdateSaasUserPasswordParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Change Sign-in ID
+        /// </summary>
+        /// <remarks>
+        /// Change user&#39;s sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="updateSaasUserSignInIdParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task UpdateSaasUserSignInIdAsync(string userId, UpdateSaasUserSignInIdParam updateSaasUserSignInIdParam = default(UpdateSaasUserSignInIdParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Change Sign-in ID
+        /// </summary>
+        /// <remarks>
+        /// Change user&#39;s sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="updateSaasUserSignInIdParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> UpdateSaasUserSignInIdWithHttpInfoAsync(string userId, UpdateSaasUserSignInIdParam updateSaasUserSignInIdParam = default(UpdateSaasUserSignInIdParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Register Authentication Application
         /// </summary>
@@ -1193,6 +1641,152 @@ namespace authapi.Api
                 return _exceptionFactory;
             }
             set { _exceptionFactory = value; }
+        }
+
+        /// <summary>
+        /// Confirm Device Confirms a device for remembering. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="confirmDeviceParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ConfirmDeviceResult</returns>
+        public ConfirmDeviceResult ConfirmDevice(ConfirmDeviceParam confirmDeviceParam = default(ConfirmDeviceParam), int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<ConfirmDeviceResult> localVarResponse = ConfirmDeviceWithHttpInfo(confirmDeviceParam);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Confirm Device Confirms a device for remembering. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="confirmDeviceParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of ConfirmDeviceResult</returns>
+        public authapi.Client.ApiResponse<ConfirmDeviceResult> ConfirmDeviceWithHttpInfo(ConfirmDeviceParam confirmDeviceParam = default(ConfirmDeviceParam), int operationIndex = 0)
+        {
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = confirmDeviceParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.ConfirmDevice";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<ConfirmDeviceResult>("/device/confirm", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ConfirmDevice", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Confirm Device Confirms a device for remembering. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="confirmDeviceParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ConfirmDeviceResult</returns>
+        public async System.Threading.Tasks.Task<ConfirmDeviceResult> ConfirmDeviceAsync(ConfirmDeviceParam confirmDeviceParam = default(ConfirmDeviceParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<ConfirmDeviceResult> localVarResponse = await ConfirmDeviceWithHttpInfoAsync(confirmDeviceParam, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Confirm Device Confirms a device for remembering. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="confirmDeviceParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ConfirmDeviceResult)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<ConfirmDeviceResult>> ConfirmDeviceWithHttpInfoAsync(ConfirmDeviceParam confirmDeviceParam = default(ConfirmDeviceParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = confirmDeviceParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.ConfirmDevice";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<ConfirmDeviceResult>("/device/confirm", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ConfirmDevice", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1653,10 +2247,10 @@ namespace authapi.Api
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSaasUserParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>SaasUser</returns>
-        public SaasUser CreateSaasUser(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0)
+        /// <returns>CreatedSaasUser</returns>
+        public CreatedSaasUser CreateSaasUser(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0)
         {
-            authapi.Client.ApiResponse<SaasUser> localVarResponse = CreateSaasUserWithHttpInfo(createSaasUserParam);
+            authapi.Client.ApiResponse<CreatedSaasUser> localVarResponse = CreateSaasUserWithHttpInfo(createSaasUserParam);
             return localVarResponse.Data;
         }
 
@@ -1666,8 +2260,8 @@ namespace authapi.Api
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSaasUserParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of SaasUser</returns>
-        public authapi.Client.ApiResponse<SaasUser> CreateSaasUserWithHttpInfo(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0)
+        /// <returns>ApiResponse of CreatedSaasUser</returns>
+        public authapi.Client.ApiResponse<CreatedSaasUser> CreateSaasUserWithHttpInfo(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0)
         {
             authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
 
@@ -1705,7 +2299,7 @@ namespace authapi.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<SaasUser>("/users", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<CreatedSaasUser>("/users", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("CreateSaasUser", localVarResponse);
@@ -1725,10 +2319,10 @@ namespace authapi.Api
         /// <param name="createSaasUserParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of SaasUser</returns>
-        public async System.Threading.Tasks.Task<SaasUser> CreateSaasUserAsync(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of CreatedSaasUser</returns>
+        public async System.Threading.Tasks.Task<CreatedSaasUser> CreateSaasUserAsync(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            authapi.Client.ApiResponse<SaasUser> localVarResponse = await CreateSaasUserWithHttpInfoAsync(createSaasUserParam, operationIndex, cancellationToken).ConfigureAwait(false);
+            authapi.Client.ApiResponse<CreatedSaasUser> localVarResponse = await CreateSaasUserWithHttpInfoAsync(createSaasUserParam, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1739,8 +2333,8 @@ namespace authapi.Api
         /// <param name="createSaasUserParam"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (SaasUser)</returns>
-        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<SaasUser>> CreateSaasUserWithHttpInfoAsync(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (CreatedSaasUser)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<CreatedSaasUser>> CreateSaasUserWithHttpInfoAsync(CreateSaasUserParam createSaasUserParam = default(CreateSaasUserParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
             authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
@@ -1779,7 +2373,7 @@ namespace authapi.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<SaasUser>("/users", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<CreatedSaasUser>("/users", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1958,25 +2552,26 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Delete User Delete all users with matching user ID from the tenant and SaaS. 
+        /// Delete User Delete all users with matching user ID from the tenant and SaaS. Returns user information before deletion. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        public void DeleteSaasUser(string userId, int operationIndex = 0)
+        /// <returns>UserInfo</returns>
+        public UserInfo DeleteSaasUser(string userId, int operationIndex = 0)
         {
-            DeleteSaasUserWithHttpInfo(userId);
+            authapi.Client.ApiResponse<UserInfo> localVarResponse = DeleteSaasUserWithHttpInfo(userId);
+            return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Delete User Delete all users with matching user ID from the tenant and SaaS. 
+        /// Delete User Delete all users with matching user ID from the tenant and SaaS. Returns user information before deletion. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public authapi.Client.ApiResponse<Object> DeleteSaasUserWithHttpInfo(string userId, int operationIndex = 0)
+        /// <returns>ApiResponse of UserInfo</returns>
+        public authapi.Client.ApiResponse<UserInfo> DeleteSaasUserWithHttpInfo(string userId, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -2019,7 +2614,7 @@ namespace authapi.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Delete<Object>("/users/{user_id}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Delete<UserInfo>("/users/{user_id}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DeleteSaasUser", localVarResponse);
@@ -2033,27 +2628,28 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Delete User Delete all users with matching user ID from the tenant and SaaS. 
+        /// Delete User Delete all users with matching user ID from the tenant and SaaS. Returns user information before deletion. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteSaasUserAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of UserInfo</returns>
+        public async System.Threading.Tasks.Task<UserInfo> DeleteSaasUserAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            await DeleteSaasUserWithHttpInfoAsync(userId, operationIndex, cancellationToken).ConfigureAwait(false);
+            authapi.Client.ApiResponse<UserInfo> localVarResponse = await DeleteSaasUserWithHttpInfoAsync(userId, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Delete User Delete all users with matching user ID from the tenant and SaaS. 
+        /// Delete User Delete all users with matching user ID from the tenant and SaaS. Returns user information before deletion. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<Object>> DeleteSaasUserWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (UserInfo)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<UserInfo>> DeleteSaasUserWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -2097,7 +2693,7 @@ namespace authapi.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.DeleteAsync<Object>("/users/{user_id}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.DeleteAsync<UserInfo>("/users/{user_id}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2396,6 +2992,144 @@ namespace authapi.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetSaasUsers", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get SaaS Users Count Get the count of SaaS users. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SaasUsersCount</returns>
+        public SaasUsersCount GetSaasUsersCount(int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<SaasUsersCount> localVarResponse = GetSaasUsersCountWithHttpInfo();
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get SaaS Users Count Get the count of SaaS users. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SaasUsersCount</returns>
+        public authapi.Client.ApiResponse<SaasUsersCount> GetSaasUsersCountWithHttpInfo(int operationIndex = 0)
+        {
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+
+            localVarRequestOptions.Operation = "SaasUserApi.GetSaasUsersCount";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<SaasUsersCount>("/users/count", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetSaasUsersCount", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get SaaS Users Count Get the count of SaaS users. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SaasUsersCount</returns>
+        public async System.Threading.Tasks.Task<SaasUsersCount> GetSaasUsersCountAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<SaasUsersCount> localVarResponse = await GetSaasUsersCountWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get SaaS Users Count Get the count of SaaS users. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SaasUsersCount)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<SaasUsersCount>> GetSaasUsersCountWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+
+            localVarRequestOptions.Operation = "SaasUserApi.GetSaasUsersCount";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<SaasUsersCount>("/users/count", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetSaasUsersCount", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -2706,7 +3440,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Request User Email Update Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. 
+        /// Request User Email Update Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -2719,7 +3453,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Request User Email Update Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. 
+        /// Request User Email Update Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -2785,7 +3519,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Request User Email Update Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. 
+        /// Request User Email Update Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -2799,7 +3533,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Request User Email Update Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. 
+        /// Request User Email Update Request to update the user&#39;s email address. Sends a verification code to the requested email address. Requires the user&#39;s access token. The verification code is valid for 24 hours. This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -3146,6 +3880,808 @@ namespace authapi.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ResendSignUpConfirmationEmail", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Reset Password Reset user&#39;s login password. The current password will be invalidated and a temporary password will be issued. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SaasUserResetPasswordResult</returns>
+        public SaasUserResetPasswordResult ResetSaasUserPassword(string userId, int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<SaasUserResetPasswordResult> localVarResponse = ResetSaasUserPasswordWithHttpInfo(userId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Reset Password Reset user&#39;s login password. The current password will be invalidated and a temporary password will be issued. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SaasUserResetPasswordResult</returns>
+        public authapi.Client.ApiResponse<SaasUserResetPasswordResult> ResetSaasUserPasswordWithHttpInfo(string userId, int operationIndex = 0)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'userId' when calling SaasUserApi->ResetSaasUserPassword");
+            }
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("user_id", authapi.Client.ClientUtils.ParameterToString(userId)); // path parameter
+
+            localVarRequestOptions.Operation = "SaasUserApi.ResetSaasUserPassword";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SaasUserResetPasswordResult>("/users/{user_id}/password/reset", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ResetSaasUserPassword", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Reset Password Reset user&#39;s login password. The current password will be invalidated and a temporary password will be issued. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SaasUserResetPasswordResult</returns>
+        public async System.Threading.Tasks.Task<SaasUserResetPasswordResult> ResetSaasUserPasswordAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<SaasUserResetPasswordResult> localVarResponse = await ResetSaasUserPasswordWithHttpInfoAsync(userId, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Reset Password Reset user&#39;s login password. The current password will be invalidated and a temporary password will be issued. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SaasUserResetPasswordResult)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<SaasUserResetPasswordResult>> ResetSaasUserPasswordWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'userId' when calling SaasUserApi->ResetSaasUserPassword");
+            }
+
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("user_id", authapi.Client.ClientUtils.ParameterToString(userId)); // path parameter
+
+            localVarRequestOptions.Operation = "SaasUserApi.ResetSaasUserPassword";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SaasUserResetPasswordResult>("/users/{user_id}/password/reset", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ResetSaasUserPassword", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Respond to Sign In Challenge Respond to a sign-in challenge. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="respondToSignInChallengeParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>RespondToSignInChallengeResult</returns>
+        public RespondToSignInChallengeResult RespondToSignInChallenge(RespondToSignInChallengeParam respondToSignInChallengeParam = default(RespondToSignInChallengeParam), int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<RespondToSignInChallengeResult> localVarResponse = RespondToSignInChallengeWithHttpInfo(respondToSignInChallengeParam);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Respond to Sign In Challenge Respond to a sign-in challenge. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="respondToSignInChallengeParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of RespondToSignInChallengeResult</returns>
+        public authapi.Client.ApiResponse<RespondToSignInChallengeResult> RespondToSignInChallengeWithHttpInfo(RespondToSignInChallengeParam respondToSignInChallengeParam = default(RespondToSignInChallengeParam), int operationIndex = 0)
+        {
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = respondToSignInChallengeParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.RespondToSignInChallenge";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<RespondToSignInChallengeResult>("/sign-in/challenge", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RespondToSignInChallenge", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Respond to Sign In Challenge Respond to a sign-in challenge. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="respondToSignInChallengeParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of RespondToSignInChallengeResult</returns>
+        public async System.Threading.Tasks.Task<RespondToSignInChallengeResult> RespondToSignInChallengeAsync(RespondToSignInChallengeParam respondToSignInChallengeParam = default(RespondToSignInChallengeParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<RespondToSignInChallengeResult> localVarResponse = await RespondToSignInChallengeWithHttpInfoAsync(respondToSignInChallengeParam, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Respond to Sign In Challenge Respond to a sign-in challenge. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="respondToSignInChallengeParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (RespondToSignInChallengeResult)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<RespondToSignInChallengeResult>> RespondToSignInChallengeWithHttpInfoAsync(RespondToSignInChallengeParam respondToSignInChallengeParam = default(RespondToSignInChallengeParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = respondToSignInChallengeParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.RespondToSignInChallenge";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<RespondToSignInChallengeResult>("/sign-in/challenge", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RespondToSignInChallenge", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Save SaaS Users Count Save the count of SaaS users. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveSaasUsersCountParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        public void SaveSaasUsersCount(SaveSaasUsersCountParam saveSaasUsersCountParam, int operationIndex = 0)
+        {
+            SaveSaasUsersCountWithHttpInfo(saveSaasUsersCountParam);
+        }
+
+        /// <summary>
+        /// Save SaaS Users Count Save the count of SaaS users. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveSaasUsersCountParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public authapi.Client.ApiResponse<Object> SaveSaasUsersCountWithHttpInfo(SaveSaasUsersCountParam saveSaasUsersCountParam, int operationIndex = 0)
+        {
+            // verify the required parameter 'saveSaasUsersCountParam' is set
+            if (saveSaasUsersCountParam == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'saveSaasUsersCountParam' when calling SaasUserApi->SaveSaasUsersCount");
+            }
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = saveSaasUsersCountParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.SaveSaasUsersCount";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/users/count", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SaveSaasUsersCount", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Save SaaS Users Count Save the count of SaaS users. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveSaasUsersCountParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task SaveSaasUsersCountAsync(SaveSaasUsersCountParam saveSaasUsersCountParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            await SaveSaasUsersCountWithHttpInfoAsync(saveSaasUsersCountParam, operationIndex, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Save SaaS Users Count Save the count of SaaS users. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="saveSaasUsersCountParam"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<Object>> SaveSaasUsersCountWithHttpInfoAsync(SaveSaasUsersCountParam saveSaasUsersCountParam, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'saveSaasUsersCountParam' is set
+            if (saveSaasUsersCountParam == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'saveSaasUsersCountParam' when calling SaasUserApi->SaveSaasUsersCount");
+            }
+
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = saveSaasUsersCountParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.SaveSaasUsersCount";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/users/count", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SaveSaasUsersCount", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Search SaaS Users Search SaaS users by user ID, email, or sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SearchSaasUsersResult</returns>
+        public SearchSaasUsersResult SearchSaasUsers(string id = default(string), string email = default(string), string signInId = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<SearchSaasUsersResult> localVarResponse = SearchSaasUsersWithHttpInfo(id, email, signInId, limit, cursor);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Search SaaS Users Search SaaS users by user ID, email, or sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SearchSaasUsersResult</returns>
+        public authapi.Client.ApiResponse<SearchSaasUsersResult> SearchSaasUsersWithHttpInfo(string id = default(string), string email = default(string), string signInId = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0)
+        {
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            if (id != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "id", id));
+            }
+            if (email != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "email", email));
+            }
+            if (signInId != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "sign_in_id", signInId));
+            }
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
+            }
+            if (cursor != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "cursor", cursor));
+            }
+
+            localVarRequestOptions.Operation = "SaasUserApi.SearchSaasUsers";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<SearchSaasUsersResult>("/users/search", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchSaasUsers", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Search SaaS Users Search SaaS users by user ID, email, or sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SearchSaasUsersResult</returns>
+        public async System.Threading.Tasks.Task<SearchSaasUsersResult> SearchSaasUsersAsync(string id = default(string), string email = default(string), string signInId = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<SearchSaasUsersResult> localVarResponse = await SearchSaasUsersWithHttpInfoAsync(id, email, signInId, limit, cursor, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Search SaaS Users Search SaaS users by user ID, email, or sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">User ID (optional)</param>
+        /// <param name="email">Email prefix (optional)</param>
+        /// <param name="signInId">Sign-in ID prefix (optional)</param>
+        /// <param name="limit">Maximum number of items to retrieve (optional)</param>
+        /// <param name="cursor">Cursor for cursor pagination (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SearchSaasUsersResult)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<SearchSaasUsersResult>> SearchSaasUsersWithHttpInfoAsync(string id = default(string), string email = default(string), string signInId = default(string), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            if (id != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "id", id));
+            }
+            if (email != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "email", email));
+            }
+            if (signInId != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "sign_in_id", signInId));
+            }
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
+            }
+            if (cursor != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "cursor", cursor));
+            }
+
+            localVarRequestOptions.Operation = "SaasUserApi.SearchSaasUsers";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<SearchSaasUsersResult>("/users/search", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchSaasUsers", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Sign In A user attempts to sign in. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SignInResult</returns>
+        public SignInResult SignIn(SignInParam signInParam = default(SignInParam), int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<SignInResult> localVarResponse = SignInWithHttpInfo(signInParam);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Sign In A user attempts to sign in. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SignInResult</returns>
+        public authapi.Client.ApiResponse<SignInResult> SignInWithHttpInfo(SignInParam signInParam = default(SignInParam), int operationIndex = 0)
+        {
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = signInParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.SignIn";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SignInResult>("/sign-in", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SignIn", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Sign In A user attempts to sign in. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SignInResult</returns>
+        public async System.Threading.Tasks.Task<SignInResult> SignInAsync(SignInParam signInParam = default(SignInParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<SignInResult> localVarResponse = await SignInWithHttpInfoAsync(signInParam, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Sign In A user attempts to sign in. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SignInResult)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<SignInResult>> SignInWithHttpInfoAsync(SignInParam signInParam = default(SignInParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = signInParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.SignIn";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SignInResult>("/sign-in", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SignIn", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -3620,6 +5156,150 @@ namespace authapi.Api
         }
 
         /// <summary>
+        /// Update Device Status Updates the device status. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateDeviceStatusParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        public void UpdateDeviceStatus(UpdateDeviceStatusParam updateDeviceStatusParam = default(UpdateDeviceStatusParam), int operationIndex = 0)
+        {
+            UpdateDeviceStatusWithHttpInfo(updateDeviceStatusParam);
+        }
+
+        /// <summary>
+        /// Update Device Status Updates the device status. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateDeviceStatusParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public authapi.Client.ApiResponse<Object> UpdateDeviceStatusWithHttpInfo(UpdateDeviceStatusParam updateDeviceStatusParam = default(UpdateDeviceStatusParam), int operationIndex = 0)
+        {
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = updateDeviceStatusParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.UpdateDeviceStatus";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/device/status", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateDeviceStatus", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update Device Status Updates the device status. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateDeviceStatusParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task UpdateDeviceStatusAsync(UpdateDeviceStatusParam updateDeviceStatusParam = default(UpdateDeviceStatusParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            await UpdateDeviceStatusWithHttpInfoAsync(updateDeviceStatusParam, operationIndex, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Update Device Status Updates the device status. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateDeviceStatusParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<Object>> UpdateDeviceStatusWithHttpInfoAsync(UpdateDeviceStatusParam updateDeviceStatusParam = default(UpdateDeviceStatusParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = updateDeviceStatusParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.UpdateDeviceStatus";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/device/status", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateDeviceStatus", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Update SaaS User Attributes Update the additional attributes of the SaaS user. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
@@ -3782,7 +5462,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Change Email Change user&#39;s email. 
+        /// Change Email Change user&#39;s email. The user must be an email authentication user. Sign-in ID authentication users cannot change their email. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -3795,7 +5475,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Change Email Change user&#39;s email. 
+        /// Change Email Change user&#39;s email. The user must be an email authentication user. Sign-in ID authentication users cannot change their email. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -3861,7 +5541,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Change Email Change user&#39;s email. 
+        /// Change Email Change user&#39;s email. The user must be an email authentication user. Sign-in ID authentication users cannot change their email. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -3875,7 +5555,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Change Email Change user&#39;s email. 
+        /// Change Email Change user&#39;s email. The user must be an email authentication user. Sign-in ID authentication users cannot change their email. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
@@ -4096,6 +5776,168 @@ namespace authapi.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("UpdateSaasUserPassword", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Change Sign-in ID Change user&#39;s sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="updateSaasUserSignInIdParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        public void UpdateSaasUserSignInId(string userId, UpdateSaasUserSignInIdParam updateSaasUserSignInIdParam = default(UpdateSaasUserSignInIdParam), int operationIndex = 0)
+        {
+            UpdateSaasUserSignInIdWithHttpInfo(userId, updateSaasUserSignInIdParam);
+        }
+
+        /// <summary>
+        /// Change Sign-in ID Change user&#39;s sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="updateSaasUserSignInIdParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public authapi.Client.ApiResponse<Object> UpdateSaasUserSignInIdWithHttpInfo(string userId, UpdateSaasUserSignInIdParam updateSaasUserSignInIdParam = default(UpdateSaasUserSignInIdParam), int operationIndex = 0)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'userId' when calling SaasUserApi->UpdateSaasUserSignInId");
+            }
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("user_id", authapi.Client.ClientUtils.ParameterToString(userId)); // path parameter
+            localVarRequestOptions.Data = updateSaasUserSignInIdParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.UpdateSaasUserSignInId";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Patch<Object>("/users/{user_id}/sign-in-id", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateSaasUserSignInId", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Change Sign-in ID Change user&#39;s sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="updateSaasUserSignInIdParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task UpdateSaasUserSignInIdAsync(string userId, UpdateSaasUserSignInIdParam updateSaasUserSignInIdParam = default(UpdateSaasUserSignInIdParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            await UpdateSaasUserSignInIdWithHttpInfoAsync(userId, updateSaasUserSignInIdParam, operationIndex, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Change Sign-in ID Change user&#39;s sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="updateSaasUserSignInIdParam"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<Object>> UpdateSaasUserSignInIdWithHttpInfoAsync(string userId, UpdateSaasUserSignInIdParam updateSaasUserSignInIdParam = default(UpdateSaasUserSignInIdParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'userId' when calling SaasUserApi->UpdateSaasUserSignInId");
+            }
+
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("user_id", authapi.Client.ClientUtils.ParameterToString(userId)); // path parameter
+            localVarRequestOptions.Data = updateSaasUserSignInIdParam;
+
+            localVarRequestOptions.Operation = "SaasUserApi.UpdateSaasUserSignInId";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PatchAsync<Object>("/users/{user_id}/sign-in-id", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateSaasUserSignInId", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

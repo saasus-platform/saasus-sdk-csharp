@@ -26,7 +26,7 @@ using OpenAPIDateConverter = authapi.Client.OpenAPIDateConverter;
 namespace authapi.Model
 {
     /// <summary>
-    /// CreateSaasUserParam
+    /// Either email or sign_in_id must be specified, but not both. - If email is specified: Email authentication user will be created.   When password is not specified, a temporary password will be sent by email. - If sign_in_id is specified: Sign-in ID authentication user will be created.   When password is not specified, it will be auto-generated and returned in the response. 
     /// </summary>
     [DataContract(Name = "CreateSaasUserParam")]
     public partial class CreateSaasUserParam : IEquatable<CreateSaasUserParam>, IValidatableObject
@@ -34,21 +34,13 @@ namespace authapi.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateSaasUserParam" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        protected CreateSaasUserParam() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CreateSaasUserParam" /> class.
-        /// </summary>
-        /// <param name="email">E-mail (required).</param>
-        /// <param name="password">Password.</param>
-        public CreateSaasUserParam(string email = default(string), string password = default(string))
+        /// <param name="email">E-mail.</param>
+        /// <param name="signInId">Sign-in ID (alphanumeric and symbols -_ only, max 50 characters) .</param>
+        /// <param name="password">Password. For email authentication, if not specified, a temporary password will be sent by email. For sign-in ID authentication, if not specified, password will be auto-generated and returned. .</param>
+        public CreateSaasUserParam(string email = default(string), string signInId = default(string), string password = default(string))
         {
-            // to ensure "email" is required (not null)
-            if (email == null)
-            {
-                throw new ArgumentNullException("email is a required property for CreateSaasUserParam and cannot be null");
-            }
             this.Email = email;
+            this.SignInId = signInId;
             this.Password = password;
         }
 
@@ -57,13 +49,21 @@ namespace authapi.Model
         /// </summary>
         /// <value>E-mail</value>
         /// <example>hoge@example.com</example>
-        [DataMember(Name = "email", IsRequired = true, EmitDefaultValue = true)]
+        [DataMember(Name = "email", EmitDefaultValue = false)]
         public string Email { get; set; }
 
         /// <summary>
-        /// Password
+        /// Sign-in ID (alphanumeric and symbols -_ only, max 50 characters) 
         /// </summary>
-        /// <value>Password</value>
+        /// <value>Sign-in ID (alphanumeric and symbols -_ only, max 50 characters) </value>
+        /// <example>user123</example>
+        [DataMember(Name = "sign_in_id", EmitDefaultValue = false)]
+        public string SignInId { get; set; }
+
+        /// <summary>
+        /// Password. For email authentication, if not specified, a temporary password will be sent by email. For sign-in ID authentication, if not specified, password will be auto-generated and returned. 
+        /// </summary>
+        /// <value>Password. For email authentication, if not specified, a temporary password will be sent by email. For sign-in ID authentication, if not specified, password will be auto-generated and returned. </value>
         /// <example>@Pass#Word1</example>
         [DataMember(Name = "password", EmitDefaultValue = false)]
         public string Password { get; set; }
@@ -77,6 +77,7 @@ namespace authapi.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class CreateSaasUserParam {\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  SignInId: ").Append(SignInId).Append("\n");
             sb.Append("  Password: ").Append(Password).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -119,6 +120,11 @@ namespace authapi.Model
                     this.Email.Equals(input.Email))
                 ) && 
                 (
+                    this.SignInId == input.SignInId ||
+                    (this.SignInId != null &&
+                    this.SignInId.Equals(input.SignInId))
+                ) && 
+                (
                     this.Password == input.Password ||
                     (this.Password != null &&
                     this.Password.Equals(input.Password))
@@ -137,6 +143,10 @@ namespace authapi.Model
                 if (this.Email != null)
                 {
                     hashCode = (hashCode * 59) + this.Email.GetHashCode();
+                }
+                if (this.SignInId != null)
+                {
+                    hashCode = (hashCode * 59) + this.SignInId.GetHashCode();
                 }
                 if (this.Password != null)
                 {

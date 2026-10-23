@@ -26,7 +26,7 @@ using OpenAPIDateConverter = authapi.Client.OpenAPIDateConverter;
 namespace authapi.Model
 {
     /// <summary>
-    /// CreateTenantUserParam
+    /// Either email or sign_in_id must be specified, but not both. 
     /// </summary>
     [DataContract(Name = "CreateTenantUserParam")]
     public partial class CreateTenantUserParam : IEquatable<CreateTenantUserParam>, IValidatableObject
@@ -39,22 +39,19 @@ namespace authapi.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateTenantUserParam" /> class.
         /// </summary>
-        /// <param name="email">E-mail (required).</param>
+        /// <param name="email">E-mail.</param>
+        /// <param name="signInId">Sign-in ID (alphanumeric and symbols -_ only, max 50 characters) .</param>
         /// <param name="attributes">Attribute information (Get information set by defining user attributes in the SaaS development console)  (required).</param>
-        public CreateTenantUserParam(string email = default(string), Dictionary<string, Object> attributes = default(Dictionary<string, Object>))
+        public CreateTenantUserParam(string email = default(string), string signInId = default(string), Dictionary<string, Object> attributes = default(Dictionary<string, Object>))
         {
-            // to ensure "email" is required (not null)
-            if (email == null)
-            {
-                throw new ArgumentNullException("email is a required property for CreateTenantUserParam and cannot be null");
-            }
-            this.Email = email;
             // to ensure "attributes" is required (not null)
             if (attributes == null)
             {
                 throw new ArgumentNullException("attributes is a required property for CreateTenantUserParam and cannot be null");
             }
             this.Attributes = attributes;
+            this.Email = email;
+            this.SignInId = signInId;
         }
 
         /// <summary>
@@ -62,8 +59,16 @@ namespace authapi.Model
         /// </summary>
         /// <value>E-mail</value>
         /// <example>hoge@example.com</example>
-        [DataMember(Name = "email", IsRequired = true, EmitDefaultValue = true)]
+        [DataMember(Name = "email", EmitDefaultValue = false)]
         public string Email { get; set; }
+
+        /// <summary>
+        /// Sign-in ID (alphanumeric and symbols -_ only, max 50 characters) 
+        /// </summary>
+        /// <value>Sign-in ID (alphanumeric and symbols -_ only, max 50 characters) </value>
+        /// <example>user123</example>
+        [DataMember(Name = "sign_in_id", EmitDefaultValue = false)]
+        public string SignInId { get; set; }
 
         /// <summary>
         /// Attribute information (Get information set by defining user attributes in the SaaS development console) 
@@ -82,6 +87,7 @@ namespace authapi.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class CreateTenantUserParam {\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  SignInId: ").Append(SignInId).Append("\n");
             sb.Append("  Attributes: ").Append(Attributes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -124,6 +130,11 @@ namespace authapi.Model
                     this.Email.Equals(input.Email))
                 ) && 
                 (
+                    this.SignInId == input.SignInId ||
+                    (this.SignInId != null &&
+                    this.SignInId.Equals(input.SignInId))
+                ) && 
+                (
                     this.Attributes == input.Attributes ||
                     this.Attributes != null &&
                     input.Attributes != null &&
@@ -143,6 +154,10 @@ namespace authapi.Model
                 if (this.Email != null)
                 {
                     hashCode = (hashCode * 59) + this.Email.GetHashCode();
+                }
+                if (this.SignInId != null)
+                {
+                    hashCode = (hashCode * 59) + this.SignInId.GetHashCode();
                 }
                 if (this.Attributes != null)
                 {

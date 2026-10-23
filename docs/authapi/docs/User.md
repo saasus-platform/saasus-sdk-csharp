@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **Id** | **string** | User ID | 
 **TenantId** | **string** |  | 
 **TenantName** | **string** | Tenant Name | 
-**Email** | **string** | E-mail | 
+**Email** | **string** | E-mail. For sign-in ID authentication users, this field is an empty string.  | 
+**SignInId** | **string** | Sign-in ID. For email authentication users, this field is an empty string.  | 
 **Attributes** | **Dictionary&lt;string, Object&gt;** | Attribute information (Get information set by defining user attributes in the SaaS development console)  | 
 **Envs** | [**List&lt;UserAvailableEnv&gt;**](UserAvailableEnv.md) |  | 
 

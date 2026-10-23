@@ -54,7 +54,7 @@ namespace billingapi.Model
         /// secret key
         /// </summary>
         /// <value>secret key</value>
-        /// <example>sk_test_09l3shTSTKHYCzzZZsiLl2vA</example>
+        /// <example>sk_test_dummy</example>
         [DataMember(Name = "secret_key", IsRequired = true, EmitDefaultValue = true)]
         public string SecretKey { get; set; }
 

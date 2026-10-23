@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **AccountVerification** | [**AccountVerification**](AccountVerification.md) |  | 
 **SelfRegist** | [**SelfRegist**](SelfRegist.md) |  | 
 **IdentityProviderConfiguration** | [**IdentityProviderConfiguration**](IdentityProviderConfiguration.md) |  | 
+**RefreshTokenValidity** | [**RefreshTokenValidity**](RefreshTokenValidity.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

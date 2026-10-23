@@ -31,12 +31,25 @@ namespace pricingapi.Model
     [DataContract(Name = "PricingTieredUsageUnitForSave")]
     public partial class PricingTieredUsageUnitForSave : IEquatable<PricingTieredUsageUnitForSave>, IValidatableObject
     {
+        /// <summary>
+        /// Defines Type
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum TypeEnum
+        {
+            /// <summary>
+            /// Enum TieredUsage for value: tiered_usage
+            /// </summary>
+            [EnumMember(Value = "tiered_usage")]
+            TieredUsage = 1
+        }
+
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
-        public UnitType Type { get; set; }
+        public TypeEnum Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -66,7 +79,7 @@ namespace pricingapi.Model
         /// <param name="upperCount">Upper limit (required).</param>
         /// <param name="meteringUnitName">Metering unit name (required).</param>
         /// <param name="aggregateUsage">aggregateUsage.</param>
-        public PricingTieredUsageUnitForSave(string name = default(string), string displayName = default(string), string description = default(string), UnitType type = default(UnitType), Currency currency = default(Currency), List<PricingTier> tiers = default(List<PricingTier>), int upperCount = default(int), string meteringUnitName = default(string), AggregateUsage? aggregateUsage = default(AggregateUsage?))
+        public PricingTieredUsageUnitForSave(string name = default(string), string displayName = default(string), string description = default(string), TypeEnum type = default(TypeEnum), Currency currency = default(Currency), List<PricingTier> tiers = default(List<PricingTier>), int upperCount = default(int), string meteringUnitName = default(string), AggregateUsage? aggregateUsage = default(AggregateUsage?))
         {
             // to ensure "name" is required (not null)
             if (name == null)

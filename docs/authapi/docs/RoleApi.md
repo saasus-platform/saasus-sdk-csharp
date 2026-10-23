@@ -7,6 +7,7 @@ All URIs are relative to *https://api.saasus.io/v1/auth*
 | [**CreateRole**](RoleApi.md#createrole) | **POST** /roles | Create Role |
 | [**DeleteRole**](RoleApi.md#deleterole) | **DELETE** /roles/{role_name} | Delete Role |
 | [**GetRoles**](RoleApi.md#getroles) | **GET** /roles | Get Roles |
+| [**UpdateRole**](RoleApi.md#updaterole) | **PATCH** /roles/{role_name} | Update Role |
 
 <a id="createrole"></a>
 # **CreateRole**
@@ -270,6 +271,97 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updaterole"></a>
+# **UpdateRole**
+> void UpdateRole (string roleName, UpdateRoleParam updateRoleParam = null)
+
+Update Role
+
+Update role display name. 
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using authapi.Api;
+using authapi.Model;
+using modules;
+
+namespace Example
+{
+    public class UpdateRoleExample
+    {
+        public static void Main()
+        {
+            AuthApiClientConfig config = new Configuration().GetAuthApiClientConfig();
+            var apiInstance = new RoleApi(config);
+            var roleName = admin;  // string | Role name
+            var updateRoleParam = new UpdateRoleParam(); // UpdateRoleParam |  (optional) 
+
+            try
+            {
+                // Update Role
+                apiInstance.UpdateRole(roleName, updateRoleParam);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling RoleApi.UpdateRole: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateRoleWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Update Role
+    apiInstance.UpdateRoleWithHttpInfo(roleName, updateRoleParam);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling RoleApi.UpdateRoleWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **roleName** | **string** | Role name |  |
+| **updateRoleParam** | [**UpdateRoleParam**](UpdateRoleParam.md) |  | [optional]  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **404** | Not Found |  -  |
 | **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
