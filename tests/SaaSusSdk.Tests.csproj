@@ -23,4 +23,11 @@
   <ItemGroup>
     <ProjectReference Include="../saasus-sdk-csharp.csproj" />
   </ItemGroup>
+
+  <!-- The contract test is its own project (tests/Contract) and must not be
+       compiled into this one as well. -->
+  <ItemGroup>
+    <Compile Remove="Contract/**" />
+    <None Remove="Contract/**" />
+  </ItemGroup>
 </Project>
