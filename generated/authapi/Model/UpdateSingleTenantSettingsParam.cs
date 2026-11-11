@@ -34,7 +34,7 @@ namespace authapi.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateSingleTenantSettingsParam" /> class.
         /// </summary>
-        /// <param name="enabled">enable Single Tenant settings or not.</param>
+        /// <param name="enabled">enable SaaS Infrastructure Management settings or not.</param>
         /// <param name="roleArn">ARN of the role for SaaS Platform to AssumeRole.</param>
         /// <param name="cloudformationTemplate">CloudFormation template file.</param>
         /// <param name="ddlTemplate">ddl file to run in SaaS environment.</param>
@@ -49,9 +49,9 @@ namespace authapi.Model
         }
 
         /// <summary>
-        /// enable Single Tenant settings or not
+        /// enable SaaS Infrastructure Management settings or not
         /// </summary>
-        /// <value>enable Single Tenant settings or not</value>
+        /// <value>enable SaaS Infrastructure Management settings or not</value>
         [DataMember(Name = "enabled", EmitDefaultValue = true)]
         public bool Enabled { get; set; }
 

@@ -69,10 +69,10 @@ namespace authapi.Api
         /// <returns>ApiResponse of IdentityProviders</returns>
         ApiResponse<IdentityProviders> GetIdentityProvidersWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// Get Password Requirements
+        /// Get Sign-In Settings
         /// </summary>
         /// <remarks>
-        /// Get user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Get sign-in settings, including user password requirements and refresh token validity period. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -80,10 +80,10 @@ namespace authapi.Api
         SignInSettings GetSignInSettings(int operationIndex = 0);
 
         /// <summary>
-        /// Get Password Requirements
+        /// Get Sign-In Settings
         /// </summary>
         /// <remarks>
-        /// Get user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Get sign-in settings, including user password requirements and refresh token validity period. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -136,10 +136,10 @@ namespace authapi.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> UpdateIdentityProviderWithHttpInfo(UpdateIdentityProviderParam updateIdentityProviderParam = default(UpdateIdentityProviderParam), int operationIndex = 0);
         /// <summary>
-        /// Update Password Requirements
+        /// Update Sign-In Settings
         /// </summary>
         /// <remarks>
-        /// Update user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Update sign-in settings, including user password requirements and refresh token validity period. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSignInSettingsParam"> (optional)</param>
@@ -148,10 +148,10 @@ namespace authapi.Api
         void UpdateSignInSettings(UpdateSignInSettingsParam updateSignInSettingsParam = default(UpdateSignInSettingsParam), int operationIndex = 0);
 
         /// <summary>
-        /// Update Password Requirements
+        /// Update Sign-In Settings
         /// </summary>
         /// <remarks>
-        /// Update user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Update sign-in settings, including user password requirements and refresh token validity period. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSignInSettingsParam"> (optional)</param>
@@ -214,10 +214,10 @@ namespace authapi.Api
         /// <returns>Task of ApiResponse (IdentityProviders)</returns>
         System.Threading.Tasks.Task<ApiResponse<IdentityProviders>> GetIdentityProvidersWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get Password Requirements
+        /// Get Sign-In Settings
         /// </summary>
         /// <remarks>
-        /// Get user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Get sign-in settings, including user password requirements and refresh token validity period. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -226,10 +226,10 @@ namespace authapi.Api
         System.Threading.Tasks.Task<SignInSettings> GetSignInSettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get Password Requirements
+        /// Get Sign-In Settings
         /// </summary>
         /// <remarks>
-        /// Get user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Get sign-in settings, including user password requirements and refresh token validity period. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -287,10 +287,10 @@ namespace authapi.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> UpdateIdentityProviderWithHttpInfoAsync(UpdateIdentityProviderParam updateIdentityProviderParam = default(UpdateIdentityProviderParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Update Password Requirements
+        /// Update Sign-In Settings
         /// </summary>
         /// <remarks>
-        /// Update user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Update sign-in settings, including user password requirements and refresh token validity period. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSignInSettingsParam"> (optional)</param>
@@ -300,10 +300,10 @@ namespace authapi.Api
         System.Threading.Tasks.Task UpdateSignInSettingsAsync(UpdateSignInSettingsParam updateSignInSettingsParam = default(UpdateSignInSettingsParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Update Password Requirements
+        /// Update Sign-In Settings
         /// </summary>
         /// <remarks>
-        /// Update user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Update sign-in settings, including user password requirements and refresh token validity period. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSignInSettingsParam"> (optional)</param>
@@ -708,7 +708,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get Password Requirements Get user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Get Sign-In Settings Get sign-in settings, including user password requirements and refresh token validity period. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -720,7 +720,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get Password Requirements Get user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Get Sign-In Settings Get sign-in settings, including user password requirements and refresh token validity period. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -775,7 +775,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get Password Requirements Get user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Get Sign-In Settings Get sign-in settings, including user password requirements and refresh token validity period. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -788,7 +788,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get Password Requirements Get user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Get Sign-In Settings Get sign-in settings, including user password requirements and refresh token validity period. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1134,7 +1134,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Update Password Requirements Update user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Update Sign-In Settings Update sign-in settings, including user password requirements and refresh token validity period. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSignInSettingsParam"> (optional)</param>
@@ -1146,7 +1146,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Update Password Requirements Update user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Update Sign-In Settings Update sign-in settings, including user password requirements and refresh token validity period. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSignInSettingsParam"> (optional)</param>
@@ -1204,7 +1204,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Update Password Requirements Update user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Update Sign-In Settings Update sign-in settings, including user password requirements and refresh token validity period. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSignInSettingsParam"> (optional)</param>
@@ -1217,7 +1217,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Update Password Requirements Update user password requirements. Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols. 
+        /// Update Sign-In Settings Update sign-in settings, including user password requirements and refresh token validity period. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSignInSettingsParam"> (optional)</param>
