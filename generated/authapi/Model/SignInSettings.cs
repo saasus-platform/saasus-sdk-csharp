@@ -46,7 +46,8 @@ namespace authapi.Model
         /// <param name="accountVerification">accountVerification (required).</param>
         /// <param name="selfRegist">selfRegist (required).</param>
         /// <param name="identityProviderConfiguration">identityProviderConfiguration (required).</param>
-        public SignInSettings(PasswordPolicy passwordPolicy = default(PasswordPolicy), DeviceConfiguration deviceConfiguration = default(DeviceConfiguration), MfaConfiguration mfaConfiguration = default(MfaConfiguration), RecaptchaProps recaptchaProps = default(RecaptchaProps), AccountVerification accountVerification = default(AccountVerification), SelfRegist selfRegist = default(SelfRegist), IdentityProviderConfiguration identityProviderConfiguration = default(IdentityProviderConfiguration))
+        /// <param name="refreshTokenValidity">refreshTokenValidity (required).</param>
+        public SignInSettings(PasswordPolicy passwordPolicy = default(PasswordPolicy), DeviceConfiguration deviceConfiguration = default(DeviceConfiguration), MfaConfiguration mfaConfiguration = default(MfaConfiguration), RecaptchaProps recaptchaProps = default(RecaptchaProps), AccountVerification accountVerification = default(AccountVerification), SelfRegist selfRegist = default(SelfRegist), IdentityProviderConfiguration identityProviderConfiguration = default(IdentityProviderConfiguration), RefreshTokenValidity refreshTokenValidity = default(RefreshTokenValidity))
         {
             // to ensure "passwordPolicy" is required (not null)
             if (passwordPolicy == null)
@@ -90,6 +91,12 @@ namespace authapi.Model
                 throw new ArgumentNullException("identityProviderConfiguration is a required property for SignInSettings and cannot be null");
             }
             this.IdentityProviderConfiguration = identityProviderConfiguration;
+            // to ensure "refreshTokenValidity" is required (not null)
+            if (refreshTokenValidity == null)
+            {
+                throw new ArgumentNullException("refreshTokenValidity is a required property for SignInSettings and cannot be null");
+            }
+            this.RefreshTokenValidity = refreshTokenValidity;
         }
 
         /// <summary>
@@ -135,6 +142,12 @@ namespace authapi.Model
         public IdentityProviderConfiguration IdentityProviderConfiguration { get; set; }
 
         /// <summary>
+        /// Gets or Sets RefreshTokenValidity
+        /// </summary>
+        [DataMember(Name = "refresh_token_validity", IsRequired = true, EmitDefaultValue = true)]
+        public RefreshTokenValidity RefreshTokenValidity { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -149,6 +162,7 @@ namespace authapi.Model
             sb.Append("  AccountVerification: ").Append(AccountVerification).Append("\n");
             sb.Append("  SelfRegist: ").Append(SelfRegist).Append("\n");
             sb.Append("  IdentityProviderConfiguration: ").Append(IdentityProviderConfiguration).Append("\n");
+            sb.Append("  RefreshTokenValidity: ").Append(RefreshTokenValidity).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -218,6 +232,11 @@ namespace authapi.Model
                     this.IdentityProviderConfiguration == input.IdentityProviderConfiguration ||
                     (this.IdentityProviderConfiguration != null &&
                     this.IdentityProviderConfiguration.Equals(input.IdentityProviderConfiguration))
+                ) && 
+                (
+                    this.RefreshTokenValidity == input.RefreshTokenValidity ||
+                    (this.RefreshTokenValidity != null &&
+                    this.RefreshTokenValidity.Equals(input.RefreshTokenValidity))
                 );
         }
 
@@ -257,6 +276,10 @@ namespace authapi.Model
                 if (this.IdentityProviderConfiguration != null)
                 {
                     hashCode = (hashCode * 59) + this.IdentityProviderConfiguration.GetHashCode();
+                }
+                if (this.RefreshTokenValidity != null)
+                {
+                    hashCode = (hashCode * 59) + this.RefreshTokenValidity.GetHashCode();
                 }
                 return hashCode;
             }

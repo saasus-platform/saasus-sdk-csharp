@@ -31,12 +31,25 @@ namespace pricingapi.Model
     [DataContract(Name = "PricingFixedUnitForSave")]
     public partial class PricingFixedUnitForSave : IEquatable<PricingFixedUnitForSave>, IValidatableObject
     {
+        /// <summary>
+        /// Defines Type
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum TypeEnum
+        {
+            /// <summary>
+            /// Enum Fixed for value: fixed
+            /// </summary>
+            [EnumMember(Value = "fixed")]
+            Fixed = 1
+        }
+
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
-        public UnitType Type { get; set; }
+        public TypeEnum Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -64,7 +77,7 @@ namespace pricingapi.Model
         /// <param name="currency">currency (required).</param>
         /// <param name="unitAmount">Price (required).</param>
         /// <param name="recurringInterval">recurringInterval (required).</param>
-        public PricingFixedUnitForSave(string name = default(string), string displayName = default(string), string description = default(string), UnitType type = default(UnitType), Currency currency = default(Currency), int unitAmount = default(int), RecurringInterval recurringInterval = default(RecurringInterval))
+        public PricingFixedUnitForSave(string name = default(string), string displayName = default(string), string description = default(string), TypeEnum type = default(TypeEnum), Currency currency = default(Currency), int unitAmount = default(int), RecurringInterval recurringInterval = default(RecurringInterval))
         {
             // to ensure "name" is required (not null)
             if (name == null)

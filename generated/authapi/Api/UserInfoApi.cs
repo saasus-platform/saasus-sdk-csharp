@@ -30,7 +30,7 @@ namespace authapi.Api
         /// Get User Info
         /// </summary>
         /// <remarks>
-        /// User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. 
+        /// User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">ID Token</param>
@@ -42,7 +42,7 @@ namespace authapi.Api
         /// Get User Info
         /// </summary>
         /// <remarks>
-        /// User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. 
+        /// User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">ID Token</param>
@@ -72,6 +72,29 @@ namespace authapi.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserInfo</returns>
         ApiResponse<UserInfo> GetUserInfoByEmailWithHttpInfo(string email, int operationIndex = 0);
+        /// <summary>
+        /// Get User Info by Sign-in ID
+        /// </summary>
+        /// <remarks>
+        /// Get user information by sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInId">Sign-in ID. </param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>UserInfo</returns>
+        UserInfo GetUserInfoBySignInId(string signInId, int operationIndex = 0);
+
+        /// <summary>
+        /// Get User Info by Sign-in ID
+        /// </summary>
+        /// <remarks>
+        /// Get user information by sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInId">Sign-in ID. </param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of UserInfo</returns>
+        ApiResponse<UserInfo> GetUserInfoBySignInIdWithHttpInfo(string signInId, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -85,7 +108,7 @@ namespace authapi.Api
         /// Get User Info
         /// </summary>
         /// <remarks>
-        /// User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. 
+        /// User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">ID Token</param>
@@ -98,7 +121,7 @@ namespace authapi.Api
         /// Get User Info
         /// </summary>
         /// <remarks>
-        /// User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. 
+        /// User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">ID Token</param>
@@ -131,6 +154,31 @@ namespace authapi.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserInfo)</returns>
         System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserInfoByEmailWithHttpInfoAsync(string email, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Get User Info by Sign-in ID
+        /// </summary>
+        /// <remarks>
+        /// Get user information by sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInId">Sign-in ID. </param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of UserInfo</returns>
+        System.Threading.Tasks.Task<UserInfo> GetUserInfoBySignInIdAsync(string signInId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get User Info by Sign-in ID
+        /// </summary>
+        /// <remarks>
+        /// Get user information by sign-in ID. 
+        /// </remarks>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInId">Sign-in ID. </param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (UserInfo)</returns>
+        System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserInfoBySignInIdWithHttpInfoAsync(string signInId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -252,7 +300,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get User Info User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. 
+        /// Get User Info User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">ID Token</param>
@@ -265,7 +313,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get User Info User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. 
+        /// Get User Info User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">ID Token</param>
@@ -328,7 +376,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get User Info User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. 
+        /// Get User Info User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">ID Token</param>
@@ -342,7 +390,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get User Info User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. 
+        /// Get User Info User information is obtained based on the ID token of the SaaS user (registered user). The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen. User information can be obtained from calling this API with an ID token from the URL on the server side. Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it. If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">ID Token</param>
@@ -554,6 +602,162 @@ namespace authapi.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUserInfoByEmail", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get User Info by Sign-in ID Get user information by sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInId">Sign-in ID. </param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>UserInfo</returns>
+        public UserInfo GetUserInfoBySignInId(string signInId, int operationIndex = 0)
+        {
+            authapi.Client.ApiResponse<UserInfo> localVarResponse = GetUserInfoBySignInIdWithHttpInfo(signInId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get User Info by Sign-in ID Get user information by sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInId">Sign-in ID. </param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of UserInfo</returns>
+        public authapi.Client.ApiResponse<UserInfo> GetUserInfoBySignInIdWithHttpInfo(string signInId, int operationIndex = 0)
+        {
+            // verify the required parameter 'signInId' is set
+            if (signInId == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'signInId' when calling UserInfoApi->GetUserInfoBySignInId");
+            }
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "sign_in_id", signInId));
+
+            localVarRequestOptions.Operation = "UserInfoApi.GetUserInfoBySignInId";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<UserInfo>("/userinfo/search/sign-in-id", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUserInfoBySignInId", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get User Info by Sign-in ID Get user information by sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInId">Sign-in ID. </param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of UserInfo</returns>
+        public async System.Threading.Tasks.Task<UserInfo> GetUserInfoBySignInIdAsync(string signInId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            authapi.Client.ApiResponse<UserInfo> localVarResponse = await GetUserInfoBySignInIdWithHttpInfoAsync(signInId, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get User Info by Sign-in ID Get user information by sign-in ID. 
+        /// </summary>
+        /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="signInId">Sign-in ID. </param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (UserInfo)</returns>
+        public async System.Threading.Tasks.Task<authapi.Client.ApiResponse<UserInfo>> GetUserInfoBySignInIdWithHttpInfoAsync(string signInId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'signInId' is set
+            if (signInId == null)
+            {
+                throw new authapi.Client.ApiException(400, "Missing required parameter 'signInId' when calling UserInfoApi->GetUserInfoBySignInId");
+            }
+
+
+            authapi.Client.RequestOptions localVarRequestOptions = new authapi.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = authapi.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = authapi.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.QueryParameters.Add(authapi.Client.ClientUtils.ParameterToMultiMap("", "sign_in_id", signInId));
+
+            localVarRequestOptions.Operation = "UserInfoApi.GetUserInfoBySignInId";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (Bearer) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<UserInfo>("/userinfo/search/sign-in-id", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUserInfoBySignInId", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

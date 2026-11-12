@@ -26,7 +26,7 @@ using OpenAPIDateConverter = authapi.Client.OpenAPIDateConverter;
 namespace authapi.Model
 {
     /// <summary>
-    /// UpdateSignInSettingsParam
+    /// Set both value and unit in refresh_token_validity when updating the refresh token validity period.
     /// </summary>
     [DataContract(Name = "UpdateSignInSettingsParam")]
     public partial class UpdateSignInSettingsParam : IEquatable<UpdateSignInSettingsParam>, IValidatableObject
@@ -40,7 +40,8 @@ namespace authapi.Model
         /// <param name="recaptchaProps">recaptchaProps.</param>
         /// <param name="accountVerification">accountVerification.</param>
         /// <param name="selfRegist">selfRegist.</param>
-        public UpdateSignInSettingsParam(PasswordPolicy passwordPolicy = default(PasswordPolicy), DeviceConfiguration deviceConfiguration = default(DeviceConfiguration), MfaConfiguration mfaConfiguration = default(MfaConfiguration), RecaptchaProps recaptchaProps = default(RecaptchaProps), AccountVerification accountVerification = default(AccountVerification), SelfRegist selfRegist = default(SelfRegist))
+        /// <param name="refreshTokenValidity">refreshTokenValidity.</param>
+        public UpdateSignInSettingsParam(PasswordPolicy passwordPolicy = default(PasswordPolicy), DeviceConfiguration deviceConfiguration = default(DeviceConfiguration), MfaConfiguration mfaConfiguration = default(MfaConfiguration), RecaptchaProps recaptchaProps = default(RecaptchaProps), AccountVerification accountVerification = default(AccountVerification), SelfRegist selfRegist = default(SelfRegist), RefreshTokenValidity refreshTokenValidity = default(RefreshTokenValidity))
         {
             this.PasswordPolicy = passwordPolicy;
             this.DeviceConfiguration = deviceConfiguration;
@@ -48,6 +49,7 @@ namespace authapi.Model
             this.RecaptchaProps = recaptchaProps;
             this.AccountVerification = accountVerification;
             this.SelfRegist = selfRegist;
+            this.RefreshTokenValidity = refreshTokenValidity;
         }
 
         /// <summary>
@@ -87,6 +89,12 @@ namespace authapi.Model
         public SelfRegist SelfRegist { get; set; }
 
         /// <summary>
+        /// Gets or Sets RefreshTokenValidity
+        /// </summary>
+        [DataMember(Name = "refresh_token_validity", EmitDefaultValue = false)]
+        public RefreshTokenValidity RefreshTokenValidity { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -100,6 +108,7 @@ namespace authapi.Model
             sb.Append("  RecaptchaProps: ").Append(RecaptchaProps).Append("\n");
             sb.Append("  AccountVerification: ").Append(AccountVerification).Append("\n");
             sb.Append("  SelfRegist: ").Append(SelfRegist).Append("\n");
+            sb.Append("  RefreshTokenValidity: ").Append(RefreshTokenValidity).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -164,6 +173,11 @@ namespace authapi.Model
                     this.SelfRegist == input.SelfRegist ||
                     (this.SelfRegist != null &&
                     this.SelfRegist.Equals(input.SelfRegist))
+                ) && 
+                (
+                    this.RefreshTokenValidity == input.RefreshTokenValidity ||
+                    (this.RefreshTokenValidity != null &&
+                    this.RefreshTokenValidity.Equals(input.RefreshTokenValidity))
                 );
         }
 
@@ -199,6 +213,10 @@ namespace authapi.Model
                 if (this.SelfRegist != null)
                 {
                     hashCode = (hashCode * 59) + this.SelfRegist.GetHashCode();
+                }
+                if (this.RefreshTokenValidity != null)
+                {
+                    hashCode = (hashCode * 59) + this.RefreshTokenValidity.GetHashCode();
                 }
                 return hashCode;
             }

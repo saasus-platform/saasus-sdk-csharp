@@ -42,10 +42,11 @@ namespace authapi.Model
         /// <param name="id">User ID (required).</param>
         /// <param name="tenantId">tenantId (required).</param>
         /// <param name="tenantName">Tenant Name (required).</param>
-        /// <param name="email">E-mail (required).</param>
+        /// <param name="email">E-mail. For sign-in ID authentication users, this field is an empty string.  (required).</param>
+        /// <param name="signInId">Sign-in ID. For email authentication users, this field is an empty string.  (required).</param>
         /// <param name="attributes">Attribute information (Get information set by defining user attributes in the SaaS development console)  (required).</param>
         /// <param name="envs">envs (required).</param>
-        public User(string id = default(string), string tenantId = default(string), string tenantName = default(string), string email = default(string), Dictionary<string, Object> attributes = default(Dictionary<string, Object>), List<UserAvailableEnv> envs = default(List<UserAvailableEnv>))
+        public User(string id = default(string), string tenantId = default(string), string tenantName = default(string), string email = default(string), string signInId = default(string), Dictionary<string, Object> attributes = default(Dictionary<string, Object>), List<UserAvailableEnv> envs = default(List<UserAvailableEnv>))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -71,6 +72,12 @@ namespace authapi.Model
                 throw new ArgumentNullException("email is a required property for User and cannot be null");
             }
             this.Email = email;
+            // to ensure "signInId" is required (not null)
+            if (signInId == null)
+            {
+                throw new ArgumentNullException("signInId is a required property for User and cannot be null");
+            }
+            this.SignInId = signInId;
             // to ensure "attributes" is required (not null)
             if (attributes == null)
             {
@@ -109,12 +116,20 @@ namespace authapi.Model
         public string TenantName { get; set; }
 
         /// <summary>
-        /// E-mail
+        /// E-mail. For sign-in ID authentication users, this field is an empty string. 
         /// </summary>
-        /// <value>E-mail</value>
+        /// <value>E-mail. For sign-in ID authentication users, this field is an empty string. </value>
         /// <example>hoge@example.com</example>
         [DataMember(Name = "email", IsRequired = true, EmitDefaultValue = true)]
         public string Email { get; set; }
+
+        /// <summary>
+        /// Sign-in ID. For email authentication users, this field is an empty string. 
+        /// </summary>
+        /// <value>Sign-in ID. For email authentication users, this field is an empty string. </value>
+        /// <example>user123</example>
+        [DataMember(Name = "sign_in_id", IsRequired = true, EmitDefaultValue = true)]
+        public string SignInId { get; set; }
 
         /// <summary>
         /// Attribute information (Get information set by defining user attributes in the SaaS development console) 
@@ -142,6 +157,7 @@ namespace authapi.Model
             sb.Append("  TenantId: ").Append(TenantId).Append("\n");
             sb.Append("  TenantName: ").Append(TenantName).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  SignInId: ").Append(SignInId).Append("\n");
             sb.Append("  Attributes: ").Append(Attributes).Append("\n");
             sb.Append("  Envs: ").Append(Envs).Append("\n");
             sb.Append("}\n");
@@ -200,6 +216,11 @@ namespace authapi.Model
                     this.Email.Equals(input.Email))
                 ) && 
                 (
+                    this.SignInId == input.SignInId ||
+                    (this.SignInId != null &&
+                    this.SignInId.Equals(input.SignInId))
+                ) && 
+                (
                     this.Attributes == input.Attributes ||
                     this.Attributes != null &&
                     input.Attributes != null &&
@@ -237,6 +258,10 @@ namespace authapi.Model
                 if (this.Email != null)
                 {
                     hashCode = (hashCode * 59) + this.Email.GetHashCode();
+                }
+                if (this.SignInId != null)
+                {
+                    hashCode = (hashCode * 59) + this.SignInId.GetHashCode();
                 }
                 if (this.Attributes != null)
                 {

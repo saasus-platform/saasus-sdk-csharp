@@ -57,12 +57,14 @@ namespace apilogapi.Api
         /// </remarks>
         /// <exception cref="apilogapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createdDate">The date, in format of YYYY-MM-DD, to retrieve the log. (optional)</param>
-        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. (optional)</param>
+        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. (optional)</param>
         /// <param name="limit">Maximum number of logs to retrieve. (optional)</param>
+        /// <param name="startAt">The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
+        /// <param name="endAt">The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
         /// <param name="cursor">Cursor for cursor pagination. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiLogs</returns>
-        ApiLogs GetLogs(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), string cursor = default(string), int operationIndex = 0);
+        ApiLogs GetLogs(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), long? startAt = default(long?), long? endAt = default(long?), string cursor = default(string), int operationIndex = 0);
 
         /// <summary>
         /// Get API execution log list
@@ -72,12 +74,14 @@ namespace apilogapi.Api
         /// </remarks>
         /// <exception cref="apilogapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createdDate">The date, in format of YYYY-MM-DD, to retrieve the log. (optional)</param>
-        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. (optional)</param>
+        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. (optional)</param>
         /// <param name="limit">Maximum number of logs to retrieve. (optional)</param>
+        /// <param name="startAt">The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
+        /// <param name="endAt">The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
         /// <param name="cursor">Cursor for cursor pagination. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApiLogs</returns>
-        ApiResponse<ApiLogs> GetLogsWithHttpInfo(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), string cursor = default(string), int operationIndex = 0);
+        ApiResponse<ApiLogs> GetLogsWithHttpInfo(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), long? startAt = default(long?), long? endAt = default(long?), string cursor = default(string), int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -120,13 +124,15 @@ namespace apilogapi.Api
         /// </remarks>
         /// <exception cref="apilogapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createdDate">The date, in format of YYYY-MM-DD, to retrieve the log. (optional)</param>
-        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. (optional)</param>
+        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. (optional)</param>
         /// <param name="limit">Maximum number of logs to retrieve. (optional)</param>
+        /// <param name="startAt">The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
+        /// <param name="endAt">The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
         /// <param name="cursor">Cursor for cursor pagination. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiLogs</returns>
-        System.Threading.Tasks.Task<ApiLogs> GetLogsAsync(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiLogs> GetLogsAsync(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), long? startAt = default(long?), long? endAt = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get API execution log list
@@ -136,13 +142,15 @@ namespace apilogapi.Api
         /// </remarks>
         /// <exception cref="apilogapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createdDate">The date, in format of YYYY-MM-DD, to retrieve the log. (optional)</param>
-        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. (optional)</param>
+        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. (optional)</param>
         /// <param name="limit">Maximum number of logs to retrieve. (optional)</param>
+        /// <param name="startAt">The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
+        /// <param name="endAt">The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
         /// <param name="cursor">Cursor for cursor pagination. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApiLogs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApiLogs>> GetLogsWithHttpInfoAsync(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ApiLogs>> GetLogsWithHttpInfoAsync(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), long? startAt = default(long?), long? endAt = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -424,14 +432,16 @@ namespace apilogapi.Api
         /// </summary>
         /// <exception cref="apilogapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createdDate">The date, in format of YYYY-MM-DD, to retrieve the log. (optional)</param>
-        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. (optional)</param>
+        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. (optional)</param>
         /// <param name="limit">Maximum number of logs to retrieve. (optional)</param>
+        /// <param name="startAt">The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
+        /// <param name="endAt">The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
         /// <param name="cursor">Cursor for cursor pagination. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiLogs</returns>
-        public ApiLogs GetLogs(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), string cursor = default(string), int operationIndex = 0)
+        public ApiLogs GetLogs(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), long? startAt = default(long?), long? endAt = default(long?), string cursor = default(string), int operationIndex = 0)
         {
-            apilogapi.Client.ApiResponse<ApiLogs> localVarResponse = GetLogsWithHttpInfo(createdDate, createdAt, limit, cursor);
+            apilogapi.Client.ApiResponse<ApiLogs> localVarResponse = GetLogsWithHttpInfo(createdDate, createdAt, limit, startAt, endAt, cursor);
             return localVarResponse.Data;
         }
 
@@ -440,12 +450,14 @@ namespace apilogapi.Api
         /// </summary>
         /// <exception cref="apilogapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createdDate">The date, in format of YYYY-MM-DD, to retrieve the log. (optional)</param>
-        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. (optional)</param>
+        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. (optional)</param>
         /// <param name="limit">Maximum number of logs to retrieve. (optional)</param>
+        /// <param name="startAt">The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
+        /// <param name="endAt">The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
         /// <param name="cursor">Cursor for cursor pagination. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApiLogs</returns>
-        public apilogapi.Client.ApiResponse<ApiLogs> GetLogsWithHttpInfo(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), string cursor = default(string), int operationIndex = 0)
+        public apilogapi.Client.ApiResponse<ApiLogs> GetLogsWithHttpInfo(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), long? startAt = default(long?), long? endAt = default(long?), string cursor = default(string), int operationIndex = 0)
         {
             apilogapi.Client.RequestOptions localVarRequestOptions = new apilogapi.Client.RequestOptions();
 
@@ -480,6 +492,14 @@ namespace apilogapi.Api
             if (limit != null)
             {
                 localVarRequestOptions.QueryParameters.Add(apilogapi.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
+            }
+            if (startAt != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(apilogapi.Client.ClientUtils.ParameterToMultiMap("", "start_at", startAt));
+            }
+            if (endAt != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(apilogapi.Client.ClientUtils.ParameterToMultiMap("", "end_at", endAt));
             }
             if (cursor != null)
             {
@@ -515,15 +535,17 @@ namespace apilogapi.Api
         /// </summary>
         /// <exception cref="apilogapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createdDate">The date, in format of YYYY-MM-DD, to retrieve the log. (optional)</param>
-        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. (optional)</param>
+        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. (optional)</param>
         /// <param name="limit">Maximum number of logs to retrieve. (optional)</param>
+        /// <param name="startAt">The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
+        /// <param name="endAt">The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
         /// <param name="cursor">Cursor for cursor pagination. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiLogs</returns>
-        public async System.Threading.Tasks.Task<ApiLogs> GetLogsAsync(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ApiLogs> GetLogsAsync(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), long? startAt = default(long?), long? endAt = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            apilogapi.Client.ApiResponse<ApiLogs> localVarResponse = await GetLogsWithHttpInfoAsync(createdDate, createdAt, limit, cursor, operationIndex, cancellationToken).ConfigureAwait(false);
+            apilogapi.Client.ApiResponse<ApiLogs> localVarResponse = await GetLogsWithHttpInfoAsync(createdDate, createdAt, limit, startAt, endAt, cursor, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -532,13 +554,15 @@ namespace apilogapi.Api
         /// </summary>
         /// <exception cref="apilogapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createdDate">The date, in format of YYYY-MM-DD, to retrieve the log. (optional)</param>
-        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. (optional)</param>
+        /// <param name="createdAt">The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at. (optional)</param>
         /// <param name="limit">Maximum number of logs to retrieve. (optional)</param>
+        /// <param name="startAt">The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
+        /// <param name="endAt">The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored. (optional)</param>
         /// <param name="cursor">Cursor for cursor pagination. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApiLogs)</returns>
-        public async System.Threading.Tasks.Task<apilogapi.Client.ApiResponse<ApiLogs>> GetLogsWithHttpInfoAsync(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<apilogapi.Client.ApiResponse<ApiLogs>> GetLogsWithHttpInfoAsync(DateTime? createdDate = default(DateTime?), DateTime? createdAt = default(DateTime?), long? limit = default(long?), long? startAt = default(long?), long? endAt = default(long?), string cursor = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
             apilogapi.Client.RequestOptions localVarRequestOptions = new apilogapi.Client.RequestOptions();
@@ -574,6 +598,14 @@ namespace apilogapi.Api
             if (limit != null)
             {
                 localVarRequestOptions.QueryParameters.Add(apilogapi.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
+            }
+            if (startAt != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(apilogapi.Client.ClientUtils.ParameterToMultiMap("", "start_at", startAt));
+            }
+            if (endAt != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(apilogapi.Client.ClientUtils.ParameterToMultiMap("", "end_at", endAt));
             }
             if (cursor != null)
             {

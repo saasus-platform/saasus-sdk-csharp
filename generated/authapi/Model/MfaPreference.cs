@@ -42,7 +42,13 @@ namespace authapi.Model
             /// Enum SoftwareToken for value: softwareToken
             /// </summary>
             [EnumMember(Value = "softwareToken")]
-            SoftwareToken = 1
+            SoftwareToken = 1,
+
+            /// <summary>
+            /// Enum Email for value: email
+            /// </summary>
+            [EnumMember(Value = "email")]
+            Email = 2
         }
 
 

@@ -33,16 +33,16 @@ namespace pricingapi.Model
     {
 
         /// <summary>
-        /// Gets or Sets RecurringInterval
-        /// </summary>
-        [DataMember(Name = "recurring_interval", IsRequired = true, EmitDefaultValue = true)]
-        public RecurringInterval RecurringInterval { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
         public UnitType Type { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RecurringInterval
+        /// </summary>
+        [DataMember(Name = "recurring_interval", IsRequired = true, EmitDefaultValue = true)]
+        public RecurringInterval RecurringInterval { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -57,17 +57,18 @@ namespace pricingapi.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PricingFixedUnit" /> class.
         /// </summary>
+        /// <param name="type">type (required).</param>
         /// <param name="unitAmount">Price (required).</param>
         /// <param name="recurringInterval">recurringInterval (required).</param>
         /// <param name="name">Name (required).</param>
         /// <param name="displayName">Display Name (required).</param>
         /// <param name="description">Description (required).</param>
-        /// <param name="type">type (required).</param>
         /// <param name="currency">currency (required).</param>
         /// <param name="id">Universally Unique Identifier (required).</param>
         /// <param name="used">used (required).</param>
-        public PricingFixedUnit(int unitAmount = default(int), RecurringInterval recurringInterval = default(RecurringInterval), string name = default(string), string displayName = default(string), string description = default(string), UnitType type = default(UnitType), Currency currency = default(Currency), string id = default(string), bool used = default(bool))
+        public PricingFixedUnit(UnitType type = default(UnitType), int unitAmount = default(int), RecurringInterval recurringInterval = default(RecurringInterval), string name = default(string), string displayName = default(string), string description = default(string), Currency currency = default(Currency), string id = default(string), bool used = default(bool))
         {
+            this.Type = type;
             this.UnitAmount = unitAmount;
             this.RecurringInterval = recurringInterval;
             // to ensure "name" is required (not null)
@@ -88,7 +89,6 @@ namespace pricingapi.Model
                 throw new ArgumentNullException("description is a required property for PricingFixedUnit and cannot be null");
             }
             this.Description = description;
-            this.Type = type;
             this.Currency = currency;
             // to ensure "id" is required (not null)
             if (id == null)
@@ -154,12 +154,12 @@ namespace pricingapi.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PricingFixedUnit {\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  UnitAmount: ").Append(UnitAmount).Append("\n");
             sb.Append("  RecurringInterval: ").Append(RecurringInterval).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Used: ").Append(Used).Append("\n");
@@ -199,6 +199,10 @@ namespace pricingapi.Model
             }
             return 
                 (
+                    this.Type == input.Type ||
+                    this.Type.Equals(input.Type)
+                ) && 
+                (
                     this.UnitAmount == input.UnitAmount ||
                     this.UnitAmount.Equals(input.UnitAmount)
                 ) && 
@@ -220,10 +224,6 @@ namespace pricingapi.Model
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
                 ) && 
                 (
                     this.Currency == input.Currency ||
@@ -249,6 +249,7 @@ namespace pricingapi.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                hashCode = (hashCode * 59) + this.Type.GetHashCode();
                 hashCode = (hashCode * 59) + this.UnitAmount.GetHashCode();
                 hashCode = (hashCode * 59) + this.RecurringInterval.GetHashCode();
                 if (this.Name != null)
@@ -263,7 +264,6 @@ namespace pricingapi.Model
                 {
                     hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
                 hashCode = (hashCode * 59) + this.Currency.GetHashCode();
                 if (this.Id != null)
                 {
