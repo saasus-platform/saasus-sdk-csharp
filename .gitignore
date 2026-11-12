@@ -11,16 +11,3 @@ obj/
 !/.github/workflows/publish-nuget.yml
 !/.github/workflows/test-publish-nuget.yml
 !/.github/workflows/sdk-contract-test.yml
-
-.env
-.env.*
-!.env.example
-!.env_sample
-
-tests/E2E/Snapshots/*/story_snapshots/
-tests/E2E/Snapshots/*/story_validations/
-tests/E2E/Snapshots/*/story_comparisons/
-tests/E2E/Snapshots/*/story_reports/
-
-# Run reports written by E2E_REPORT_JSON (see tests/E2E/*/README.md)
-artifacts/
