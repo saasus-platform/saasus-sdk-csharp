@@ -10,3 +10,4 @@ obj/
 !/.github/workflows/
 !/.github/workflows/publish-nuget.yml
 !/.github/workflows/test-publish-nuget.yml
+!/.github/workflows/sdk-contract-test.yml

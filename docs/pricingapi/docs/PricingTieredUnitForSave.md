@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Name | 
 **DisplayName** | **string** | Display Name | 
 **Description** | **string** | Description | 
-**Type** | **UnitType** |  | 
+**Type** | **string** |  | 
 **Currency** | **Currency** |  | 
 **Tiers** | [**List&lt;PricingTier&gt;**](PricingTier.md) |  | 
 **UpperCount** | **int** | Upper limit | 

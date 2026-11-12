@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Type** | **UnitType** |  | 
 **UpperCount** | **int** | Upper limit | 
 **MeteringUnitName** | **string** | Metering unit name | 
 **AggregateUsage** | **AggregateUsage** |  | [optional] 
 **Name** | **string** | Name | 
 **DisplayName** | **string** | Display Name | 
 **Description** | **string** | Description | 
-**Type** | **UnitType** |  | 
 **Currency** | **Currency** |  | 
 **Tiers** | [**List&lt;PricingTier&gt;**](PricingTier.md) |  | 
 **Id** | **string** | Universally Unique Identifier | 

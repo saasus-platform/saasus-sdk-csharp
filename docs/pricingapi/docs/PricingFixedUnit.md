@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Type** | **UnitType** |  | 
 **UnitAmount** | **int** | Price | 
 **RecurringInterval** | **RecurringInterval** |  | 
 **Name** | **string** | Name | 
 **DisplayName** | **string** | Display Name | 
 **Description** | **string** | Description | 
-**Type** | **UnitType** |  | 
 **Currency** | **Currency** |  | 
 **Id** | **string** | Universally Unique Identifier | 
 **Used** | **bool** |  | 

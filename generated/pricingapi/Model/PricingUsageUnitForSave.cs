@@ -31,12 +31,25 @@ namespace pricingapi.Model
     [DataContract(Name = "PricingUsageUnitForSave")]
     public partial class PricingUsageUnitForSave : IEquatable<PricingUsageUnitForSave>, IValidatableObject
     {
+        /// <summary>
+        /// Defines Type
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum TypeEnum
+        {
+            /// <summary>
+            /// Enum Usage for value: usage
+            /// </summary>
+            [EnumMember(Value = "usage")]
+            Usage = 1
+        }
+
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
-        public UnitType Type { get; set; }
+        public TypeEnum Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -66,7 +79,7 @@ namespace pricingapi.Model
         /// <param name="unitAmount">Amount per usage (required).</param>
         /// <param name="meteringUnitName">Metering unit name (required).</param>
         /// <param name="aggregateUsage">aggregateUsage.</param>
-        public PricingUsageUnitForSave(string name = default(string), string displayName = default(string), string description = default(string), UnitType type = default(UnitType), Currency currency = default(Currency), int upperCount = default(int), int unitAmount = default(int), string meteringUnitName = default(string), AggregateUsage? aggregateUsage = default(AggregateUsage?))
+        public PricingUsageUnitForSave(string name = default(string), string displayName = default(string), string description = default(string), TypeEnum type = default(TypeEnum), Currency currency = default(Currency), int upperCount = default(int), int unitAmount = default(int), string meteringUnitName = default(string), AggregateUsage? aggregateUsage = default(AggregateUsage?))
         {
             // to ensure "name" is required (not null)
             if (name == null)

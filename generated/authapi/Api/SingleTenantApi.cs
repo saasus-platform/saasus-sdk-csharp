@@ -27,10 +27,10 @@ namespace authapi.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Get CloudFormation Stack Launch Link For Single Tenant
+        /// Get CloudFormation Stack Launch Link For SaaS Infrastructure Management
         /// </summary>
         /// <remarks>
-        /// Get the CloudFormation stack activation link for Single Tenant. 
+        /// Get the CloudFormation stack activation link for SaaS Infrastructure Management. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -38,17 +38,17 @@ namespace authapi.Api
         CloudFormationLaunchStackLink GetCloudFormationLaunchStackLinkForSingleTenant(int operationIndex = 0);
 
         /// <summary>
-        /// Get CloudFormation Stack Launch Link For Single Tenant
+        /// Get CloudFormation Stack Launch Link For SaaS Infrastructure Management
         /// </summary>
         /// <remarks>
-        /// Get the CloudFormation stack activation link for Single Tenant. 
+        /// Get the CloudFormation stack activation link for SaaS Infrastructure Management. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CloudFormationLaunchStackLink</returns>
         ApiResponse<CloudFormationLaunchStackLink> GetCloudFormationLaunchStackLinkForSingleTenantWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// Retrieve the settings of the single tenant.
+        /// Retrieve the settings of the SaaS Infrastructure Management.
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -56,7 +56,7 @@ namespace authapi.Api
         SingleTenantSettings GetSingleTenantSettings(int operationIndex = 0);
 
         /// <summary>
-        /// Retrieve the settings of the single tenant.
+        /// Retrieve the settings of the SaaS Infrastructure Management.
         /// </summary>
         /// <remarks>
         /// 
@@ -66,10 +66,10 @@ namespace authapi.Api
         /// <returns>ApiResponse of SingleTenantSettings</returns>
         ApiResponse<SingleTenantSettings> GetSingleTenantSettingsWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// Update configuration information for single-tenant functionality
+        /// Update configuration information for SaaS Infrastructure Management
         /// </summary>
         /// <remarks>
-        /// Updates configuration information for single-tenant functionality Returns error if single tenant feature cannot be enabled. 
+        /// Updates configuration information for SaaS Infrastructure Management Returns error if SaaS Infrastructure Management feature cannot be enabled. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSingleTenantSettingsParam"> (optional)</param>
@@ -78,10 +78,10 @@ namespace authapi.Api
         void UpdateSingleTenantSettings(UpdateSingleTenantSettingsParam updateSingleTenantSettingsParam = default(UpdateSingleTenantSettingsParam), int operationIndex = 0);
 
         /// <summary>
-        /// Update configuration information for single-tenant functionality
+        /// Update configuration information for SaaS Infrastructure Management
         /// </summary>
         /// <remarks>
-        /// Updates configuration information for single-tenant functionality Returns error if single tenant feature cannot be enabled. 
+        /// Updates configuration information for SaaS Infrastructure Management Returns error if SaaS Infrastructure Management feature cannot be enabled. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSingleTenantSettingsParam"> (optional)</param>
@@ -98,10 +98,10 @@ namespace authapi.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Get CloudFormation Stack Launch Link For Single Tenant
+        /// Get CloudFormation Stack Launch Link For SaaS Infrastructure Management
         /// </summary>
         /// <remarks>
-        /// Get the CloudFormation stack activation link for Single Tenant. 
+        /// Get the CloudFormation stack activation link for SaaS Infrastructure Management. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -110,10 +110,10 @@ namespace authapi.Api
         System.Threading.Tasks.Task<CloudFormationLaunchStackLink> GetCloudFormationLaunchStackLinkForSingleTenantAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get CloudFormation Stack Launch Link For Single Tenant
+        /// Get CloudFormation Stack Launch Link For SaaS Infrastructure Management
         /// </summary>
         /// <remarks>
-        /// Get the CloudFormation stack activation link for Single Tenant. 
+        /// Get the CloudFormation stack activation link for SaaS Infrastructure Management. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -121,7 +121,7 @@ namespace authapi.Api
         /// <returns>Task of ApiResponse (CloudFormationLaunchStackLink)</returns>
         System.Threading.Tasks.Task<ApiResponse<CloudFormationLaunchStackLink>> GetCloudFormationLaunchStackLinkForSingleTenantWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Retrieve the settings of the single tenant.
+        /// Retrieve the settings of the SaaS Infrastructure Management.
         /// </summary>
         /// <remarks>
         /// 
@@ -133,7 +133,7 @@ namespace authapi.Api
         System.Threading.Tasks.Task<SingleTenantSettings> GetSingleTenantSettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Retrieve the settings of the single tenant.
+        /// Retrieve the settings of the SaaS Infrastructure Management.
         /// </summary>
         /// <remarks>
         /// 
@@ -144,10 +144,10 @@ namespace authapi.Api
         /// <returns>Task of ApiResponse (SingleTenantSettings)</returns>
         System.Threading.Tasks.Task<ApiResponse<SingleTenantSettings>> GetSingleTenantSettingsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Update configuration information for single-tenant functionality
+        /// Update configuration information for SaaS Infrastructure Management
         /// </summary>
         /// <remarks>
-        /// Updates configuration information for single-tenant functionality Returns error if single tenant feature cannot be enabled. 
+        /// Updates configuration information for SaaS Infrastructure Management Returns error if SaaS Infrastructure Management feature cannot be enabled. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSingleTenantSettingsParam"> (optional)</param>
@@ -157,10 +157,10 @@ namespace authapi.Api
         System.Threading.Tasks.Task UpdateSingleTenantSettingsAsync(UpdateSingleTenantSettingsParam updateSingleTenantSettingsParam = default(UpdateSingleTenantSettingsParam), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Update configuration information for single-tenant functionality
+        /// Update configuration information for SaaS Infrastructure Management
         /// </summary>
         /// <remarks>
-        /// Updates configuration information for single-tenant functionality Returns error if single tenant feature cannot be enabled. 
+        /// Updates configuration information for SaaS Infrastructure Management Returns error if SaaS Infrastructure Management feature cannot be enabled. 
         /// </remarks>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSingleTenantSettingsParam"> (optional)</param>
@@ -289,7 +289,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get CloudFormation Stack Launch Link For Single Tenant Get the CloudFormation stack activation link for Single Tenant. 
+        /// Get CloudFormation Stack Launch Link For SaaS Infrastructure Management Get the CloudFormation stack activation link for SaaS Infrastructure Management. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -301,7 +301,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get CloudFormation Stack Launch Link For Single Tenant Get the CloudFormation stack activation link for Single Tenant. 
+        /// Get CloudFormation Stack Launch Link For SaaS Infrastructure Management Get the CloudFormation stack activation link for SaaS Infrastructure Management. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -356,7 +356,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get CloudFormation Stack Launch Link For Single Tenant Get the CloudFormation stack activation link for Single Tenant. 
+        /// Get CloudFormation Stack Launch Link For SaaS Infrastructure Management Get the CloudFormation stack activation link for SaaS Infrastructure Management. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -369,7 +369,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Get CloudFormation Stack Launch Link For Single Tenant Get the CloudFormation stack activation link for Single Tenant. 
+        /// Get CloudFormation Stack Launch Link For SaaS Infrastructure Management Get the CloudFormation stack activation link for SaaS Infrastructure Management. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -427,7 +427,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Retrieve the settings of the single tenant. 
+        /// Retrieve the settings of the SaaS Infrastructure Management. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -439,7 +439,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Retrieve the settings of the single tenant. 
+        /// Retrieve the settings of the SaaS Infrastructure Management. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -494,7 +494,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Retrieve the settings of the single tenant. 
+        /// Retrieve the settings of the SaaS Infrastructure Management. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -507,7 +507,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Retrieve the settings of the single tenant. 
+        /// Retrieve the settings of the SaaS Infrastructure Management. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -565,7 +565,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Update configuration information for single-tenant functionality Updates configuration information for single-tenant functionality Returns error if single tenant feature cannot be enabled. 
+        /// Update configuration information for SaaS Infrastructure Management Updates configuration information for SaaS Infrastructure Management Returns error if SaaS Infrastructure Management feature cannot be enabled. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSingleTenantSettingsParam"> (optional)</param>
@@ -577,7 +577,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Update configuration information for single-tenant functionality Updates configuration information for single-tenant functionality Returns error if single tenant feature cannot be enabled. 
+        /// Update configuration information for SaaS Infrastructure Management Updates configuration information for SaaS Infrastructure Management Returns error if SaaS Infrastructure Management feature cannot be enabled. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSingleTenantSettingsParam"> (optional)</param>
@@ -635,7 +635,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Update configuration information for single-tenant functionality Updates configuration information for single-tenant functionality Returns error if single tenant feature cannot be enabled. 
+        /// Update configuration information for SaaS Infrastructure Management Updates configuration information for SaaS Infrastructure Management Returns error if SaaS Infrastructure Management feature cannot be enabled. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSingleTenantSettingsParam"> (optional)</param>
@@ -648,7 +648,7 @@ namespace authapi.Api
         }
 
         /// <summary>
-        /// Update configuration information for single-tenant functionality Updates configuration information for single-tenant functionality Returns error if single tenant feature cannot be enabled. 
+        /// Update configuration information for SaaS Infrastructure Management Updates configuration information for SaaS Infrastructure Management Returns error if SaaS Infrastructure Management feature cannot be enabled. 
         /// </summary>
         /// <exception cref="authapi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="updateSingleTenantSettingsParam"> (optional)</param>

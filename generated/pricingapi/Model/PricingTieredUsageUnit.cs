@@ -33,16 +33,16 @@ namespace pricingapi.Model
     {
 
         /// <summary>
-        /// Gets or Sets AggregateUsage
-        /// </summary>
-        [DataMember(Name = "aggregate_usage", EmitDefaultValue = false)]
-        public AggregateUsage? AggregateUsage { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
         public UnitType Type { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AggregateUsage
+        /// </summary>
+        [DataMember(Name = "aggregate_usage", EmitDefaultValue = false)]
+        public AggregateUsage? AggregateUsage { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -63,21 +63,22 @@ namespace pricingapi.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PricingTieredUsageUnit" /> class.
         /// </summary>
+        /// <param name="type">type (required).</param>
         /// <param name="upperCount">Upper limit (required).</param>
         /// <param name="meteringUnitName">Metering unit name (required).</param>
         /// <param name="aggregateUsage">aggregateUsage.</param>
         /// <param name="name">Name (required).</param>
         /// <param name="displayName">Display Name (required).</param>
         /// <param name="description">Description (required).</param>
-        /// <param name="type">type (required).</param>
         /// <param name="currency">currency (required).</param>
         /// <param name="tiers">tiers (required).</param>
         /// <param name="id">Universally Unique Identifier (required).</param>
         /// <param name="meteringUnitId">Universally Unique Identifier (required).</param>
         /// <param name="recurringInterval">recurringInterval (required).</param>
         /// <param name="used">Indicates if the unit is used (required).</param>
-        public PricingTieredUsageUnit(int upperCount = default(int), string meteringUnitName = default(string), AggregateUsage? aggregateUsage = default(AggregateUsage?), string name = default(string), string displayName = default(string), string description = default(string), UnitType type = default(UnitType), Currency currency = default(Currency), List<PricingTier> tiers = default(List<PricingTier>), string id = default(string), string meteringUnitId = default(string), RecurringInterval recurringInterval = default(RecurringInterval), bool used = default(bool))
+        public PricingTieredUsageUnit(UnitType type = default(UnitType), int upperCount = default(int), string meteringUnitName = default(string), AggregateUsage? aggregateUsage = default(AggregateUsage?), string name = default(string), string displayName = default(string), string description = default(string), Currency currency = default(Currency), List<PricingTier> tiers = default(List<PricingTier>), string id = default(string), string meteringUnitId = default(string), RecurringInterval recurringInterval = default(RecurringInterval), bool used = default(bool))
         {
+            this.Type = type;
             this.UpperCount = upperCount;
             // to ensure "meteringUnitName" is required (not null)
             if (meteringUnitName == null)
@@ -103,7 +104,6 @@ namespace pricingapi.Model
                 throw new ArgumentNullException("description is a required property for PricingTieredUsageUnit and cannot be null");
             }
             this.Description = description;
-            this.Type = type;
             this.Currency = currency;
             // to ensure "tiers" is required (not null)
             if (tiers == null)
@@ -206,13 +206,13 @@ namespace pricingapi.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PricingTieredUsageUnit {\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  UpperCount: ").Append(UpperCount).Append("\n");
             sb.Append("  MeteringUnitName: ").Append(MeteringUnitName).Append("\n");
             sb.Append("  AggregateUsage: ").Append(AggregateUsage).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Tiers: ").Append(Tiers).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
@@ -255,6 +255,10 @@ namespace pricingapi.Model
             }
             return 
                 (
+                    this.Type == input.Type ||
+                    this.Type.Equals(input.Type)
+                ) && 
+                (
                     this.UpperCount == input.UpperCount ||
                     this.UpperCount.Equals(input.UpperCount)
                 ) && 
@@ -281,10 +285,6 @@ namespace pricingapi.Model
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
                 ) && 
                 (
                     this.Currency == input.Currency ||
@@ -325,6 +325,7 @@ namespace pricingapi.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                hashCode = (hashCode * 59) + this.Type.GetHashCode();
                 hashCode = (hashCode * 59) + this.UpperCount.GetHashCode();
                 if (this.MeteringUnitName != null)
                 {
@@ -343,7 +344,6 @@ namespace pricingapi.Model
                 {
                     hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
                 hashCode = (hashCode * 59) + this.Currency.GetHashCode();
                 if (this.Tiers != null)
                 {

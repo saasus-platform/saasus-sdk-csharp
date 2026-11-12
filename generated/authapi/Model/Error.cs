@@ -76,7 +76,6 @@ namespace authapi.Model
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
-        /// <example>{&quot;sign_in_page_url&quot;:&quot;auth.dev.saasus.io&quot;}</example>
         [DataMember(Name = "data", EmitDefaultValue = false)]
         public Dictionary<string, Object> Data { get; set; }
 

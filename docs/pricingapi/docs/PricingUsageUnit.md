@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Type** | **UnitType** |  | 
 **UpperCount** | **int** | Upper limit | 
 **UnitAmount** | **int** | Amount per usage | 
 **MeteringUnitName** | **string** | Metering unit name | 
@@ -11,7 +12,6 @@ Name | Type | Description | Notes
 **Name** | **string** | Name | 
 **DisplayName** | **string** | Display Name | 
 **Description** | **string** | Description | 
-**Type** | **UnitType** |  | 
 **Currency** | **Currency** |  | 
 **Id** | **string** | Universally Unique Identifier | 
 **MeteringUnitId** | **string** | Universally Unique Identifier | 
