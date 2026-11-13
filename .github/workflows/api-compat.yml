@@ -1,0 +1,90 @@
+# Detects breaking changes in the SDK's public C# API that the contract test
+# cannot see. The contract test feeds request bodies into the generated models
+# by JSON key name, so it never exercises the public constructors/signatures a
+# consumer's hand-written code binds to positionally. Inserting a property into
+# a model (e.g. a new field in CreateTenantUserParam) shifts the generated
+# constructor's parameters and breaks that code without failing any contract
+# case.
+#
+# Runs on the update-sdk PR (pull_request to main), comparing the PR's public
+# API against the latest released tag. No NuGet publish is required: the
+# baseline is the previous tag, built from source.
+
+name: API Compatibility
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: api-compat-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # The job name "api-compat" is the status check name. Do not rename.
+  api-compat:
+    name: api-compat
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout PR (candidate SDK)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          path: candidate
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: "8.0.x"
+
+      # Reads this repository's tags via git ls-remote; the repo is public.
+      - name: Resolve latest release tag
+        id: release-tag
+        uses: saasus-platform/github-actions/.github/actions/resolve-latest-stable-tag@main
+
+      - name: Checkout latest release (baseline SDK)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ steps.release-tag.outputs.tag }}
+          path: baseline
+
+      # Pinned: the clean/breaking output strings this job greps are stable only
+      # within a fixed tool version. The 8.0.x tool targets net6, so it is run
+      # with roll-forward on the net8 runtime (see the compare step).
+      - name: Install ApiCompat tool
+        run: dotnet tool install --global Microsoft.DotNet.ApiCompat.Tool --version 8.0.400
+
+      # CopyLocalLockFileAssemblies puts the package dependencies next to the
+      # built assembly so ApiCompat can resolve them as references.
+      - name: Build baseline
+        run: dotnet build baseline/saasus-sdk-csharp.csproj -c Release -p:CopyLocalLockFileAssemblies=true -o baseline-out
+
+      - name: Build candidate
+        run: dotnet build candidate/saasus-sdk-csharp.csproj -c Release -p:CopyLocalLockFileAssemblies=true -o candidate-out
+
+      # Non-strict: checks that the baseline's public API is preserved in the
+      # candidate (consumer-breaking removals/changes), while allowing additions
+      # such as a new optional member. The netstandard facade lives in the
+      # shared framework, not the library output, so it is resolved from there.
+      # The tool exits 0 even when it finds breaking changes, so the result is
+      # read from its output: anything other than the clean message fails the
+      # job (real breaks, unresolved references, or a tool error).
+      - name: Compare public API against latest release
+        run: |
+          set -euo pipefail
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          export DOTNET_ROLL_FORWARD=LatestMajor
+          nsref="$(dirname "$(find "$(dirname "$(readlink -f "$(command -v dotnet)")")/shared" -name netstandard.dll | sort | tail -1)")"
+          apicompat \
+            --left  baseline-out/saasus-sdk-csharp.dll \
+            --right candidate-out/saasus-sdk-csharp.dll \
+            --lref  "baseline-out,${nsref}" \
+            --rref  "candidate-out,${nsref}" | tee apicompat.txt
+          if ! grep -q "ran successfully without finding any breaking changes" apicompat.txt; then
+            echo "::error::Public API breaking changes detected against ${{ steps.release-tag.outputs.tag }}. If intentional, bump the SDK major version."
+            exit 1
+          fi
