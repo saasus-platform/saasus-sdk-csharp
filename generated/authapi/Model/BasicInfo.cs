@@ -32,6 +32,84 @@ namespace authapi.Model
     public partial class BasicInfo : IEquatable<BasicInfo>, IValidatableObject
     {
         /// <summary>
+        /// Domain setup status. Pending means validation or configuration is in progress; action_required means user action is needed; completed means configuration has been accepted.
+        /// </summary>
+        /// <value>Domain setup status. Pending means validation or configuration is in progress; action_required means user action is needed; completed means configuration has been accepted.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum DomainSetupStatusEnum
+        {
+            /// <summary>
+            /// Enum DomainSetupPending for value: pending
+            /// </summary>
+            [EnumMember(Value = "pending")]
+            DomainSetupPending = 1,
+
+            /// <summary>
+            /// Enum DomainSetupActionRequired for value: action_required
+            /// </summary>
+            [EnumMember(Value = "action_required")]
+            DomainSetupActionRequired = 2,
+
+            /// <summary>
+            /// Enum DomainSetupCompleted for value: completed
+            /// </summary>
+            [EnumMember(Value = "completed")]
+            DomainSetupCompleted = 3
+        }
+
+
+        /// <summary>
+        /// Domain setup status. Pending means validation or configuration is in progress; action_required means user action is needed; completed means configuration has been accepted.
+        /// </summary>
+        /// <value>Domain setup status. Pending means validation or configuration is in progress; action_required means user action is needed; completed means configuration has been accepted.</value>
+        [DataMember(Name = "domain_setup_status", EmitDefaultValue = false)]
+        public DomainSetupStatusEnum? DomainSetupStatus { get; set; }
+        /// <summary>
+        /// Reason domain setup is incomplete. Omitted when no known reason is available. DNS validation may still be pending while records propagate. Failed or timed-out certificate requests require resubmitting the domain settings after correcting DNS.
+        /// </summary>
+        /// <value>Reason domain setup is incomplete. Omitted when no known reason is available. DNS validation may still be pending while records propagate. Failed or timed-out certificate requests require resubmitting the domain settings after correcting DNS.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum DomainSetupReasonCodeEnum
+        {
+            /// <summary>
+            /// Enum CNAMEALREADYEXISTS for value: CNAME_ALREADY_EXISTS
+            /// </summary>
+            [EnumMember(Value = "CNAME_ALREADY_EXISTS")]
+            CNAMEALREADYEXISTS = 1,
+
+            /// <summary>
+            /// Enum CERTIFICATEVALIDATIONTIMEDOUT for value: CERTIFICATE_VALIDATION_TIMED_OUT
+            /// </summary>
+            [EnumMember(Value = "CERTIFICATE_VALIDATION_TIMED_OUT")]
+            CERTIFICATEVALIDATIONTIMEDOUT = 2,
+
+            /// <summary>
+            /// Enum CERTIFICATECAAERROR for value: CERTIFICATE_CAA_ERROR
+            /// </summary>
+            [EnumMember(Value = "CERTIFICATE_CAA_ERROR")]
+            CERTIFICATECAAERROR = 3,
+
+            /// <summary>
+            /// Enum CERTIFICATEPENDINGVALIDATION for value: CERTIFICATE_PENDING_VALIDATION
+            /// </summary>
+            [EnumMember(Value = "CERTIFICATE_PENDING_VALIDATION")]
+            CERTIFICATEPENDINGVALIDATION = 4,
+
+            /// <summary>
+            /// Enum CLOUDFRONTDNSNOTCONFIGURED for value: CLOUDFRONT_DNS_NOT_CONFIGURED
+            /// </summary>
+            [EnumMember(Value = "CLOUDFRONT_DNS_NOT_CONFIGURED")]
+            CLOUDFRONTDNSNOTCONFIGURED = 5
+        }
+
+
+        /// <summary>
+        /// Reason domain setup is incomplete. Omitted when no known reason is available. DNS validation may still be pending while records propagate. Failed or timed-out certificate requests require resubmitting the domain settings after correcting DNS.
+        /// </summary>
+        /// <value>Reason domain setup is incomplete. Omitted when no known reason is available. DNS validation may still be pending while records propagate. Failed or timed-out certificate requests require resubmitting the domain settings after correcting DNS.</value>
+        [DataMember(Name = "domain_setup_reason_code", EmitDefaultValue = false)]
+        public DomainSetupReasonCodeEnum? DomainSetupReasonCode { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="BasicInfo" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -41,6 +119,8 @@ namespace authapi.Model
         /// </summary>
         /// <param name="domainName">Domain Name (required).</param>
         /// <param name="isDnsValidated">DNS Record Verification Results (required).</param>
+        /// <param name="domainSetupStatus">Domain setup status. Pending means validation or configuration is in progress; action_required means user action is needed; completed means configuration has been accepted..</param>
+        /// <param name="domainSetupReasonCode">Reason domain setup is incomplete. Omitted when no known reason is available. DNS validation may still be pending while records propagate. Failed or timed-out certificate requests require resubmitting the domain settings after correcting DNS..</param>
         /// <param name="certificateDnsRecord">certificateDnsRecord (required).</param>
         /// <param name="cloudFrontDnsRecord">cloudFrontDnsRecord (required).</param>
         /// <param name="dkimDnsRecords">DKIM DNS Records (required).</param>
@@ -48,7 +128,7 @@ namespace authapi.Model
         /// <param name="fromEmailAddress">Sender Email for Authentication Email (required).</param>
         /// <param name="replyEmailAddress">Reply-from email address of authentication email (required).</param>
         /// <param name="isSesSandboxGranted">SES sandbox release and Cognito SES configuration results (required).</param>
-        public BasicInfo(string domainName = default(string), bool isDnsValidated = default(bool), DnsRecord certificateDnsRecord = default(DnsRecord), DnsRecord cloudFrontDnsRecord = default(DnsRecord), List<DnsRecord> dkimDnsRecords = default(List<DnsRecord>), string defaultDomainName = default(string), string fromEmailAddress = default(string), string replyEmailAddress = default(string), bool isSesSandboxGranted = default(bool))
+        public BasicInfo(string domainName = default(string), bool isDnsValidated = default(bool), DomainSetupStatusEnum? domainSetupStatus = default(DomainSetupStatusEnum?), DomainSetupReasonCodeEnum? domainSetupReasonCode = default(DomainSetupReasonCodeEnum?), DnsRecord certificateDnsRecord = default(DnsRecord), DnsRecord cloudFrontDnsRecord = default(DnsRecord), List<DnsRecord> dkimDnsRecords = default(List<DnsRecord>), string defaultDomainName = default(string), string fromEmailAddress = default(string), string replyEmailAddress = default(string), bool isSesSandboxGranted = default(bool))
         {
             // to ensure "domainName" is required (not null)
             if (domainName == null)
@@ -94,6 +174,8 @@ namespace authapi.Model
             }
             this.ReplyEmailAddress = replyEmailAddress;
             this.IsSesSandboxGranted = isSesSandboxGranted;
+            this.DomainSetupStatus = domainSetupStatus;
+            this.DomainSetupReasonCode = domainSetupReasonCode;
         }
 
         /// <summary>
@@ -173,6 +255,8 @@ namespace authapi.Model
             sb.Append("class BasicInfo {\n");
             sb.Append("  DomainName: ").Append(DomainName).Append("\n");
             sb.Append("  IsDnsValidated: ").Append(IsDnsValidated).Append("\n");
+            sb.Append("  DomainSetupStatus: ").Append(DomainSetupStatus).Append("\n");
+            sb.Append("  DomainSetupReasonCode: ").Append(DomainSetupReasonCode).Append("\n");
             sb.Append("  CertificateDnsRecord: ").Append(CertificateDnsRecord).Append("\n");
             sb.Append("  CloudFrontDnsRecord: ").Append(CloudFrontDnsRecord).Append("\n");
             sb.Append("  DkimDnsRecords: ").Append(DkimDnsRecords).Append("\n");
@@ -225,6 +309,14 @@ namespace authapi.Model
                     this.IsDnsValidated.Equals(input.IsDnsValidated)
                 ) && 
                 (
+                    this.DomainSetupStatus == input.DomainSetupStatus ||
+                    this.DomainSetupStatus.Equals(input.DomainSetupStatus)
+                ) && 
+                (
+                    this.DomainSetupReasonCode == input.DomainSetupReasonCode ||
+                    this.DomainSetupReasonCode.Equals(input.DomainSetupReasonCode)
+                ) && 
+                (
                     this.CertificateDnsRecord == input.CertificateDnsRecord ||
                     (this.CertificateDnsRecord != null &&
                     this.CertificateDnsRecord.Equals(input.CertificateDnsRecord))
@@ -275,6 +367,8 @@ namespace authapi.Model
                     hashCode = (hashCode * 59) + this.DomainName.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.IsDnsValidated.GetHashCode();
+                hashCode = (hashCode * 59) + this.DomainSetupStatus.GetHashCode();
+                hashCode = (hashCode * 59) + this.DomainSetupReasonCode.GetHashCode();
                 if (this.CertificateDnsRecord != null)
                 {
                     hashCode = (hashCode * 59) + this.CertificateDnsRecord.GetHashCode();
