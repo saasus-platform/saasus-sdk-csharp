@@ -22,6 +22,7 @@ namespace pricingapi.Client
                 // Authorization ヘッダーの追加
                 string sig = WithSaasusSigV1(request, this._baseUrl);
                 request.AddHeader("Authorization", sig);
+                request.Authenticator = global::SaaSus.SdkUserAgent.Instance;
             }
             catch (Exception ex)
             {

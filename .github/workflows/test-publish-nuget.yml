@@ -20,21 +20,11 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
 
-      # .csproj から現在の <Version> を抽出し、"-test.<run_number>" に置き換える ──
-      - name: Inject test version (use current csproj version)
+      - name: Inject test version
         run: |
-          # 1. csprojファイル名を変数に
-          CSPROJ="saasus-sdk-csharp.csproj"
-
-          # 2. <Version>タグ内の文字列を抽出
-          CURRENT_VERSION=$(grep -oP '(?<=<Version>)[^<]+' "$CSPROJ")
-
-          # 3. 抽出したバージョンに "-test.${{ github.run_number }}" を付与して置換
-          NEW_VERSION="${CURRENT_VERSION}-test.${{ github.run_number }}"
-          echo "Current version: $CURRENT_VERSION"
-          echo "New test version: $NEW_VERSION"
-
-          sed -i "s|<Version>.*</Version>|<Version>${NEW_VERSION}</Version>|" "$CSPROJ"
+          sh update-version.sh --check
+          CURRENT_VERSION=$(cat VERSION)
+          sh update-version.sh "${CURRENT_VERSION}-test.$GITHUB_RUN_NUMBER"
 
       - name: Restore dependencies
         run: dotnet restore
